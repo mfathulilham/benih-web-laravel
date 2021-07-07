@@ -1,0 +1,91 @@
+.navbar {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.sidebar {
+    height: 90vh;
+}
+.nav li img {
+    width: 75px;
+    height: 75px;
+    margin-top: 40px;
+}
+.nav li h6 {
+    margin-bottom: 30px;
+}
+.admin {
+    margin-left: 45px;
+    margin-top: 40px;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (max-width: 576px) {
+    .sidebar {
+        height: max-content;
+    }
+    .nav li img {
+        width: 70px;
+        height: 70px;
+        margin-top: 0px;
+    }
+    .nav li h6 {
+        margin-bottom: 10px;
+    }
+    .nav li a {
+        font-size: 15px;
+    }
+    .admin {
+        margin-left: 20px;
+    }
+    .table th,
+    .table td {
+        font-size: 15px;
+    }
+}
+
+/* Medium Device */
+@media (min-width: 576px) {
+    .sidebar {
+        height: max-content;
+    }
+    .nav li img {
+        width: 70px;
+        height: 70px;
+        margin-top: 0px;
+    }
+    .nav li h6 {
+        margin-bottom: 10px;
+    }
+    .nav li a {
+        font-size: 15px;
+    }
+    .admin {
+        margin-left: 0;
+    }
+}
+/* Medium Device */
+@media (min-width: 720px) {
+    .sidebar {
+        height: 90vh;
+    }
+    .nav li img {
+        width: 75px;
+        height: 75px;
+        margin-top: 40px;
+    }
+    .nav li h6 {
+        margin-bottom: 30px;
+    }
+    .admin {
+        margin-left: 15px;
+        margin-top: 40px;
+    }        
+}
+
+/* Large Device */
+@media (min-width: 992px) {
+    .admin {
+        margin-left: 45px;
+        margin-top: 40px;
+    }
+}

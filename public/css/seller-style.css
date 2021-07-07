@@ -1,0 +1,179 @@
+.navbar {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.sidebar {
+    height: 90vh;
+}
+.overview-ikb {
+    border-radius: 15px;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
+    padding: 10px 30px 40px 30px;
+    margin-top: 50px;
+}
+
+.overview-ikb h4 {
+    margin-top: 40px;
+}
+.card-content {
+    border-radius: 5px;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+}
+.ikb-content {
+    margin-left: 40px;
+}
+
+.navTabs {
+    margin-left: 2px;
+}
+
+/* CARD BENIH */
+.cardBenih:hover {
+    box-shadow: 1px 1px 8px rgba(30, 130, 76, 1);
+    transform: translateY(-5px);
+}
+.cardBenih .card-title {
+    font-size: 15px;
+}
+.cardBenih .card-text {
+    font-size: 13px;
+}
+.cardBenih .harga {
+    font-size: 17px;
+    color: green;
+}
+.cardBenih .card-stok {
+    font-size: 15px;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (max-width: 576px) {
+    body {
+        overflow-x: hidden;
+    }
+    .sidebar {
+        height: max-content;
+    }
+    .overview-ikb {
+        border-radius: 0;
+        box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
+        /* padding: 10px; */
+        margin-top: 15px;
+    }    
+    .overview-ikb h4 {
+        margin-top: 20px;
+    }
+    .ikb-content {
+        margin-left: 0;
+    }    
+    .side-transaksi {
+        display: none;
+    }
+}
+
+/* Medium Device */
+@media (min-width: 576px) {
+    body {
+        overflow-x: hidden;
+    }
+    .sidebar {
+        height: max-content;
+    }
+    .overview-ikb {
+        border-radius: 0;
+        box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
+        /* padding: 10px; */
+        margin-top: 15px;
+    }    
+    .overview-ikb h4 {
+        margin-top: 20px;
+    }   
+    .ikb-content {
+        margin-left: 35px;
+        margin-top: 20px;
+    }    
+    .side-transaksi {
+        display: none;
+    }
+    .ikb-transaksi {
+        margin-left: 0px;
+    }
+    /* CARD BENIH */
+    .cardBenih .card-title {
+        font-size: 14px;
+    }
+    .cardBenih .card-text {
+        font-size: 13px;
+    }
+    .cardBenih .harga {
+        font-size: 13px;
+    }
+    .cardBenih .card-body a {
+        font-size: 13px;
+    }
+}
+/* Medium Device */
+@media (min-width: 720px) {
+    body {
+        overflow-x: hidden;
+    }
+    .sidebar {
+        height: 90vh;
+    }
+    .overview-ikb {
+        border-radius: 15px;
+        box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
+        /* padding: 10px; */
+        margin-top: 35px;
+    }    
+    .overview-ikb h4 {
+        margin-top: 40px;
+    }
+    .side-transaksi {
+        display: inline;
+    }       
+    .ikb-transaksi {
+        margin-left: 30px;
+    }
+        
+}
+
+/* Large Device */
+@media (min-width: 992px) {
+    body {
+        overflow-x: hidden;
+    }
+    .sidebar {
+        height: 90vh;
+    }
+    .overview-ikb {
+        border-radius: 15px;
+        box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
+        /* padding: 10px; */
+        margin-top: 35px;
+    }    
+    .overview-ikb h4 {
+        margin-top: 60px;
+    }   
+    .ikb-content {
+        margin-left: 40px;
+        margin-top: 20px;
+    }
+
+    .cardBenih .card-title {
+        font-size: 15px;
+    }
+    .cardBenih .card-text {
+        font-size: 13px;
+    }
+    .cardBenih .harga {
+        font-size: 17px;
+        color: green;
+    }
+    .cardBenih .card-stok {
+        font-size: 15px;
+    }
+    .cardBenih .card-body a {
+        font-size: 15px;
+    }
+}
