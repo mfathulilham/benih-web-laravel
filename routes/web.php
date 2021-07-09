@@ -24,11 +24,16 @@ Route::middleware('admin')->group(function() {
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     // Customers
-    Route::get('/customer', [CustomersController::class, 'index'])->name('customer');
+    Route::prefix('customer')->name('customer')->group(function(){
+        Route::get('', [CustomersController::class, 'index'])->name('');
+        Route::get('/edit/{id}', [CustomersController::class, 'edit'])->name('-edit');
+    });
     // Seller
     Route::prefix('seller')->name('seller')->group(function(){
         Route::get('', [SellerController::class, 'index'])->name('');
         Route::get('/create', [SellerController::class, 'create'])->name('-create');
+        Route::post('/store', [SellerController::class, 'store'])->name('-store');
+        Route::get('/edit/{id}', [SellerController::class, 'edit'])->name('-edit');
     });
     // Order
     Route::get('/order', [OrderController::class, 'index'])->name('order');

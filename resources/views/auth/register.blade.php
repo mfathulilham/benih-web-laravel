@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header bg-success">{{ __('Register') }}</div>
+                <div class="card-header text-light bg-success">{{ __('Register') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
@@ -62,10 +62,50 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="lahir" class="col-md-4 col-form-label text-md-right">{{ __('Lahir') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="lahir" type="date" class="form-control" name="lahir" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="telp" class="col-md-4 col-form-label text-md-right">{{ __('Telp') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="telp" type="text" class="form-control" name="telp" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="alamat" class="col-md-4 col-form-label text-md-right">{{ __('Alamat') }}</label>
 
                             <div class="col-md-6">
-                                <textarea name="alamat" id="alamat" class="form-control"></textarea>
+                                <textarea name="alamat" id="alamat" class="form-control" placeholder="Nama Jalan/Gedung/Penanda"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group row" id="test">
+                            <label for="prov" class="col-md-4 col-form-label text-md-right">{{ __('Provinsi') }} @{{ sapi }}</label>
+
+                            <div class="col-md-6">
+                                <input id="prov" type="text" class="form-control" v-model="sapi" name="prov" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="kab" class="col-md-4 col-form-label text-md-right">{{ __('Kabupaten\Kota') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="kab" type="text" class="form-control" name="kab" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="kec" class="col-md-4 col-form-label text-md-right">{{ __('Kecamatan') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="kec" type="text" class="form-control" name="kec" required>
                             </div>
                         </div>
 
@@ -82,4 +122,18 @@
         </div>
     </div>
 </div>
+@push('vuejs')
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+    new Vue({
+        el: '#test',
+        data():{
+            return {
+                sapi: 'kuda'
+            }
+
+        }
+    })
+</script>
+@endpush
 @endsection

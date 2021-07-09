@@ -15,52 +15,43 @@
 
         <div class="table-responsive">
             <table class="table table-striped table-bordered table-sm">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Username</th>
-                  <th>Email</th>
-                  <th>Rek</th>
-                  <th>No. Rek</th>
-                  <th>Alamat</th>
-                  <th>Aksi</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>mark@gmail.com</td>
-                    <td>BNI</td>
-                    <td>01238129</td>
-                    <td>Makassar</td>
-                    <td>
-                        <a href="#" class="btn btn-danger">Hapus</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Mark</td>
-                    <td>mark@gmail.com</td>
-                    <td>BNI</td>
-                    <td>01238129</td>
-                    <td>Makassar</td>
-                    <td>
-                        <a href="#" class="btn btn-danger">Hapus</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Mark</td>
-                    <td>mark@gmail.com</td>
-                    <td>BNI</td>
-                    <td>01238129</td>
-                    <td>Makassar</td>
-                    <td>
-                        <a href="#" class="btn btn-danger">Hapus</a>
-                    </td>
-                </tr>
-              </tbody>
+                <thead>
+                    <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Email</th>
+                    <th>TTL</th>
+                    <th>Telp</th>
+                    <th>Alamat</th>
+                    <th>Provinsi</th>
+                    <th>Kabupaten</th>
+                    <th>Kecamatan</th>
+                    <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php
+                        $angkaAwal = 1
+                    @endphp
+                    @foreach ($customers as $customer)
+                        <tr>
+                            <td>{{ $angkaAwal++ }}</td>
+                            <td>{{ $customer->name }}</td>
+                            <td>{{ $customer->email }}</td>
+                            <td>{{ $customer->lahir }}</td>
+                            <td>{{ $customer->telp }}</td>
+                            <td>{{ $customer->alamat }}</td>
+                            <td>{{ $customer->prov }}</td>
+                            <td>{{ $customer->kab }}</td>
+                            <td>{{ $customer->kec }}</td>
+                            <td>
+                                <a href="{{ route('customer-edit', $customer->id) }}" class="btn btn-secondary"><i class="far fa-edit"></i></a>
+                                <a href="#" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                    @endforeach
+
+                </tbody>
             </table>
           </div>
 

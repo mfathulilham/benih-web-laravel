@@ -48,7 +48,7 @@
             </li>
             <li class="nav-item dropdown ms-3">
                 <a href="#" class="nav-link d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&background=0D8ABC&color=fff" alt="" width="32" height="32" class="rounded-circle me-2">
+                <img src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&background=d5d657&color=fff" alt="" width="32" height="32" class="rounded-circle me-2">
 
 
                 <!-- <strong>Logout</strong> -->

@@ -7,7 +7,7 @@
 
         <ul class="nav nav-pills flex-column mb-auto">
             <li class="text-center">
-                <img src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&background=0D8ABC&color=fff" alt="" class="rounded-circle mb-2">
+                <img src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&background=d5d657&color=fff" alt="img-profile" class="rounded-circle mb-2">
                 <h6>{{ Auth::user()->name}}</h6>
             </li>
             <li>
@@ -17,13 +17,13 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('customer') }}" class="nav-link link-dark {{ request()->is('customer') ? 'bg-success active' : '' }}">
+                <a href="{{ route('customer') }}" class="nav-link link-dark {{ request()->is('customer/*') ? 'bg-success active' : '' }}">
                     <i class="fas fa-users me-2"></i>
                     Customers
                 </a>
             </li>
             <li>
-                <a href="{{ route('seller') }}" class="nav-link link-dark {{ request()->is('seller') ? 'bg-success active' : '' }} " aria-current="page">
+                <a href="{{ route('seller') }}" class="nav-link link-dark {{ request()->is('seller/*') ? 'bg-success active' : '' }} ">
                     <i class="fas fa-users me-2"></i>
                     Ikb
                 </a>
