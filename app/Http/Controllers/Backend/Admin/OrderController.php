@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers\Backend\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -9,6 +9,6 @@ class OrderController extends Controller
 {
     public function index()
     {
-        return view('backend.order.index');
+        return view('backend.admin.order.index');
     }
 }

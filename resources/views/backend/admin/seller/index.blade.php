@@ -1,4 +1,4 @@
-@extends('layouts.backend.master')
+@extends('layouts.backend.admin.master')
 @section('content')
 <!-- CONTENT -->
 
@@ -55,7 +55,14 @@
                     <td>
                         <a href="{{ route('seller-edit', $seller->id) }}" class="btn btn-secondary"><i class="far fa-edit"></i></a>
                         {{-- <a href="/seller/{{ $seller->id }}/edit" class="btn btn-secondary"><i class="far fa-edit me-2"></i>Edit</a> --}}
-                        <a href="#" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
+                        {{-- <a href="" class="btn btn-danger"><i class="far fa-trash-alt"></i></a> --}}
+                        <form method="POST" action="{{ route('seller-delete', $seller->id) }}">
+                            @csrf
+                            @method('DELETE')
+
+                            <button class="btn btn-danger" onclick="return confirm('Want to delete ?')" type="submit"><i class="far fa-trash-alt"></i></button>
+
+                        </form>
                     </td>
                 </tr>
                 @endforeach

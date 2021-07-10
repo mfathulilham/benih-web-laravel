@@ -1,4 +1,4 @@
-@extends('layouts.backend.master')
+@extends('layouts.backend.admin.master')
 @section('content')
 <!-- CONTENT -->
 
@@ -6,20 +6,25 @@
     <div class="container">
         <h3>
             <i class="fas fa-users me-2"></i>
-            Edit Account
+            Add Account
         </h3>
         <hr>
+        {{-- @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                <p>{{ $error }}</p>
+            @endforeach
+        @endif --}}
 
         <div class="row justify-content-center mt-4">
             <div class="col card-2">
-                <form method="POST" action="" class="row g-3" novalidate>
+                <form method="POST" action="{{ route('seller-store') }}" class="row g-3" novalidate>
                     @csrf
 
                     <div class="col-md-3">
                         <label for="name" class="form-label">{{ __('Name') }}</label>
                     </div>
                     <div class="col-md-9">
-                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name')?? $customer->name  }}" required autocomplete="name" autofocus>
+                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                         @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -30,7 +35,7 @@
                         <label for="email" class="form-label">{{ __('Email') }}</label>
                     </div>
                     <div class="col-md-9">
-                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email')?? $customer->email }}" required autocomplete="email">
+                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
                         @error('email')
                             <span class="invalid-feedback" role="alert">
@@ -54,38 +59,62 @@
                         <label for="password-confirm" class="form-label">{{ __('Confirm Password') }}</label>
                     </div>
                     <div class="col-md-9">
-                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                        <input id="password-confirm" type="password" class="form-control @error('name') is-invalid @enderror" name="password_confirmation" required autocomplete="new-password">
+                        @error('password-confirm')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
 
-                    <div class="col-md-3">
-                        <label for="lahir" class="form-label">{{ __('Tanggal Lahir') }}</label>
-                    </div>
-                    <div class="col-md-9">
-                        <input type="date" class="form-control" id="lahir" name="lahir" value="{{ old('lahir')?? $customer->lahir }}" required>
-                    </div>
                     <div class="col-md-3">
                         <label for="telp" class="form-label">{{ __('Telepon') }}</label>
                     </div>
                     <div class="col-md-9">
-                        <input type="text" class="form-control" id="telp" name="telp" value="{{ old('email')?? $customer->telp }}" required>
+                        <input type="number" class="form-control @error('name') is-invalid @enderror" id="telp" name="telp" required>
+                        @error('telp')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="col-md-3">
-                        <label for="alamat" class="form-label">{{ __('Alamat') }} </label>
+                        <label for="alamat" class="form-label">{{ __('Alamat') }}</label>
                     </div>
                     <div class="col-md-9">
-                        <textarea class="form-control" id="alamat" rows="2" placeholder="Nama Jalan/Gedung/Penanda Lain" name="alamat" required>{{ old('email')?? $customer->alamat }}</textarea>
+                        <textarea class="form-control @error('name') is-invalid @enderror" id="alamat" rows="2" placeholder="Nama Jalan/Gedung/Penanda Lain" name="alamat" required></textarea>
+                        @error('alamat')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="col-md-3">
                         <label for="prov" class="form-label">{{ __('Provinsi\Kab Kota\Kecamatan') }}</label>
                     </div>
                     <div class="col-md-3">
-                        <input type="text" class="form-control" id="prov" placeholder="Provinsi" name="prov" value="{{ old('email')?? $customer->prov }}" required>
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="prov" placeholder="Provinsi" name="prov" required>
+                        @error('prov')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="col-md-3">
-                        <input type="text" class="form-control" id="kab" placeholder="Kabupaten" name="kab" value="{{ old('email')?? $customer->kab }}" required>
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="kab" placeholder="Kabupaten" name="kab" required>
+                        @error('kab')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="col-md-3">
-                        <input type="text" class="form-control" id="kec" placeholder="Kecamatan" name="kec" value="{{ old('email')?? $customer->kec }}" required>
+                        <input type="text" class="form-control @error('name') is-invalid @enderror"" id="kec" placeholder="Kecamatan" name="kec" required>
+                        @error('kec')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     {{-- ROLE --}}
                     <div class="col-md-5">

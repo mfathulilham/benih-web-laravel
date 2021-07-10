@@ -1,4 +1,4 @@
-@extends('layouts.backend.master')
+@extends('layouts.backend.admin.master')
 @section('content')
 
 <!-- CONTENT -->
@@ -10,6 +10,10 @@
             <i class="fas fa-users me-2"></i>
             Customer Accounts
         </h3>
+
+        @if (session('msg'))
+            <p class="alert alert-success">{{ session('msg') }}</p>
+        @endif
 
         <hr>
 
@@ -46,7 +50,13 @@
                             <td>{{ $customer->kec }}</td>
                             <td>
                                 <a href="{{ route('customer-edit', $customer->id) }}" class="btn btn-secondary"><i class="far fa-edit"></i></a>
-                                <a href="#" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
+                                <form method="POST" action="{{ route('customer-delete', $customer->id) }}">
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <button class="btn btn-danger" onclick="return confirm('Want to delete ?')" type="submit"><i class="far fa-trash-alt"></i></button>
+
+                                </form>
                             </td>
                         </tr>
                     @endforeach
