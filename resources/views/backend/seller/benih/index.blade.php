@@ -15,10 +15,16 @@
               </div>
           </div>
 
+
           <!-- Button Add Benih -->
           <div class="row mx-3 mt-5 mb-3">
+
+            @if (session('msg'))
+                <p class="alert alert-success">{{ session('msg') }}</p>
+            @endif
+
               <div class="col">
-                  <h5>4 Produk</h5>
+                  <h5>{{ $benihs->count() }} Benih</h5>
               </div>
               <div class="col-md-5 col-lg-3">
                   <a href="{{ route('benih-create') }}" class="container-fluid btn btn-success"><i class="fas fa-plus me-2"></i>Tambah Benih</a>
@@ -28,35 +34,43 @@
           <!-- BENIH SAYA -->
           <div class="row g-2 benihCard mx-3 my-2">
 
-              <!-- BENIH 1 -->
+            @foreach ($benihs as $benih)
+
+              <!-- BENIH -->
               <div class="col-6 col-md-4 col-lg-3">
                   <div class="card cardBenih">
-                    <img src="img/carousel2.jpg" class="card-img-top img-thumbnail" alt="...">
+                    <img src="{{ $benih->img }}" class="card-img-top img-thumbnail" alt="...">
                     <div class="card-body">
-                      <h5 class="card-title">Benih Padi Varietas Inpari 32 Label BP</h5>
+                      <h5 class="card-title">{{ $benih->judul }}</h5>
                       <div class="row g-0">
                         <div class="col">
-                          <p class="harga">Rp. 50.000</p>
+                          <p class="harga">Rp.{{ $benih->harga }}</p>
                         </div>
                         <div class="col">
                           <div class="card-stok text-end">
-                              <p>Stok 50</p>
+                              <p>Stok {{ $benih->stok }}</p>
                           </div>
                       </div>
                       <div class="row g-0">
                           <div class="col">
                               <p class="card-text text-end mb-3">
                                   <i class="fas fa-star text-warning"></i>
-                                  5.0 | Terjual 100
+                                  0 | Terjual 0
                               </p>
                           </div>
                       </div>
                       <div class="row justify-content-center g-0">
                         <div class="col">
-                          <a href="#" class="container-fluid btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</a>
+                          <a href="{{ route('benih-edit', $benih->id) }}" class="container-fluid btn btn-outline-secondary"><i class="far fa-edit me-2"></i>Edit</a>
                         </div>
                         <div class="col">
-                          <a href="#" class="container-fluid btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Hapus</a>
+                        <form method="POST" action="{{ route('benih-delete', $benih->id) }}">
+                            @csrf
+                            @method('DELETE')
+
+                                <button class="container-fluid btn btn-outline-danger" onclick="return confirm('Want to delete ?')" type="submit"><i class="far fa-trash-alt me-2"></i>Hapus</button>
+
+                            </form>
                         </div>
                       </div>
                     </div>
@@ -64,115 +78,11 @@
                 </div>
               </div>
 
-              <!-- BENIH 2 -->
-              <div class="col-6 col-md-4 col-lg-3">
-                  <div class="card cardBenih">
-                    <img src="img/carousel2.jpg" class="card-img-top img-thumbnail" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Benih Padi Varietas Inpari 32 Label BP</h5>
-                      <div class="row g-0">
-                        <div class="col">
-                          <p class="harga">Rp. 50.000</p>
-                        </div>
-                        <div class="col">
-                          <div class="card-stok text-end">
-                              <p>Stok 50</p>
-                          </div>
-                      </div>
-                      <div class="row g-0">
-                          <div class="col">
-                              <p class="card-text text-end mb-3">
-                                  <i class="fas fa-star text-warning"></i>
-                                  5.0 | Terjual 100
-                              </p>
-                          </div>
-                      </div>
-                      <div class="row justify-content-center g-0">
-                        <div class="col">
-                          <a href="#" class="container-fluid btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</a>
-                        </div>
-                        <div class="col">
-                          <a href="#" class="container-fluid btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Hapus</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- BENIH 3 -->
-              <div class="col-6 col-md-4 col-lg-3">
-                  <div class="card cardBenih">
-                    <img src="img/carousel2.jpg" class="card-img-top img-thumbnail" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Benih Padi Varietas Inpari 32 Label BP</h5>
-                      <div class="row g-0">
-                        <div class="col">
-                          <p class="harga">Rp. 50.000</p>
-                        </div>
-                        <div class="col">
-                          <div class="card-stok text-end">
-                              <p>Stok 50</p>
-                          </div>
-                      </div>
-                      <div class="row g-0">
-                          <div class="col">
-                              <p class="card-text text-end mb-3">
-                                  <i class="fas fa-star text-warning"></i>
-                                  5.0 | Terjual 100
-                              </p>
-                          </div>
-                      </div>
-                      <div class="row justify-content-center g-0">
-                        <div class="col">
-                          <a href="#" class="container-fluid btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</a>
-                        </div>
-                        <div class="col">
-                          <a href="#" class="container-fluid btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Hapus</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- BENIH 4 -->
-              <div class="col-6 col-md-4 col-lg-3">
-                  <div class="card cardBenih">
-                    <img src="img/carousel2.jpg" class="card-img-top img-thumbnail" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Benih Padi Varietas Inpari 32 Label BP</h5>
-                      <div class="row g-0">
-                        <div class="col">
-                          <p class="harga">Rp. 50.000</p>
-                        </div>
-                        <div class="col">
-                          <div class="card-stok text-end">
-                              <p>Stok 50</p>
-                          </div>
-                      </div>
-                      <div class="row g-0">
-                          <div class="col">
-                              <p class="card-text text-end mb-3">
-                                  <i class="fas fa-star text-warning"></i>
-                                  5.0 | Terjual 100
-                              </p>
-                          </div>
-                      </div>
-                      <div class="row justify-content-center g-0">
-                        <div class="col">
-                          <a href="#" class="container-fluid btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</a>
-                        </div>
-                        <div class="col">
-                          <a href="#" class="container-fluid btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Hapus</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            @endforeach
+            <!-- BATAS BENIH -->
 
           </div>
+          <!--BATAS BENIH SAYA -->
 
       </main>
   </div>

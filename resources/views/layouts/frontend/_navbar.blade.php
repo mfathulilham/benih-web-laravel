@@ -27,7 +27,7 @@
         {{-- Show Dashboard For Admin--}}
         @if (Auth::user()->role == 2)
             <li class="nav-item ms-4 mt-1">
-                <a href="{{ route('dashboard')}}" class="keranjangBtn nav-link text-light">
+                <a href="{{ route('dashboard') }}" class="keranjangBtn nav-link text-light">
                 <i class="fas fa-home me-2"></i>
                 Dashboard
                 </a>
@@ -35,7 +35,7 @@
         @endif
 
             <li class="nav-item ms-4 mt-1">
-                <a href="keranjang.html" class="keranjangBtn nav-link text-light">
+                <a href="{{ route('keranjang') }}" class="keranjangBtn nav-link text-light">
                 <i class="fas fa-shopping-cart"></i>
                 Keranjang
                 </a>

@@ -35,6 +35,10 @@ main {
 }
 
 /* CARD BENIH */
+.cardBenih img {
+    height: 250px !important;
+}
+
 .cardBenih:hover {
     box-shadow: 1px 1px 8px rgba(30, 130, 76, 1);
     transform: translateY(-5px);
@@ -49,10 +53,6 @@ main {
     font-size: 17px;
     color: green;
 }
-/* .card-benih .card-body a {
-    font-size: 12px;
-} */
-
 .sidebar {
     height: 90vh;
 }
@@ -68,7 +68,6 @@ main {
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
 }
 .vertical-center {
-    /* flex-direction: column; */
     display: flex;
     align-items: center;
   }
@@ -81,16 +80,12 @@ main {
     background-color: white;
     margin-top: 100px;
     border-radius: 15px;
-    /* padding: 30px; */
-    /* box-sizing: border-box; */
     box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
 }
 .card-admin {
     background-color: white;
     margin-top: 50px;
     border-radius: 15px;
-    /* padding: 30px; */
-    /* box-sizing: border-box; */
     box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.3);
 }
 .sidebar {
@@ -111,7 +106,10 @@ main {
         height: 37vh;
         border-radius: 15px;
     }
-    
+
+    .cardBenih img {
+        height: 150px !important;
+    }
     .cardBenih .card-title {
         font-size: 15px;
     }
@@ -130,7 +128,7 @@ main {
     .card-keranjang img {
         width: 28px;
         height: 35px;
-    }    
+    }
     .card-keranjang a {
         font-size: 13px;
     }
@@ -159,7 +157,7 @@ main {
     }
     .card-keranjang p {
         font-size: 13px;
-    }        
+    }
     .card-keranjang img {
         width: 30px;
         height: 37px;
@@ -167,11 +165,11 @@ main {
     .sidebar {
         /* height: 40vh; */
         display: none;
-    }    
+    }
     .filter {
         display: none;
     }
-    
+
 }
 /* Large Device */
 @media (min-width: 992px) {

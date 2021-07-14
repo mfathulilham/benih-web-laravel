@@ -6,7 +6,8 @@
           <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
             Home
           </button>
-          <div class="collapse {{ request()->is('home') ? 'show' : '' }}" id="home-collapse">
+          {{-- <div class="collapse {{ request()->is('home') ? 'show' : '' }}" id="home-collapse"> --}}
+            <div class="collapse show" id="home-collapse">
             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
               <li>
                   <a href="{{ route('home') }}" class="link-dark rounded {{ request()->is('home') ? 'fw-bold' : '' }}">Perlu Penanganan</a>
@@ -20,11 +21,11 @@
           <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
             Transaksi
           </button>
-          <div class="collapse {{ request()->is('transaksi') ? 'show' : '' }}" id="dashboard-collapse">
+          <div class="collapse {{ request()->is('transaksi') ? 'show' : '' }} {{ request()->is('transaksi/*') ? 'show' : '' }}" id="dashboard-collapse">
             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
               {{-- <li><a href="#" class="link-dark rounded {{ request()->is('pemesanan') ? 'fw-bold' : '' }}">Pemesanan</a></li> --}}
               <li><a href="{{ route('transaksi') }}" class="link-dark rounded {{ request()->is('transaksi') ? 'fw-bold' : '' }}">Pemesanan</a></li>
-              <li><a href="{{ route('transaksi-pengiriman') }}" class="link-dark rounded {{ request()->is('transaksi-pengiriman') ? 'fw-bold' : '' }}">Pengiriman</a></li>
+              <li><a href="{{ route('transaksi-pengiriman') }}" class="link-dark rounded {{ request()->is('transaksi/pengiriman') ? 'fw-bold' : '' }}">Pengiriman</a></li>
               <li><a href="#" class="link-dark rounded">Selesai</a></li>
               <li><a href="#" class="link-dark rounded">Cancel</a></li>
             </ul>
@@ -34,10 +35,10 @@
           <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
             Benih
           </button>
-          <div class="collapse  {{ request()->is('benih') ? 'show' : '' }}" id="orders-collapse">
+          <div class="collapse  {{ request()->is('benih') ? 'show' : '' }} {{ request()->is('benih/*') ? 'show' : '' }}" id="orders-collapse">
             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
               <li><a href="{{ route('benih') }}" class="link-dark rounded {{ request()->is('benih') ? 'fw-bold' : '' }}">Benih Saya</a></li>
-              <li><a href="{{ route('benih-create') }}" class="link-dark rounded {{ request()->is('benih-create') ? 'fw-bold' : '' }}">Tambah Benih</a></li>
+              <li><a href="{{ route('benih-create') }}" class="link-dark rounded {{ request()->is('benih/create') ? 'fw-bold' : '' }}">Tambah Benih</a></li>
             </ul>
           </div>
         </li>

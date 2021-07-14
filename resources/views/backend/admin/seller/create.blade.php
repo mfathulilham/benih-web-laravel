@@ -17,7 +17,7 @@
 
         <div class="row justify-content-center mt-4">
             <div class="col card-2">
-                <form method="POST" action="{{ route('seller-store') }}" class="row g-3" novalidate>
+                <form method="POST" action="{{ route('seller-store') }}" class="row g-3">
                     @csrf
 
                     <div class="col-md-3">
@@ -109,7 +109,7 @@
                         @enderror
                     </div>
                     <div class="col-md-3">
-                        <input type="text" class="form-control @error('name') is-invalid @enderror"" id="kec" placeholder="Kecamatan" name="kec" required>
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="kec" placeholder="Kecamatan" name="kec" required>
                         @error('kec')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

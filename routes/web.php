@@ -18,6 +18,7 @@ use App\Http\Controllers\Backend\Seller\{SellerHomeController,SellerTransaksiCon
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/keranjang', [HomeController::class, 'keranjang'])->name('keranjang');
 
 // Seller Dashboard
 Route::middleware('seller')->group(function () {
@@ -32,6 +33,10 @@ Route::middleware('seller')->group(function () {
     Route::prefix('benih')->name('benih')->group(function(){
         Route::get('', [SellerBenihController::class, 'index'])->name('');
         Route::get('/create', [SellerBenihController::class, 'create'])->name('-create');
+        Route::post('/store', [SellerBenihController::class, 'store'])->name('-store');
+        Route::get('/edit/{id}', [SellerBenihController::class, 'edit'])->name('-edit');
+        Route::patch('/update/{id}', [SellerBenihController::class, 'update'])->name('-update');
+        Route::delete('/delete/{id}', [SellerBenihController::class, 'delete'])->name('-delete');
     });
 
 });
