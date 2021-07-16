@@ -12,7 +12,7 @@
 
         <div class="row justify-content-center mt-4">
             <div class="col card-2">
-                <form method="POST" action="/seller/update/{{ $seller->id }}" class="row g-3">
+                <form method="POST" action="/seller/update/{{ $seller->id }}" class="row g-3" novalidate>
                     @csrf
                     @method('patch')
 

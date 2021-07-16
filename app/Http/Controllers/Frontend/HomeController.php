@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Benih;
+// use App\Models\Benih;
+use App\Models\{Benih,User,Keranjang};
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -16,14 +17,27 @@ class HomeController extends Controller
         return view('frontend.home', ['benihs' => $benihs]);
     }
 
-    public function keranjang()
+    public function detail($id)
     {
-        $name = Auth::user()->name;
-        $alamat = Auth::user()->alamat;
-        $kec = Auth::user()->kec;
-        $kab = Auth::user()->kab;
-        $prov = Auth::user()->prov;
+        $benih = Benih::findOrFail($id);
+        return view('frontend.detail', ['benih' => $benih]);
+    }
+    public function add(Request $request, $id)
+    {
+        $data = $request->validate([
+            'jumlah' => ['required','numeric','gt:0']
+        ]);
 
-        return view('frontend.keranjang', compact('name', 'alamat','kec','kab','prov'));
+        $benih = Benih::findOrFail($id);
+        $total_harga = ($benih->harga) * $request->jumlah ;
+
+        $data['user_id'] = Auth::user()->id;
+        $data['benih_id'] = $benih->id;
+        $data['total_harga'] = $total_harga;
+
+        // dd($data);
+
+        Keranjang::create($data);
+        return redirect('keranjang')->with('msg', 'Benih telah dimasukkan ke keranjang');
     }
 }

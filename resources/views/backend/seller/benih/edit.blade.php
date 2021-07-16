@@ -37,10 +37,10 @@
             <div class="col-md-3">
                 <label for="kategori" class="form-label">{{ __('Kategori Benih') }}</label>
                 <select class="form-select @error('kategori') is-invalid @enderror" aria-label="Default select example" id="kategori" name="kategori">
-                    <option {{ $benih->kategori == 'Padi' ? 'selected' : '' }} value="1">Padi</option>
-                    <option {{ $benih->kategori == 'Jagung' ? 'selected' : '' }} value="2">Jagung</option>
-                    <option {{ $benih->kategori == 'Kedelai' ? 'selected' : '' }} value="3">Kedelai</option>
-                    <option {{ $benih->kategori == 'Kacang - kacangan' ? 'selected' : '' }} value="4">Kacang - kacangan</option>
+                    <option {{ $benih->kategori == 'Padi' ? 'selected' : '' }} value="Padi">Padi</option>
+                    <option {{ $benih->kategori == 'Jagung' ? 'selected' : '' }} value="Jagung">Jagung</option>
+                    <option {{ $benih->kategori == 'Kedelai' ? 'selected' : '' }} value="Kedelai">Kedelai</option>
+                    <option {{ $benih->kategori == 'Kacang - kacangan' ? 'selected' : '' }} value="Kacang - kacangan">Kacang - kacangan</option>
                 </select>
                 @error('kategori')
                     <span class="invalid-feedback" role="alert">
@@ -51,8 +51,8 @@
             <div class="col-md-3">
                 <label for="varietas" class="form-label">{{ __('Varietas') }}</label>
                 <select class="form-select @error('varietas') is-invalid @enderror" aria-label="Default select example" id="varietas" name="varietas">
-                    <option {{ $benih->varietas == 'Cigeulis' ? 'selected' : '' }} value="1">Cigeulis</option>
-                    <option {{ $benih->varietas == 'Ciherang' ? 'selected' : '' }} value="2">Ciherang</option>
+                    <option {{ $benih->varietas == 'Cigeulis' ? 'selected' : '' }} value="Cigeulis">Cigeulis</option>
+                    <option {{ $benih->varietas == 'Ciherang' ? 'selected' : '' }} value="Ciherang">Ciherang</option>
                 </select>
                 @error('varietas')
                     <span class="invalid-feedback" role="alert">
@@ -99,8 +99,8 @@
             <div class="col-md-4">
                 <label for="variasi" class="form-label">{{ __('Variasi Kemasan (Kg)') }}</label>
                 <select class="form-select @error('variasi') is-invalid @enderror" aria-label="Default select example" id="variasi" name="variasi">
-                    <option {{ $benih->variasi == '5' ? 'selected' : '' }} value="1">5</option>
-                    <option {{ $benih->variasi == '25' ? 'selected' : '' }} value="2">25</option>
+                    <option {{ $benih->variasi == '5' ? 'selected' : '' }} value="5">5</option>
+                    <option {{ $benih->variasi == '25' ? 'selected' : '' }} value="25">25</option>
                 </select>
                 @error('variasi')
                     <span class="invalid-feedback" role="alert">

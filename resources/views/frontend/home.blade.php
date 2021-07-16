@@ -23,7 +23,7 @@
 </div>
 
 <!-- Kategori -->
-<section>
+{{-- <section>
     <div class="category mx-4 mt-5">
       <div class="row card-2 px-3 pt-2 py-3 mx-1 g-3">
         <h3 class="my-3">Kategori Benih</h3>
@@ -75,7 +75,7 @@
 
       </div>
     </div>
-</section>
+</section> --}}
 
 <hr class="mx-4 mt-5 text-secondary">
 
@@ -110,7 +110,7 @@
                     </a>
                 </div>
                 <div class="col">
-                    <a href="#" class="detailBtn container-fluid btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Detail</a>
+                    <a href="{{ route('home-detail', $benih->id) }}" class="detailBtn container-fluid btn btn-secondary">Detail</a>
                 </div>
                 </div>
             </div>
@@ -127,15 +127,27 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Detail Benih</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Masukkan ke keranjang</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            No Data Yet ....
+            <div class="row">
+                <div class="col-7">
+                    Benih Inpari
+                </div>
+                <div class="col-3">
+                    <input type="number" class="form-control @error('jumlah') is-invalid @enderror" id="jumlah" name="jumlah" placeholder="Jumlah" required>
+                    @error('jumlah')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+                </div>
+            </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Add to cart</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batalkan</button>
+            <button type="submit" class="btn btn-primary">Masukkan</button>
           </div>
         </div>
       </div>

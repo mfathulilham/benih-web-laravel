@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\SellerRequest;
 
 class SellerController extends Controller
 {
@@ -19,46 +20,28 @@ class SellerController extends Controller
     {
         return view('backend.admin.seller.create');
     }
-    public function store(Request $request)
+    public function store(SellerRequest $request)
     {
-        $request->validate([
-            'name'  => ['required', 'string'],
-            'email' => ['required', 'email', 'unique:users'],
-            'password' => ['required', 'password', 'confirmed', 'min:8'],
-            'telp' => ['required', 'numeric'],
-            'alamat' => ['required'],
-            'prov' => ['required', 'string'],
-            'kab' => ['required', 'string'],
-            'kec' => ['required', 'string']
-        ]);
+        $data = $request->validated();
+        $data['role'] = 1;
 
-        $request->password = Hash::make($request->password);
+        $data['password'] = Hash::make($request->password);
 
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password,
-            'telp' => $request->telp,
-            'alamat' => $request->alamat,
-            'prov' => $request->prov,
-            'kab' => $request->kab,
-            'kec' => $request->kec,
-            'role' => $request->role
-        ]);
+        User::create($data);
 
         return redirect('seller')->with('msg', 'Data Added');
     }
 
-    public function edit($id)
+    public function edit(User $user)
     {
-        $seller = User::findOrFail($id);
+        $seller = $user;
         return view('backend.admin.seller.edit', ['seller' => $seller ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $user)
     {
-        $user =  User::findOrFail($id);
-        $request->validate([
+        $user = User::findOrFail($user);
+        $data = $request->validate([
             'name'  => ['required', 'string'],
             'email' => ['required', 'email', 'unique:users,email,' . $user->id ],
             'password' => ['confirmed'],
@@ -69,18 +52,9 @@ class SellerController extends Controller
             'kec' => ['required', 'string']
         ]);
 
-        $request->password = Hash::make($request->password);
+        $data['password'] = Hash::make($request->password);
 
-        $user->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password,
-            'telp' => $request->telp,
-            'alamat' => $request->alamat,
-            'prov' => $request->prov,
-            'kab' => $request->kab,
-            'kec' => $request->kec,
-        ]);
+        $user->update($data);
         return redirect('seller')->with('msg', 'Data Updated');
     }
 

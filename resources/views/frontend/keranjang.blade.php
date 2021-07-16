@@ -6,6 +6,10 @@
     <div class="row mt-5">
         <div class="col card px-4 py-4">
 
+            @if (session('msg'))
+                <p class="alert alert-success">{{ session('msg') }}</p>
+            @endif
+
             <h5 class="mb-3 text-success">Alamat Pengiriman</h5>
             <div class="row g-1">
                 <div class="namaPengiriman col-12 col-md-4">

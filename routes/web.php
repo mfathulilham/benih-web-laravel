@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\{HomeController, KeranjangController};
+use App\Http\Controllers\Frontend\Transaksi\PemesananController;
 use App\Http\Controllers\Backend\Admin\{DashboardController, CustomersController, SellerController, OrderController};
 use App\Http\Controllers\Backend\Seller\{SellerHomeController,SellerTransaksiController, SellerPemesananController, SellerPengirimanController, SellerBenihController};
 
@@ -17,8 +18,23 @@ use App\Http\Controllers\Backend\Seller\{SellerHomeController,SellerTransaksiCon
 |
 */
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/keranjang', [HomeController::class, 'keranjang'])->name('keranjang');
+
+Route::prefix('/')->name('home')->group(function(){
+    Route::get('', [HomeController::class, 'index'])->name('');
+    Route::get('/detail/{id}', [HomeController::class, 'detail'])->name('-detail');
+    Route::post('/add/{id}', [HomeController::class, 'add'])->name('-add');
+});
+
+// Keranjang
+Route::prefix('keranjang')->name('keranjang')->group(function(){
+    Route::get('', [KeranjangController::class, 'index'])->name('');
+    // Route::post('/add', [KeranjangController::class, 'add'])->name('-add');
+});
+
+// Transaksi
+Route::prefix('transaksi')->name('transaksi')->group(function(){
+    Route::get('/pemesanan', [PemesananController::class, 'index'])->name('-pemesanan');
+});
 
 // Seller Dashboard
 Route::middleware('seller')->group(function () {
@@ -58,7 +74,7 @@ Route::middleware('admin')->group(function() {
         Route::get('', [SellerController::class, 'index'])->name('');
         Route::get('/create', [SellerController::class, 'create'])->name('-create');
         Route::post('/store', [SellerController::class, 'store'])->name('-store');
-        Route::get('/edit/{id}', [SellerController::class, 'edit'])->name('-edit');
+        Route::get('/edit/{user:id}', [SellerController::class, 'edit'])->name('-edit');
         Route::patch('/update/{id}', [SellerController::class, 'update'])->name('-update');
         Route::delete('/delete/{id}', [SellerController::class, 'delete'])->name('-delete');
     });

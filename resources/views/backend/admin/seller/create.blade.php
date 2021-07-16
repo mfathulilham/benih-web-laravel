@@ -17,7 +17,7 @@
 
         <div class="row justify-content-center mt-4">
             <div class="col card-2">
-                <form method="POST" action="{{ route('seller-store') }}" class="row g-3">
+                <form method="POST" action="{{ route('seller-store') }}" class="row g-3" novalidate>
                     @csrf
 
                     <div class="col-md-3">
@@ -71,7 +71,7 @@
                         <label for="telp" class="form-label">{{ __('Telepon') }}</label>
                     </div>
                     <div class="col-md-9">
-                        <input type="number" class="form-control @error('name') is-invalid @enderror" id="telp" name="telp" required>
+                        <input type="number" class="form-control @error('telp') is-invalid @enderror" id="telp" value="{{ old('telp') }}" name="telp" required>
                         @error('telp')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -82,7 +82,7 @@
                         <label for="alamat" class="form-label">{{ __('Alamat') }}</label>
                     </div>
                     <div class="col-md-9">
-                        <textarea class="form-control @error('name') is-invalid @enderror" id="alamat" rows="2" placeholder="Nama Jalan/Gedung/Penanda Lain" name="alamat" required></textarea>
+                        <textarea class="form-control @error('alamat') is-invalid @enderror" id="alamat" rows="2" placeholder="Nama Jalan/Gedung/Penanda Lain" name="alamat" required>{{ old('email') }}</textarea>
                         @error('alamat')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -93,7 +93,7 @@
                         <label for="prov" class="form-label">{{ __('Provinsi\Kab Kota\Kecamatan') }}</label>
                     </div>
                     <div class="col-md-3">
-                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="prov" placeholder="Provinsi" name="prov" required>
+                        <input type="text" class="form-control @error('prov') is-invalid @enderror" id="prov" placeholder="Provinsi" name="prov" value="{{ old('prov') }}" required>
                         @error('prov')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -101,7 +101,7 @@
                         @enderror
                     </div>
                     <div class="col-md-3">
-                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="kab" placeholder="Kabupaten" name="kab" required>
+                        <input type="text" class="form-control @error('kab') is-invalid @enderror" id="kab" placeholder="Kabupaten" name="kab" value="{{ old('kab') }}" required>
                         @error('kab')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -109,16 +109,12 @@
                         @enderror
                     </div>
                     <div class="col-md-3">
-                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="kec" placeholder="Kecamatan" name="kec" required>
+                        <input type="text" class="form-control @error('kec') is-invalid @enderror" id="kec" placeholder="Kecamatan" name="kec" value="{{ old('kec') }}" required>
                         @error('kec')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-                    </div>
-                    {{-- ROLE --}}
-                    <div class="col-md-5">
-                        <input type="number" class="form-control" id="role" value="1" name="role" hidden>
                     </div>
 
                     <div class="col-3">

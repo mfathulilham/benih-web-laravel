@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Backend\Seller;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Benih;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\SellerBenihRequest;
 
 class SellerBenihController extends Controller
 {
@@ -20,38 +20,14 @@ class SellerBenihController extends Controller
     {
         return view('backend.seller.benih.create');
     }
-    public function store(Request $request)
+    public function store(SellerBenihRequest $request)
     {
-        $request->validate([
-            'judul'  => ['required', 'string'],
-            'gambar' => ['required', 'max:5120'],
-            'kategori' => ['required', 'string'],
-            'varietas' => ['required', 'string'],
-            'umur' => ['required', 'numeric'],
-            'potensi' => ['required', 'string'],
-            'rekomendasi' => ['required', 'string'],
-            'deskripsi' => ['required', 'string'],
-            'variasi' => ['required', 'string'],
-            'stok' => ['required', 'numeric'],
-            'harga' => ['required', 'numeric']
-        ]);
+        $data = $request->validated();
 
         $gambar = $request->file('gambar');
-        $gambar = $gambar->storeAs('gambar_benih', time(). '.' . $gambar->getClientOriginalExtension() );
-        Benih::create([
-            'judul' => $request->judul,
-            'gambar' => $gambar,
-            'kategori' => $request->kategori,
-            'varietas' => $request->varietas,
-            'umur' => $request->umur,
-            'potensi' => $request->potensi,
-            'rekomendasi' => $request->rekomendasi,
-            'deskripsi' => $request->deskripsi,
-            'variasi' => $request->variasi,
-            'stok' => $request->stok,
-            'harga' => $request->harga,
-            'user_id' => Auth::user()->id,
-        ]);
+        $data['gambar'] = $gambar->storeAs('gambar_benih', time(). '.' . $gambar->getClientOriginalExtension() );
+        $data['user_id'] = $request->user()->id;
+        Benih::create($data);
 
         return redirect('benih')->with('msg', 'Benih telah ditambahkan');
     }
@@ -62,44 +38,19 @@ class SellerBenihController extends Controller
         return view('backend.seller.benih.edit', ['benih' => $benih]);
     }
 
-    public function update(Request $request, $id)
+    public function update(SellerBenihRequest $request, $id)
     {
         $benih = Benih::findOrFail($id);
-        $request->validate([
-            'judul'  => ['required', 'string'],
-            'gambar' => ['max:5120'],
-            'kategori' => ['required', 'string'],
-            'varietas' => ['required', 'string'],
-            'umur' => ['required', 'numeric'],
-            'potensi' => ['required', 'string'],
-            'rekomendasi' => ['required', 'string'],
-            'deskripsi' => ['required', 'string'],
-            'variasi' => ['required', 'string'],
-            'stok' => ['required', 'numeric'],
-            'harga' => ['required', 'numeric']
-        ]);
+        $data = $request->validated();
 
         if ($gambar = $request->file('gambar')) {
             Storage::delete($benih->gambar);
-            $gambar = $gambar->storeAs('gambar_benih', time(). '.' . $gambar->getClientOriginalExtension() );
+            $data['gambar'] = $gambar->storeAs('gambar_benih', time(). '.' . $gambar->getClientOriginalExtension() );
         }
         else {
-            $gambar = $benih->gambar;
+            $data['gambar'] = $benih->gambar;
         }
-        $benih->update([
-            'judul' => $request->judul,
-            'gambar' => $gambar,
-            'kategori' => $request->kategori,
-            'varietas' => $request->varietas,
-            'umur' => $request->umur,
-            'potensi' => $request->potensi,
-            'rekomendasi' => $request->rekomendasi,
-            'deskripsi' => $request->deskripsi,
-            'variasi' => $request->variasi,
-            'stok' => $request->stok,
-            'harga' => $request->harga,
-            'user_id' => Auth::user()->id,
-        ]);
+        $benih->update($data);
 
         return redirect('benih')->with('msg', 'Benih telah diedit');
 
@@ -112,4 +63,5 @@ class SellerBenihController extends Controller
          $benih->delete();
         return redirect('benih')->with('msg', 'Benih telah dihapus');
     }
+
 }
