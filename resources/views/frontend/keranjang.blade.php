@@ -38,7 +38,7 @@
                 </div>
 
                 <div class="col-5">
-                  <p>Produk</p>
+                  <p>Nama Benih</p>
                 </div>
 
                 <div class="col-2">
@@ -54,36 +54,40 @@
                 </div>
             </div>
 
-            <!-- DAFTAR KERANJANG -->
-            <div class="row mx-2 mt-3 px-2 pt-4 pb-2 bg-light">
 
-                <div class="col-1">
-                    <div class="form-check">
-                        <input class="form-check-input checkPilih" type="checkbox" value="" id="flexCheckDefault">
-                    </div>
+    @foreach ($keranjangs as $keranjang)
+        <div class="row mx-2 mt-3 px-2 pt-4 pb-2 bg-light">
+
+            <div class="col-1">
+                <div class="form-check">
+                    <input class="form-check-input checkPilih" type="checkbox" value="" id="flexCheckDefault">
                 </div>
-
-                <div class="col-1 imageBenih">
-                  <img src="img/carousel1.jpg" alt="">
-                </div>
-
-                <div class="col-4 titleBenih">
-                  <p>Padi Inpari 32 Kemasan 5 kg</p>
-                </div>
-
-                <div class="col-2 hargaBenih">
-                    <p>Rp. 50.000</p>
-                </div>
-
-                <div class="col-2 jumlahBenih">
-                    <p>2</p>
-                </div>
-
-                <div class="col-2 totalBenih">
-                    <p>Rp. 100.000</p>
-                </div>
-
             </div>
+
+            <div class="col-1 imageBenih">
+                <img src="{{ $keranjang->benih->img }}" alt="">
+            </div>
+
+            <div class="col-4 titleBenih">
+                <p>{{$keranjang->benih->judul}}</p>
+            </div>
+
+            <div class="col-2 hargaBenih">
+                <p>Rp. {{number_format($keranjang->benih->harga, 0, ',', '.') }}</p>
+            </div>
+
+            <div class="col-2 jumlahBenih">
+                <p>{{$keranjang->jumlah}}</p>
+            </div>
+
+            <div class="col-2 totalBenih">
+                <p>Rp. {{number_format($keranjang->total_harga, 0, ',', '.') }}</p>
+            </div>
+
+        </div>
+    @endforeach
+
+
 
             <div class="row mt-4">
                 <div class="col-5"></div>

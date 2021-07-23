@@ -33,7 +33,8 @@
 }
 .cardBenih:hover {
     box-shadow: 1px 1px 8px rgba(30, 130, 76, 1);
-    transform: translateY(-5px);
+    transform: translateY(-8px);
+    transition: 0.3s;
 }
 .cardBenih .card-title {
     font-size: 15px;

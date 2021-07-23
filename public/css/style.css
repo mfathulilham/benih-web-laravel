@@ -1,6 +1,6 @@
 
 main {
-    margin: 20px 45px;
+    margin: 20px 45px 120px 45px;
 }
 
 /* CAROUSEL */
@@ -21,6 +21,7 @@ main {
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
 }
 .card-3 {
+    margin: 20px 45px 0 45px;
     border-radius: 5px;
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
 }
@@ -41,7 +42,9 @@ main {
 
 .cardBenih:hover {
     box-shadow: 1px 1px 8px rgba(30, 130, 76, 1);
-    transform: translateY(-5px);
+    /* border: 3px solid rgba(30, 130, 76, 1); */
+    transform: translateY(-8px);
+    transition: 0.3s;
 }
 .cardBenih .card-title {
     font-size: 18px;
@@ -95,6 +98,9 @@ main {
 .filter {
     border: 1px solid #FFF;
     border-radius: 5px;
+}
+.footer ul {
+    list-style: none;
 }
 /* Small devices (landscape phones, 576px and up) */
 @media (max-width: 576px) {

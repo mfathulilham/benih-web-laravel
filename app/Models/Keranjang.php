@@ -14,4 +14,18 @@ class Keranjang extends Model
         'jumlah',
         'total_harga'
     ];
+
+    protected $with = [
+        'benih'
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function benih()
+    {
+        return $this->belongsTo(Benih::class);
+    }
 }

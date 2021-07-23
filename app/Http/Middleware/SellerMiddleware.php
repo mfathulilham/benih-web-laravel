@@ -23,5 +23,6 @@ class SellerMiddleware
                 return $next($request);
             } else return abort('403', 'Anda bukan Seller');
         } else return abort('404');
+
     }
 }

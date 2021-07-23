@@ -17,9 +17,10 @@ class KeranjangController extends Controller
         $kab = Auth::user()->kab;
         $prov = Auth::user()->prov;
 
-        // $keranjangs = Keranjang::where('user_id', Auth::user()->id)->get();
+        $user = Auth::user()->id;
+        // $keranjangs = Keranjang::all();
+        $keranjangs = Keranjang::where('user_id', Auth::user()->id)->get();
 
-
-        return view('frontend.keranjang', compact('name', 'alamat','kec','kab','prov'));
+        return view('frontend.keranjang', compact('name', 'alamat','kec','kab','prov', 'keranjangs'));
     }
 }

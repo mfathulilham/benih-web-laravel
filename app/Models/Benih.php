@@ -26,4 +26,14 @@ class Benih extends Model
     {
         return url('storage', $this->gambar);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function keranjangs()
+    {
+        return $this->hasMany(Keranjang::class);
+    }
 }

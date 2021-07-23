@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Frontend\{HomeController, KeranjangController};
+use App\Http\Controllers\Frontend\{HomeController, KeranjangController, ProfileController};
 use App\Http\Controllers\Frontend\Transaksi\PemesananController;
 use App\Http\Controllers\Backend\Admin\{DashboardController, CustomersController, SellerController, OrderController};
 use App\Http\Controllers\Backend\Seller\{SellerHomeController,SellerTransaksiController, SellerPemesananController, SellerPengirimanController, SellerBenihController};
@@ -18,42 +18,50 @@ use App\Http\Controllers\Backend\Seller\{SellerHomeController,SellerTransaksiCon
 |
 */
 
-
-Route::prefix('/')->name('home')->group(function(){
-    Route::get('', [HomeController::class, 'index'])->name('');
-    Route::get('/detail/{id}', [HomeController::class, 'detail'])->name('-detail');
-    Route::post('/add/{id}', [HomeController::class, 'add'])->name('-add');
-});
-
-// Keranjang
-Route::prefix('keranjang')->name('keranjang')->group(function(){
-    Route::get('', [KeranjangController::class, 'index'])->name('');
-    // Route::post('/add', [KeranjangController::class, 'add'])->name('-add');
-});
-
-// Transaksi
-Route::prefix('transaksi')->name('transaksi')->group(function(){
-    Route::get('/pemesanan', [PemesananController::class, 'index'])->name('-pemesanan');
-});
-
-// Seller Dashboard
-Route::middleware('seller')->group(function () {
+Route::get('', [HomeController::class, 'index'])->name('');
+Route::middleware('user')->group(function () {
     //Home
-    Route::get('/home', [SellerHomeController::class, 'index'])->name('home');
-    //Transaksi
+
+    // Home Detail
+    Route::prefix('/')->name('home')->group(function(){
+        Route::get('/detail/{id}', [HomeController::class, 'detail'])->name('-detail');
+        Route::post('/add/{id}', [HomeController::class, 'add'])->name('-add');
+    });
+
+    // Keranjang
+    Route::prefix('keranjang')->name('keranjang')->group(function(){
+        Route::get('', [KeranjangController::class, 'index'])->name('');
+        // Route::post('/add', [KeranjangController::class, 'add'])->name('-add');
+    });
+
+    // Transaksi
     Route::prefix('transaksi')->name('transaksi')->group(function(){
-        Route::get('', [SellerPemesananController::class, 'index'])->name('');
-        Route::get('/pengiriman', [SellerPengirimanController::class, 'index'])->name('-pengiriman');
+        Route::get('/pemesanan', [PemesananController::class, 'index'])->name('-pemesanan');
     });
-    //Benih
-    Route::prefix('benih')->name('benih')->group(function(){
-        Route::get('', [SellerBenihController::class, 'index'])->name('');
-        Route::get('/create', [SellerBenihController::class, 'create'])->name('-create');
-        Route::post('/store', [SellerBenihController::class, 'store'])->name('-store');
-        Route::get('/edit/{id}', [SellerBenihController::class, 'edit'])->name('-edit');
-        Route::patch('/update/{id}', [SellerBenihController::class, 'update'])->name('-update');
-        Route::delete('/delete/{id}', [SellerBenihController::class, 'delete'])->name('-delete');
-    });
+
+    // Profile
+    Route::get('profile', [ProfileController::class, 'index'])->name('profile');
+
+});
+
+
+Route::middleware('seller')->group(function () {
+        //Home
+        Route::get('/home', [SellerHomeController::class, 'index'])->name('home');
+        //Transaksi
+        Route::prefix('transaksi')->name('transaksi')->group(function(){
+            Route::get('', [SellerPemesananController::class, 'index'])->name('');
+            Route::get('/pengiriman', [SellerPengirimanController::class, 'index'])->name('-pengiriman');
+        });
+        //Benih
+        Route::prefix('benih')->name('benih')->group(function(){
+            Route::get('', [SellerBenihController::class, 'index'])->name('');
+            Route::get('/create', [SellerBenihController::class, 'create'])->name('-create');
+            Route::post('/store', [SellerBenihController::class, 'store'])->name('-store');
+            Route::get('/edit/{id}', [SellerBenihController::class, 'edit'])->name('-edit');
+            Route::patch('/update/{id}', [SellerBenihController::class, 'update'])->name('-update');
+            Route::delete('/delete/{id}', [SellerBenihController::class, 'delete'])->name('-delete');
+        });
 
 });
 

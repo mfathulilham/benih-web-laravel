@@ -26,8 +26,10 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-success text-light shadow-sm">
             <div class="container">
-                <i class="fas fa-seedling"></i>
-                <a class="navbar-brand text-light" href="{{ url('/') }}">
+                <h3>
+                    <i class="fas fa-seedling mx-1"></i>
+                </h3>
+                    <a class="navbar-brand text-light" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

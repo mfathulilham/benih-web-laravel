@@ -94,7 +94,7 @@
                 <h5 class="card-title">{{ $benih->judul }}</h5>
                 <div class="row g-0">
                 <div class="col">
-                    <p class="harga">Rp. {{ $benih->harga }}</p>
+                    <p class="harga">Rp. {{ number_format($benih->harga, 0, ',', '.') }}</p>
                 </div>
                 <div class="col">
                     <p class="card-text">
@@ -104,14 +104,25 @@
                 </div>
                 </div>
                 <div class="row justify-content-center g-1">
-                <div class="col">
-                    <a href="#" class="addKeranjangBtn container-fluid btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <i class="fas fa-plus me-1"></i>Keranjang
-                    </a>
-                </div>
-                <div class="col">
-                    <a href="{{ route('home-detail', $benih->id) }}" class="detailBtn container-fluid btn btn-secondary">Detail</a>
-                </div>
+                    @auth
+                        {{-- <div class="col">
+                            <a href="#" class="addKeranjangBtn container-fluid btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <i class="fas fa-plus me-1"></i>Keranjang
+                            </a>
+                        </div> --}}
+                        <div class="col">
+                            <a href="{{ route('home-detail', $benih->id) }}" class="detailBtn container-fluid btn btn-secondary">Detail</a>
+                        </div>
+                    @else
+                        {{-- <div class="col">
+                            <a href="{{ route('login') }}" class="addKeranjangBtn container-fluid btn btn-success">
+                                <i class="fas fa-plus me-1"></i>Keranjang
+                            </a>
+                        </div> --}}
+                        <div class="col">
+                            <a href="{{ route('login') }}" class="detailBtn container-fluid btn btn-secondary">Detail</a>
+                        </div>
+                    @endauth
                 </div>
             </div>
             </div>

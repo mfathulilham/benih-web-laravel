@@ -1,7 +1,7 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-success text-light px-5">
     <h3>
       <i class="fas fa-seedling"></i>
-      <a class="navbar-brand text-light" href="index.html">BenihKu</a>
+      <a class="navbar-brand text-light" href="/">BenihKu</a>
     </h3>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -54,7 +54,7 @@
                 <!-- <strong>Logout</strong> -->
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end text-small shadow" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="userProfile.html">Akun Saya</a></li>
+                <li><a class="dropdown-item" href="{{ route('profile') }}">Akun Saya</a></li>
                 <li><a class="dropdown-item" href="{{ route('transaksi-pemesanan') }}">Pesananan Saya</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li>

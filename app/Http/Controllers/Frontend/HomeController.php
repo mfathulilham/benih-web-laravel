@@ -19,8 +19,11 @@ class HomeController extends Controller
 
     public function detail($id)
     {
-        $benih = Benih::findOrFail($id);
-        return view('frontend.detail', ['benih' => $benih]);
+        if (Auth::user()) {
+            $benih = Benih::findOrFail($id);
+            return view('frontend.detail', ['benih' => $benih]);
+        }
+        else return view('auth.login');
     }
     public function add(Request $request, $id)
     {
@@ -29,6 +32,21 @@ class HomeController extends Controller
         ]);
 
         $benih = Benih::findOrFail($id);
+        $keranjangs = Keranjang::where('user_id', Auth::user()->id)->get();
+        // dd($keranjangs);
+        foreach ($keranjangs as $keranjang) {
+            if ($keranjang->benih_id == $benih->id) {
+                $jumlah = ($keranjang->jumlah) + $request->jumlah;
+                $total_harga = $jumlah * $keranjang->total_harga;
+
+                $data['jumlah'] = $jumlah;
+                $data['total_harga'] = $total_harga;
+
+                $keranjang->update($data);
+                return redirect('keranjang')->with('msg', 'Benih telah dimasukkan ke keranjang');
+            }
+        }
+
         $total_harga = ($benih->harga) * $request->jumlah ;
 
         $data['user_id'] = Auth::user()->id;

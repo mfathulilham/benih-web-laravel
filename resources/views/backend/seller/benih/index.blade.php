@@ -44,7 +44,7 @@
                       <h5 class="card-title">{{ $benih->judul }}</h5>
                       <div class="row g-0">
                         <div class="col">
-                          <p class="harga">Rp.{{ $benih->harga }}</p>
+                          <p class="harga">Rp. {{ number_format($benih->harga,0, ',', '.') }}</p>
                         </div>
                         <div class="col">
                           <div class="card-stok text-end">

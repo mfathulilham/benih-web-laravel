@@ -1,6 +1,25 @@
 @extends('layouts.frontend.transaksi_master')
 @section('content')
 
+<!-- NAV Tab -->
+@include('layouts.frontend._navtabs')
+
+<!-- Data Pemesanan -->
+
+{{-- <div class="row mx-3 mt-4 text-success">
+    <h3>Pemesanan</h3>
+</div> --}}
+
+<div class="row g-0 mx-4 mt-4">
+    <div class="col">
+        <input class="form-control me-2" type="search" placeholder="Cari..." aria-label="Search">
+    </div>
+    <div class="col-2 col-md-1">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </div>
+</div>
+
+{{-- MAIN CONTENT --}}
 <div class="row list-pemesanan mx-4 my-3 px-3 py-3 bg-light">
 
     <div class="col-1 col-lg-1 text-success">

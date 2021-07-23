@@ -10,7 +10,7 @@
         <div class="col-12 col-md-6">
             <h5>{{ $benih->judul }}</h5>
             <p>Terjual 0 | Stok {{ $benih->stok }} | <i class="fas fa-star text-warning"></i>0</p>
-            <h2 class="text-success">Rp. {{ $benih->harga }}</h2>
+            <h2 class="text-success">Rp. {{ number_format($benih->harga, 0, ',', '.') }}</h2>
             <hr>
             <p>Kategori : {{ $benih->kategori }}</p>
             <p>Varietas : {{ $benih->varietas }}</p>
