@@ -22,25 +22,25 @@ Route::get('', [HomeController::class, 'index'])->name('');
 Route::middleware('user')->group(function () {
     //Home
 
-    // Home Detail
     Route::prefix('/')->name('home')->group(function(){
+        // Home Detail
         Route::get('/detail/{id}', [HomeController::class, 'detail'])->name('-detail');
         Route::post('/add/{id}', [HomeController::class, 'add'])->name('-add');
+        // Keranjang
+        Route::get('/keranjang', [HomeController::class, 'keranjang'])->name('-keranjang');
+        Route::post('/keranjang/add', [HomeController::class, 'keranjang_add'])->name('-keranjang-add');
+        // Profile
+        Route::get('profile', [HomeController::class, 'profile'])->name('-profile');
     });
 
-    // Keranjang
-    Route::prefix('keranjang')->name('keranjang')->group(function(){
-        Route::get('', [KeranjangController::class, 'index'])->name('');
-        // Route::post('/add', [KeranjangController::class, 'add'])->name('-add');
-    });
 
     // Transaksi
     Route::prefix('transaksi')->name('transaksi')->group(function(){
         Route::get('/pemesanan', [PemesananController::class, 'index'])->name('-pemesanan');
+        Route::post('/pemesanan/bayar/{id}', [PemesananController::class, 'bayar'])->name('-pemesanan-bayar');
     });
 
     // Profile
-    Route::get('profile', [ProfileController::class, 'index'])->name('profile');
 
 });
 

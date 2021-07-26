@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 // use App\Models\Benih;
-use App\Models\{Benih,User,Keranjang};
+use App\Models\{Benih,User,Keranjang,Transaksi};
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -14,17 +14,58 @@ class HomeController extends Controller
     public function index()
     {
         $benihs = Benih::where('stok','>', 0)->get();
-        return view('frontend.home', ['benihs' => $benihs]);
+        // $keranjang_notif = Keranjang::where('user_id',Auth::user()->id);
+        return view('frontend.home', compact('benihs'));
+    }
+
+    public function keranjang()
+    {
+        $name = Auth::user()->name;
+        $alamat = Auth::user()->alamat;
+        $kec = Auth::user()->kec;
+        $kab = Auth::user()->kab;
+        $prov = Auth::user()->prov;
+
+        $user = Auth::user()->id;
+        // $keranjangs = Keranjang::all();
+        $keranjangs = Keranjang::where('user_id', Auth::user()->id)->where('status','keranjang')->get();
+
+        return view('frontend.keranjang', compact('name', 'alamat','kec','kab','prov', 'keranjangs'));
+    }
+
+    public function keranjang_add(Request $request)
+    {
+        $transaksi =Transaksi::create([
+            'user_id' => Auth::user()->id,
+            'status' => 'Menunggu Pembayaran'
+        ]);
+
+        foreach ($request->keranjang_checks as $keranjang_check) {
+            $keranjang = Keranjang::findOrFail($keranjang_check);
+            $keranjang->update([
+                "transaksi_id" => $transaksi->id,
+                "status" => $transaksi->status,
+            ]);
+            $transaksi->seller_id = $keranjang->benih->user_id;
+            $transaksi->save();
+        }
+        return redirect('transaksi/pemesanan')->with('msg', 'Benih telah dimasukkan ke keranjang');
+
+        // return view('frontend.pemesanan');
     }
 
     public function detail($id)
     {
-        if (Auth::user()) {
-            $benih = Benih::findOrFail($id);
-            return view('frontend.detail', ['benih' => $benih]);
-        }
-        else return view('auth.login');
+        $benih = Benih::findOrFail($id);
+        return view('frontend.detail', ['benih' => $benih]);
     }
+
+    public function profile()
+    {
+        $user = Auth::user();
+        return view('frontend.profile', ['user' => $user]);
+    }
+
     public function add(Request $request, $id)
     {
         $data = $request->validate([
@@ -32,12 +73,10 @@ class HomeController extends Controller
         ]);
 
         $benih = Benih::findOrFail($id);
-        $keranjangs = Keranjang::where('user_id', Auth::user()->id)->get();
-        // dd($keranjangs);
-        foreach ($keranjangs as $keranjang) {
-            if ($keranjang->benih_id == $benih->id) {
+        foreach ($benih->keranjangs as $keranjang) {
+            if ($keranjang->transaksi_id == NULL) {
                 $jumlah = ($keranjang->jumlah) + $request->jumlah;
-                $total_harga = $jumlah * $keranjang->total_harga;
+                $total_harga = $jumlah * $benih->harga;
 
                 $data['jumlah'] = $jumlah;
                 $data['total_harga'] = $total_harga;

@@ -12,7 +12,9 @@ class Keranjang extends Model
         'benih_id',
         'user_id',
         'jumlah',
-        'total_harga'
+        'total_harga',
+        'transaksi_id',
+        'status',
     ];
 
     protected $with = [
@@ -28,4 +30,10 @@ class Keranjang extends Model
     {
         return $this->belongsTo(Benih::class);
     }
+
+    public function transaksi()
+    {
+        return $this->belongsTo(Transaksi::class);
+    }
+
 }

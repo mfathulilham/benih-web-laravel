@@ -20,62 +20,130 @@
 </div>
 
 {{-- MAIN CONTENT --}}
+@foreach ($transaksis as $transaksi)
+
 <div class="row list-pemesanan mx-4 my-3 px-3 py-3 bg-light">
 
-    <div class="col-1 col-lg-1 text-success">
-        <p>Id</p>
-    </div>
-    <div class="idTransaksi col-8 col-lg-9">
-        <p>INV/20200717/XX/VII/586286265</p>
-    </div>
+        <div class="col-7 col-lg-9 text-success">
+            <p>Id Order : 2021090{{ $transaksi->id }}</p>
+        </div>
 
-    <div class="dateTransaksi col-3 col-lg-2">
-        <p>26 Jul 2021</p>
+        <div class="dateTransaksi col-5 col-lg-3">
+            <p>{{ $transaksi->created_at}}</p>
+        </div>
+
+        <hr>
+
+    @foreach ($transaksi->keranjang as $keranjang)
+
+
+        <div class="imgTransaksi col-2 col-lg-1">
+        <img src="{{ $keranjang->benih->img}}" style="width: 60px; height: 30px;  border-radius: 5px;" alt="">
+        </div>
+
+        <div class="titleTransaksi col-10 col-lg-3 fw-bold">
+            <p>{{ $keranjang->benih->judul}}</p>
+        </div>
+
+        <div class="col-2"></div>
+
+        <div class="jumlahTransaksi col-1 col-lg-1 fw-light">
+            <p>{{ $keranjang->jumlah}}</p>
+        </div>
+
+        <div class="col-1 col-lg-1 fw-light">
+            <p>x</p>
+        </div>
+
+        <div class="hargaTransaksi col-4 col-lg-2 fw-light">
+            <p>Rp. {{ number_format($keranjang->benih->harga, 0, ',', '.') }}</p>
+        </div>
+
+        <div class="totalTransaksi col-4 col-lg-2 fw-bold text-success">
+            <p>Rp. {{ number_format($keranjang->total_harga, 0, ',', '.') }}</p>
+        </div>
+
+        <hr>
+
+    @endforeach
+
+    <div class="col-8 col-lg-8">
+    </div>
+    <div class="col-8 col-lg-2 fw-bold">
+        <p>Total Pemesanan</p>
+    </div>
+    <div class="col-4 col-lg-2 fw-bold text-success">
+        <p>Rp. {{ number_format($transaksi->keranjang()->sum('total_harga'), 0, ',', '.') }}</p>
     </div>
 
     <hr>
 
-    <div class="imgTransaksi col-2 col-lg-1">
-    <img src="img/carousel1.jpg" style="width: 60px; border-radius: 5px;" alt="">
-    </div>
-
-    <div class="titleTransaksi col-10 col-lg-3 fw-bold">
-    <p>Benih Padi Inpari 32 Kemasan 5 kg</p>
-    </div>
-
-    <div class="col-2"></div>
-
-    <div class="jumlahTransaksi col-1 col-lg-1 fw-light">
-        <p>2</p>
-    </div>
-
-    <div class="col-1 col-lg-1 fw-light">
-        <p>x</p>
-    </div>
-
-    <div class="hargaTransaksi col-4 col-lg-2 fw-light">
-    <p>Rp. 100.000</p>
-    </div>
-
-    <div class="totalTransaksi col-4 col-lg-2 fw-bold text-success">
-    <p>Rp. 200.000</p>
-    </div>
 
     <div class="col-8 col-lg-9"></div>
-    <div class="statusTransaksi col-4 col-lg-3 fw-bold">
-    <p>Menunggu Pembayaran</p>
-    </div>
-
-    <hr>
-
-    <div class="btnTransaksi col-12">
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <a href="userBayar.html" class="btn btn-success me-md-2">Bayar</a>
-            <a href="#" class="btn btn-secondary">Detail</a>
-            <a href="#" class="btn btn-danger">Batalkan</a>
+        <div class="statusTransaksi col-4 col-lg-3 fw-bold">
+            <p>{{ $transaksi->status}}</p>
         </div>
+
+        <div class="btnTransaksi col-12">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a href="userBayar.html" class="btn btn-success me-md-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Bayar</a>
+                <a href="#" class="btn btn-secondary">Detail</a>
+                <a href="#" class="btn btn-danger">Batalkan</a>
+            </div>
+        </div>
+
     </div>
 
-</div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Pembayaran</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('transaksi-pemesanan-bayar', $transaksi->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body">
+                        <div class="row g-3">
+                            <div class="col-4">
+                                Total Pembayaran
+                            </div>
+                            <div class="col-8">
+                                <input type="text" class="form-control" id="pembayaran" aria-describedby="nilai" value="Rp. {{ number_format($transaksi->keranjang()->sum('total_harga'), 0, ',', '.') }}" disabled>
+                            </div>
+                            <div class="col-4">
+                                Bayar Ke Rekening
+                            </div>
+                            <div class="col-8">
+                                <select class="form-select" aria-label="Default select example" name="rekening">
+                                    <option value="Fathul - BRI - 1234567">Fathul - BRI - 1234567</option>
+                                    <option value="Ilham - BNI - 7891011">Ilham - BNI - 7891011</option>
+                                </select>
+                            </div>
+                            <div class="col-4">
+                                Bukti Transfer
+                            </div>
+                            <div class="col-8">
+                                <input class="form-control @error('bukti_transfer') is-invalid @enderror" id="bukti_transfer" name="bukti_transfer" type="file" required>
+                                @error('bukti_transfer')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batalkan</button>
+                        <button type="submit" class="btn btn-primary">Bayar Sekarang</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+      </div>
+
+@endforeach
+
 
 @endsection

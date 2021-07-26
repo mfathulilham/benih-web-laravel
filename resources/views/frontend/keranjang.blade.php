@@ -19,7 +19,7 @@
                     <p>{{ $alamat }}, Kecamatan {{ $kec }}, Kabupaten {{ $kab }}, Provinsi {{ $prov }}</p>
                 </div>
                 <div class="col-12 col-md-2">
-                    <a href="#" class="container-fluid btn btn-success">Ubah</a>
+                    <a href="{{ route('home-profile') }}" class="container-fluid btn btn-success">Ubah</a>
                 </div>
             </div>
 
@@ -55,46 +55,52 @@
             </div>
 
 
-    @foreach ($keranjangs as $keranjang)
-        <div class="row mx-2 mt-3 px-2 pt-4 pb-2 bg-light">
+            <form action="{{ route('home-keranjang-add') }}" method="POST">
+                @csrf
 
-            <div class="col-1">
-                <div class="form-check">
-                    <input class="form-check-input checkPilih" type="checkbox" value="" id="flexCheckDefault">
+            @foreach ($keranjangs as $keranjang)
+                <div class="row mx-2 mt-3 px-2 pt-4 pb-2 bg-light">
+
+                    <div class="col-1">
+                        <div class="form-check">
+                            <input class="form-check-input checkPilih" type="checkbox" value="{{ $keranjang->id }}" id="keranjang_check" name="keranjang_checks[]">
+                        </div>
+                    </div>
+
+                    <div class="col-1 imageBenih">
+                        <img src="{{ $keranjang->benih->img }}" alt="">
+                    </div>
+
+                    <div class="col-4 titleBenih">
+                        <p>{{$keranjang->benih->judul}}</p>
+                    </div>
+
+                    <div class="col-2 hargaBenih">
+                        <p>Rp. {{number_format($keranjang->benih->harga, 0, ',', '.') }}</p>
+                    </div>
+
+                    <div class="col-2 jumlahBenih">
+                        <p>{{$keranjang->jumlah}}</p>
+                    </div>
+
+                    <div class="col-2 totalBenih">
+                        <p>Rp. {{number_format($keranjang->total_harga, 0, ',', '.') }}</p>
+                    </div>
+
                 </div>
-            </div>
-
-            <div class="col-1 imageBenih">
-                <img src="{{ $keranjang->benih->img }}" alt="">
-            </div>
-
-            <div class="col-4 titleBenih">
-                <p>{{$keranjang->benih->judul}}</p>
-            </div>
-
-            <div class="col-2 hargaBenih">
-                <p>Rp. {{number_format($keranjang->benih->harga, 0, ',', '.') }}</p>
-            </div>
-
-            <div class="col-2 jumlahBenih">
-                <p>{{$keranjang->jumlah}}</p>
-            </div>
-
-            <div class="col-2 totalBenih">
-                <p>Rp. {{number_format($keranjang->total_harga, 0, ',', '.') }}</p>
-            </div>
-
-        </div>
-    @endforeach
+            @endforeach
 
 
 
             <div class="row mt-4">
                 <div class="col-5"></div>
                 <div class="col-3">
-                  <a href="#" class="btn btn-success">Bayar Sekarang</a>
+                    <button type="submit" class="btn btn-success"></i>Pesan Sekarang</button>
                 </div>
             </div>
+
+        </form>
+
 
 
         </div>

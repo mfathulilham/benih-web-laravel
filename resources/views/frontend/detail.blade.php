@@ -33,7 +33,6 @@
                             </span>
                         @enderror
                             <button type="submit" class="container-fluid btn btn-success text-center mt-3"><i class="fas fa-shopping-cart me-2"></i>Tambah ke keranjang</button>
-
                     </form>
                 </div>
               </div>

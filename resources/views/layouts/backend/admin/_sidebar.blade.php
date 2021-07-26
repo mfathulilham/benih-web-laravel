@@ -25,7 +25,7 @@
             <li>
                 <a href="{{ route('seller') }}" class="nav-link link-dark {{ request()->is('seller') ? 'bg-success active' : '' }} {{ request()->is('seller/*') ? 'bg-success active' : '' }}">
                     <i class="fas fa-users me-2"></i>
-                    Ikb
+                    IKB
                 </a>
             </li>
             <li>

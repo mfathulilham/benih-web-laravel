@@ -7,12 +7,12 @@
             </li>
             <li class="nav-item">
                 <a href="{{ route('transaksi-pemesanan') }}" class="text-dark text-decoration-none {{ request()->is('transaksi/*') ? 'fw-bold' : '' }}">
-                    <i class="far fa-edit me-2"></i>Pesanan Saya
+                    <i class="far fa-clipboard me-2"></i>Transaksi
                 </a>
             </li>
             <li class="nav-item my-2">
-                <a href="{{ route('profile') }}" class=" text-dark text-decoration-none {{ request()->is('profile') ? 'fw-bold' : '' }}">
-                    <i class="far fa-edit me-2"></i>Ubah Profile
+                <a href="{{ route('home-profile') }}" class=" text-dark text-decoration-none {{ request()->is('profile') ? 'fw-bold' : '' }}">
+                    <i class="far fa-user me-2"></i>Ubah Profile
                 </a>
             </li>
             <li>

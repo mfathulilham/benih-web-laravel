@@ -21,7 +21,7 @@ main {
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
 }
 .card-3 {
-    margin: 20px 45px 0 45px;
+    margin: 20px 45px 0 10px;
     border-radius: 5px;
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
 }
@@ -60,7 +60,7 @@ main {
     height: 90vh;
 }
 .sidebar img {
-    margin-top: 100px;
+    margin-top: 50px;
 }
 
 .transaksi-main {
@@ -92,7 +92,7 @@ main {
     box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.3);
 }
 .sidebar {
-    box-shadow: 2px -2px 5px rgba(0, 0, 0, 0.3);
+    /* box-shadow: 2px -2px 5px rgba(0, 0, 0, 0.3); */
 }
 
 .filter {
@@ -137,6 +137,9 @@ main {
     }
     .card-keranjang a {
         font-size: 13px;
+    }
+    .card-3 {
+        margin: 20px 45px 0 45px;
     }
 
     .sidebar {

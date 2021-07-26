@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div id="test" class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -85,11 +85,12 @@
                             </div>
                         </div>
 
-                        <div class="form-group row" id="test">
+                        <div class="form-group row" >
                             <label for="prov" class="col-md-4 col-form-label text-md-right">{{ __('Provinsi') }} @{{ sapi }}</label>
 
                             <div class="col-md-6">
-                                <input id="prov" type="text" class="form-control" v-model="sapi" name="prov" required>
+                                {{-- <input id="prov" type="text" class="form-control" v-model="sapi" name="prov" required> --}}
+                                <select onchange="loadKabupaten()" name="prov" class="form-control" id="provcoba"></select>
                             </div>
                         </div>
 
@@ -97,7 +98,10 @@
                             <label for="kab" class="col-md-4 col-form-label text-md-right">{{ __('Kabupaten\Kota') }}</label>
 
                             <div class="col-md-6">
-                                <input id="kab" type="text" class="form-control" name="kab" required>
+                                <select onchange="loadKecamatan()" name="kab" id="kabcoba" class="form-control">
+                                    <option disabled>Pilih Provinsi Dulu</option>
+                                </select>
+                                {{-- <input id="kab" type="text" class="form-control" name="kab" required> --}}
                             </div>
                         </div>
 
@@ -105,7 +109,10 @@
                             <label for="kec" class="col-md-4 col-form-label text-md-right">{{ __('Kecamatan') }}</label>
 
                             <div class="col-md-6">
-                                <input id="kec" type="text" class="form-control" name="kec" required>
+                                <select name="kec" id="keccoba" class="form-control">
+                                    <option disabled>Pilih Kabupaten Dulu</option>
+                                </select>
+                                {{-- <input id="kec" type="text" class="form-control" name="kec" required> --}}
                             </div>
                         </div>
 
@@ -127,13 +134,45 @@
 <script>
     new Vue({
         el: '#test',
-        data():{
+        data(){
             return {
-                sapi: 'kuda'
+                sapi:'',
+                provinsi:[]
             }
-
-        }
+        },
+        methods:{
+            loadProvinsi:function(){
+                console.log("asd")
+                fetch('https://dev.farizdotid.com/api/daerahindonesia/provinsi').then(data => data.json()).then(data => this.provinsi = data)
+            },
+        },
     })
+</script>
+<script>
+    function loadProvinsiCoba(){
+        let prov = document.getElementById('provcoba');
+        fetch('https://dev.farizdotid.com/api/daerahindonesia/provinsi').then(data => data.json()).then(data => data.provinsi.map(e => prov.innerHTML +=`<option value="${e.nama},${e.id}">${e.nama}</option>`))
+    }
+    function loadKabupaten(){
+        let kab = document.getElementById('kabcoba');
+        kab.innerHTML = '';
+        let prov = document.getElementById('provcoba');
+        prov = prov.value;
+        prov = prov.split(',');
+        fetch('https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi='+prov[1]).then(data => data.json()).then(data => data.kota_kabupaten.map(e => kab.innerHTML +=`<option value="${e.nama},${e.id}">${e.nama}</option>`))
+    }
+
+    function loadKecamatan(){
+        let kec = document.getElementById('keccoba');
+        kec.innerHTML = '';
+        let kab = document.getElementById('kabcoba');
+        kab = kab.value;
+        kab = kab.split(',');
+        fetch('https://dev.farizdotid.com/api/daerahindonesia/kecamatan?id_kota='+kab[1]).then(data => data.json()).then(data => data.kecamatan.map(e => kec.innerHTML +="<option value="+e.nama+">"+e.nama+"</option>"))
+    }
+    document.addEventListener("DOMContentLoaded", function() {
+        loadProvinsiCoba();
+    });
 </script>
 @endpush
 @endsection

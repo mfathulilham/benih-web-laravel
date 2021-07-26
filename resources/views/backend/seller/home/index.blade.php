@@ -7,9 +7,9 @@
         <hr>
         <div class="row overview-ikb">
             <div class="col-4">
-                <a href="#" class="container-fluid btn btn-warning text-light text-center">
-                <h4 class="pemesanan-count">0</h4>
-                <p>Pemesanan</p>
+                <a href="{{ route('transaksi') }}" class="container-fluid btn btn-warning text-light text-center">
+                <h4 class="pemesanan-count">{{ $transaksis->count() }}</h4>
+                    <p>Pemesanan Berlangsung</p>
                 </a>
             </div>
 

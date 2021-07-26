@@ -10,7 +10,6 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        $user = Auth::user();
-        return view('frontend.profile', ['user' => $user]);
+
     }
 }

@@ -16,9 +16,9 @@
         <!-- Sidebar -->
         @include('layouts.frontend._sidebar')
 
-        <div class="col-12 transaksi-main col-md-10">
+        <div class="col-12 transaksi-main col-md-10 bg-light">
             <div class="container">
-                <div class="card-3 pb-3">
+                <div class="card-3 pb-3 bg-white">
 
                     {{-- CONTENT --}}
 

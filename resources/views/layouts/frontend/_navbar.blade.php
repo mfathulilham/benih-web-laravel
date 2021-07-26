@@ -35,15 +35,21 @@
         @endif
 
             <li class="nav-item ms-4 mt-1">
-                <a href="{{ route('keranjang') }}" class="keranjangBtn nav-link text-light">
+                <a href="{{ route('home-keranjang') }}" class="keranjangBtn nav-link text-light">
                 <i class="fas fa-shopping-cart"></i>
                 Keranjang
+                @if (Auth::user()->keranjangs()->where('status','keranjang')->count() != 0)
+                    <span class="badge bg-danger rounded-pill">{{Auth::user()->keranjangs()->where('status','keranjang')->count()}}</span>
+                @endif
                 </a>
             </li>
             <li class="nav-item ms-4 mt-1">
-                <a href="#" class="notifikasiBtn nav-link text-light">
-                <i class="fas fa-bell"></i>
-                Notifikasi
+                <a href="{{ route('transaksi-pemesanan') }}" class="notifikasiBtn nav-link text-light">
+                <i class="fas fa-shopping-bag"></i>
+                Transaksi
+                @if (Auth::user()->keranjangs()->where('status','!=','keranjang')->count() != 0)
+                    <span class="badge bg-danger rounded-pill">{{ Auth::user()->transaksis()->count() }}</span>
+                @endif
                 </a>
             </li>
             <li class="nav-item dropdown ms-3">
@@ -54,8 +60,7 @@
                 <!-- <strong>Logout</strong> -->
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end text-small shadow" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="{{ route('profile') }}">Akun Saya</a></li>
-                <li><a class="dropdown-item" href="{{ route('transaksi-pemesanan') }}">Pesananan Saya</a></li>
+                <li><a class="dropdown-item" href="{{ route('home-profile') }}">Profile Saya</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li>
                     <a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>

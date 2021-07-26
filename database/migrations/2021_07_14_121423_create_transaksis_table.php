@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKeranjangsTable extends Migration
+class CreateTransaksisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateKeranjangsTable extends Migration
      */
     public function up()
     {
-        Schema::create('keranjangs', function (Blueprint $table) {
+        Schema::create('transaksis', function (Blueprint $table) {
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->id();
-            $table->foreignId('benih_id')->constrained('benihs')->cascadeOnDelete();
-            $table->tinyInteger('jumlah');
-            $table->integer('total_harga');
-            $table->string('status')->default('keranjang');
-            $table->foreignId('transaksi_id')->constrained('transaksis')->cascadeOnDelete()->nullable();
+            $table->string('status');
+            $table->string('rekening')->nullable();
+            $table->string('gambar')->nullable();
+            $table->bigInteger('seller_id')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +31,7 @@ class CreateKeranjangsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('keranjangs');
+        Schema::dropIfExists('transaksis');
     }
+
 }
