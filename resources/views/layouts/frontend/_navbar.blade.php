@@ -8,20 +8,12 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto">
-        <form class="nav-item d-flex form-control-md mt-1 me-5">
+        <form class="nav-item d-flex form-control-sm me-5">
           <input class="searchInput form-control me-2 ps-4 pe-5" type="search" placeholder="Temukan Benih..." aria-label="Search">
-          <li class="dropdown filter">
-            <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Filter
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li><a class="dropdown-item" href="#">Kategory</a></li>
-              <li><a class="dropdown-item" href="#">IKB Name</a></li>
-              <li><a class="dropdown-item" href="#">Ascending</a></li>
-              <li><a class="dropdown-item" href="#">Descending</a></li>
-            </ul>
-          </li>
-          <button class="btn btn-outline-light ms-2" type="submit"><i class="fas fa-search"></i></button>
+            <button class="btn btn-outline-light" type="submit">
+                {{-- <i class="fas fa-search me-2"></i> --}}
+                Search
+            </button>
         </form>
         @auth
         {{-- Show Dashboard For Admin--}}

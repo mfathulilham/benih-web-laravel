@@ -46,8 +46,14 @@ class HomeController extends Controller
                 "transaksi_id" => $transaksi->id,
                 "status" => $transaksi->status,
             ]);
+            // Add Seller_id to database transaksi
             $transaksi->seller_id = $keranjang->benih->user_id;
             $transaksi->save();
+
+            // Reduce stok benih saat memesan
+            $benih = Benih::findOrFail($keranjang->benih_id);
+            $data['stok'] = $benih->stok - $keranjang->jumlah;
+            $benih->update($data);
         }
         return redirect('transaksi/pemesanan')->with('msg', 'Benih telah dimasukkan ke keranjang');
 

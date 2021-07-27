@@ -1,4 +1,4 @@
-<div class="sidebar col-12 col-md-3 col-lg-2 bg-light">
+<div class="sidebar col-12 col-md-3 col-lg-2 bg-light sticky-top">
 
     <div class="flex-shrink-0 p-3">
       <ul class="list-unstyled ps-0">

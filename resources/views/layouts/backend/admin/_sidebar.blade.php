@@ -1,7 +1,7 @@
 <!-- SIDEBAR -->
 
 
-<div class="sidebar col-12 col-md-3 col-lg-2 bg-light">
+<div class="sidebar col-12 col-md-3 col-lg-2 bg-light sticky-top">
 
     <div class="d-flex flex-column p-3 bg-light">
 
@@ -31,7 +31,7 @@
             <li>
                 <a href="{{ route('order') }}" class="nav-link link-dark {{ request()->is('order') ? 'bg-success active' : '' }}">
                     <i class="far fa-handshake me-2"></i>
-                    Order
+                    Pembayaran
                 </a>
             </li>
         </ul>

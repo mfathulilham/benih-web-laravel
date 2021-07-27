@@ -3,7 +3,7 @@
     padding-right: 20px;
 }
 .sidebar {
-    height: 90vh;
+    height: 100vh;
 }
 .overview-ikb {
     /* border-radius: 15px; */
@@ -54,6 +54,10 @@
 @media (max-width: 576px) {
     body {
         overflow-x: hidden;
+    }
+    .navbar {
+        padding-left: 5px;
+        padding-right: 5px;
     }
     .sidebar {
         height: max-content;
@@ -122,7 +126,7 @@
         overflow-x: hidden;
     }
     .sidebar {
-        height: 90vh;
+        height: 100vh;
     }
     .overview-ikb {
         /* border-radius: 15px;
@@ -146,9 +150,6 @@
 @media (min-width: 992px) {
     body {
         overflow-x: hidden;
-    }
-    .sidebar {
-        height: 90vh;
     }
     .overview-ikb {
         /* border-radius: 15px;

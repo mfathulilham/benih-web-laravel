@@ -38,6 +38,7 @@ Route::middleware('user')->group(function () {
     Route::prefix('transaksi')->name('transaksi')->group(function(){
         Route::get('/pemesanan', [PemesananController::class, 'index'])->name('-pemesanan');
         Route::post('/pemesanan/bayar/{id}', [PemesananController::class, 'bayar'])->name('-pemesanan-bayar');
+        Route::post('/pemesanan/cancel/{id}', [PemesananController::class, 'cancel'])->name('-pemesanan-cancel');
     });
 
     // Profile

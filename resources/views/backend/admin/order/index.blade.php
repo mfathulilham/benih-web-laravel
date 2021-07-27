@@ -4,7 +4,7 @@
 <!-- CONTENT -->
 
 <div class="col-11 admin col-md-8 col-lg-9">
-    <div class="container">
+    {{-- <div class="container">
 
         <h3>
             <i class="far fa-handshake me-2"></i>
@@ -34,6 +34,77 @@
                   <p>Canceled Order</p>
                 </a>
               </div>
+        </div>
+
+    </div> --}}
+    <div class="container">
+
+        <h3>
+            <i class="fas fa-users me-2"></i>
+            Pembayaran
+        </h3>
+
+        @if (session('msg'))
+            <p class="alert alert-success">{{ session('msg') }}</p>
+        @endif
+
+        <hr>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-sm">
+            <thead>
+                <tr>
+                <th>No</th>
+                <th>Id Transaksi</th>
+                <th>Nama Pengirim</th>
+                <th>Kirim Ke Rekening</th>
+                <th>Bukti Pembayaran</th>
+                <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @php
+                    $angkaAwal = 1
+                @endphp
+                <tr>
+                    <td>{{ $angkaAwal++ }}</td>
+                    <td>Id</td>
+                    <td>Nama Pengirim</td>
+                    <td>Kirim Ke Rekening</td>
+                    <td>
+                        <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalBukti">Lihat Bukti</a>
+                    </td>
+                    <td>
+                        <form method="POST" action="#">
+                            @csrf
+                            {{-- <a href="#" class="btn btn-secondary"><i class="far fa-edit"></i></a>                         --}}
+                                <button class="btn btn-success" onclick="return confirm('Konfirmasi Pembayaran ?')" type="submit">Konfirmasi</button>
+                                <button class="btn btn-danger" onclick="return confirm('Tolak Pembayaran ?')" type="submit">Tolak</button>
+                        </form>
+                    </td>
+                </tr>
+                <!-- Modal Bukti Pembayaran-->
+                <div class="modal fade" id="modalBukti" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Bukti Pembayaran</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="#" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="modal-body">
+                                    <img src="img/carousel1.jpg" width="465" alt="bukti">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                            </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </tbody>
+            </table>
         </div>
 
     </div>

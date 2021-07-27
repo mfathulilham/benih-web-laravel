@@ -14,6 +14,7 @@ class PemesananController extends Controller
         $transaksis = Transaksi::where('user_id', Auth::user()->id)->get();
         return view('frontend.pemesanan', ['transaksis' => $transaksis]);
     }
+
     public function bayar(Request $request, $id)
     {
         $request->validate([
@@ -28,5 +29,24 @@ class PemesananController extends Controller
         Transaksi::findOrFail($id)->update($request->all());
 
         return redirect('transaksi/pemesanan')->with('msg', 'Pembayaran telah ditambahkan');
+    }
+
+    public function cancel(Request $request, $id)
+    {
+        dd($id);
+        //  Status Berubah menjadi dibatalkan
+        $data['status'] = 'Dibatalkan';
+        $transaksi = Transaksi::findOrFail($id);
+        $transaksi->update($data);
+
+        // Add stok benih saat dibatalkan
+        $keranjangs = $transaksi->keranjang;
+        // dd($keranjang->benih_id);
+        foreach($keranjangs as $keranjang){
+            $benih = Benih::findOrFail($keranjang->benih_id);
+            $data['stok'] = $benih->stok + $keranjang->jumlah;
+            $benih->update($data);
+        }
+        return redirect('transaksi/pemesanan')->with('msg', 'Pemesanan telah dibatalkan');
     }
 }

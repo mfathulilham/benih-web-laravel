@@ -10,14 +10,18 @@
     <h3>Pemesanan</h3>
 </div> --}}
 
-<div class="row g-0 mx-4 mt-4">
-    <div class="col">
-        <input class="form-control me-2" type="search" placeholder="Cari..." aria-label="Search">
+@if (session('msg'))
+    <div class="row g-0 mx-4 mt-4">
+        <p class="alert alert-success">{{ session('msg') }}</p>
+
+                {{-- <div class="col">
+                    <input class="form-control me-2" type="search" placeholder="Cari..." aria-label="Search">
+                </div>
+                <div class="col-2 col-md-1">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </div> --}}
     </div>
-    <div class="col-2 col-md-1">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-    </div>
-</div>
+@endif
 
 {{-- MAIN CONTENT --}}
 @foreach ($transaksis as $transaksi)
@@ -86,16 +90,20 @@
 
         <div class="btnTransaksi col-12">
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <a href="userBayar.html" class="btn btn-success me-md-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Bayar</a>
-                <a href="#" class="btn btn-secondary">Detail</a>
-                <a href="#" class="btn btn-danger">Batalkan</a>
+                @if ($transaksi->status != 'Menunggu Pembayaran')
+                    <a href="#" class="btn btn-secondary">Detail</a>
+                @else
+                    <a href="#" class="btn btn-secondary">Detail</a>
+                    <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalBayar">Bayar</a>
+                    <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalCancel">Batalkan</a>
+                @endif
             </div>
         </div>
 
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Modal Pembayaran-->
+    <div class="modal fade" id="modalBayar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -135,8 +143,30 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batalkan</button>
-                        <button type="submit" class="btn btn-primary">Bayar Sekarang</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                        <button type="submit" onclick="return confirm('Pemesanan tidak dapat dibatalkan setelah ini, Setuju?')" class="btn btn-primary">Bayar Sekarang</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+      </div>
+
+    <!-- Modal Pembayaran-->
+    <div class="modal fade" id="modalCancel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Pembayaran</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('transaksi-pemesanan-cancel', $transaksi->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body">
+                        <p>Yakin Ingin Membatalkan Pemesanan ?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                        <button type="submit" class="btn btn-primary">Batalkan Pemesanan</button>
                     </div>
                 </div>
             </form>

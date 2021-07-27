@@ -60,7 +60,7 @@
         <div class="col-8 col-lg-9"></div>
 
         <div class="statusTransaksi col-4 col-lg-3 fw-bold">
-            <p>{{ $keranjang->status }}</p>
+            <p>{{ $transaksi->status }}</p>
         </div>
 
 
@@ -68,8 +68,8 @@
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <a href="#" class="btn btn-secondary">Detail</a>
                     <a href="#" class="btn btn-danger">Batalkan</a>
-                </div>
             </div>
+        </div>
 
 </div>
 
