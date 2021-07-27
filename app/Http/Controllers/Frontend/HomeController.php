@@ -55,7 +55,7 @@ class HomeController extends Controller
             $data['stok'] = $benih->stok - $keranjang->jumlah;
             $benih->update($data);
         }
-        return redirect('transaksi/pemesanan')->with('msg', 'Benih telah dimasukkan ke keranjang');
+        return redirect('pemesanan')->with('msg', 'Benih telah dimasukkan ke keranjang');
 
         // return view('frontend.pemesanan');
     }

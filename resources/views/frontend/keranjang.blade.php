@@ -90,18 +90,16 @@
                 </div>
             @endforeach
 
-
-
-            <div class="row mt-4">
-                <div class="col-5"></div>
-                <div class="col-3">
-                    <button type="submit" class="btn btn-success"></i>Pesan Sekarang</button>
+            @if ($keranjangs == NULL)
+                <div class="row mt-4">
+                    <div class="col-5"></div>
+                    <div class="col-3">
+                        <button type="submit" class="btn btn-success"></i>Pesan Sekarang</button>
+                    </div>
                 </div>
-            </div>
+            @endif
 
         </form>
-
-
 
         </div>
     </div>

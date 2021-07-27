@@ -36,7 +36,7 @@
                 </a>
             </li>
             <li class="nav-item ms-4 mt-1">
-                <a href="{{ route('transaksi-pemesanan') }}" class="notifikasiBtn nav-link text-light">
+                <a href="{{ route('pemesanan') }}" class="notifikasiBtn nav-link text-light">
                 <i class="fas fa-shopping-bag"></i>
                 Transaksi
                 @if (Auth::user()->keranjangs()->where('status','!=','keranjang')->count() != 0)

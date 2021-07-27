@@ -35,13 +35,17 @@ Route::middleware('user')->group(function () {
 
 
     // Transaksi
-    Route::prefix('transaksi')->name('transaksi')->group(function(){
-        Route::get('/pemesanan', [PemesananController::class, 'index'])->name('-pemesanan');
-        Route::post('/pemesanan/bayar/{id}', [PemesananController::class, 'bayar'])->name('-pemesanan-bayar');
-        Route::post('/pemesanan/cancel/{id}', [PemesananController::class, 'cancel'])->name('-pemesanan-cancel');
-    });
+    Route::prefix('pemesanan')->name('pemesanan')->group(function(){
+        Route::get('/', [PemesananController::class, 'index'])->name('');
+        Route::post('bayar/{id}', [PemesananController::class, 'bayar'])->name('-bayar');
+        Route::post('cancel/{id}', [PemesananController::class, 'cancel'])->name('-cancel');
 
-    // Profile
+    });
+    Route::prefix('pengiriman')->name('pengiriman')->group(function(){
+        Route::get('', [PemesananController::class, 'user_pengiriman'])->name('');
+    });
+    Route::get('cancel', [PemesananController::class, 'user_cancel'])->name('cancel');
+    Route::get('selesai', [PemesananController::class, 'user_selesai'])->name('selesai');
 
 });
 
@@ -88,7 +92,10 @@ Route::middleware('admin')->group(function() {
         Route::delete('/delete/{id}', [SellerController::class, 'delete'])->name('-delete');
     });
     // Order
-    Route::get('/order', [OrderController::class, 'index'])->name('order');
+    Route::prefix('order')->name('order')->group(function(){
+        Route::get('', [OrderController::class, 'index'])->name('');
+        Route::post('/confirm/{id}', [OrderController::class, 'confirm'])->name('-confirm');
+    });
 });
 
 Auth::routes();

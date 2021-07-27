@@ -44,47 +44,50 @@
             Pembayaran
         </h3>
 
+        <hr>
+
         @if (session('msg'))
             <p class="alert alert-success">{{ session('msg') }}</p>
         @endif
-
-        <hr>
 
         <div class="table-responsive">
             <table class="table table-striped table-bordered table-sm">
             <thead>
                 <tr>
-                <th>No</th>
-                <th>Id Transaksi</th>
-                <th>Nama Pengirim</th>
-                <th>Kirim Ke Rekening</th>
-                <th>Bukti Pembayaran</th>
-                <th>Aksi</th>
+                    <th>No</th>
+                    <th>Id Transaksi</th>
+                    <th>Nama Pengirim</th>
+                    <th>Kirim Ke Rekening</th>
+                    <th>Bukti Pembayaran</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 @php
                     $angkaAwal = 1
                 @endphp
+                @foreach ($transaksis as $transaksi)
+
                 <tr>
                     <td>{{ $angkaAwal++ }}</td>
-                    <td>Id</td>
-                    <td>Nama Pengirim</td>
-                    <td>Kirim Ke Rekening</td>
+                    <td>2021090{{ $transaksi->id}}</td>
+                    <td>{{ $transaksi->user->name}}</td>
+                    <td>{{ $transaksi->rekening}}</td>
                     <td>
-                        <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalBukti">Lihat Bukti</a>
+                        <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalBukti{{$transaksi->id}}">Lihat Bukti</a>
                     </td>
                     <td>
-                        <form method="POST" action="#">
+                        <form action="{{ route('order-confirm', $transaksi->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            {{-- <a href="#" class="btn btn-secondary"><i class="far fa-edit"></i></a>                         --}}
-                                <button class="btn btn-success" onclick="return confirm('Konfirmasi Pembayaran ?')" type="submit">Konfirmasi</button>
-                                <button class="btn btn-danger" onclick="return confirm('Tolak Pembayaran ?')" type="submit">Tolak</button>
+                            {{-- <a href="#" class="btn btn-secondary"><i class="far fa-edit"></i></a> --}}
+                                <button class="btn btn-success" onclick="return confirm('Konfirmasi Pembayaran ?')" type="submit">Confirm</button>
+                                <button class="btn btn-danger" onclick="return confirm('Tolak Pembayaran ?')" type="submit">Cancel</button>
                         </form>
                     </td>
                 </tr>
+
                 <!-- Modal Bukti Pembayaran-->
-                <div class="modal fade" id="modalBukti" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="modalBukti{{$transaksi->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -94,7 +97,7 @@
                         <form action="#" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="modal-body">
-                                    <img src="img/carousel1.jpg" width="465" alt="bukti">
+                                <img src="{{ $transaksi->img }}" width="465" alt="bukti">
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
@@ -103,6 +106,8 @@
                         </form>
                     </div>
                 </div>
+                @endforeach
+
             </tbody>
             </table>
         </div>

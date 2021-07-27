@@ -6,7 +6,7 @@
                 <img src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&background=d5d657&color=fff" alt="" width="80" height="80" class="rounded-circle me-2">
             </li>
             <li class="nav-item">
-                <a href="{{ route('transaksi-pemesanan') }}" class="text-dark text-decoration-none {{ request()->is('transaksi/*') ? 'fw-bold' : '' }}">
+                <a href="{{ route('pemesanan') }}" class="text-dark text-decoration-none {{ request()->is('pemesanan','pengiriman','cancel','selesai') ? 'fw-bold' : '' }}">
                     <i class="far fa-clipboard me-2"></i>Transaksi
                 </a>
             </li>

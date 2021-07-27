@@ -17,8 +17,10 @@
         @include('layouts.frontend._sidebar')
 
         <div class="col-12 transaksi-main col-md-10 bg-light pb-4">
-            <div class="container">
+            <div class="container-3">
                 <div class="card-3 pb-3 bg-white">
+
+                    @include('layouts.frontend._navtabs')
 
                     {{-- CONTENT --}}
 

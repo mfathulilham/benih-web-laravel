@@ -17,6 +17,11 @@ class Transaksi extends Model
         'seller_id',
     ];
 
+    public function getImgAttribute()
+    {
+        return url('storage', $this->gambar);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
