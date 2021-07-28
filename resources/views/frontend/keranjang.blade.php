@@ -9,6 +9,9 @@
             @if (session('msg'))
                 <p class="alert alert-success">{{ session('msg') }}</p>
             @endif
+            @if (session('error'))
+                <p class="alert alert-danger">{{ session('error') }}</p>
+            @endif
 
             <h5 class="mb-3 text-success">Alamat Pengiriman</h5>
             <div class="row g-1">
@@ -90,14 +93,14 @@
                 </div>
             @endforeach
 
-            @if ($keranjangs == NULL)
+            {{-- @if ($keranjangs == NULL) --}}
                 <div class="row mt-4">
                     <div class="col-5"></div>
                     <div class="col-3">
                         <button type="submit" class="btn btn-success"></i>Pesan Sekarang</button>
                     </div>
                 </div>
-            @endif
+            {{-- @endif --}}
 
         </form>
 

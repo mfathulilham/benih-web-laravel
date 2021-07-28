@@ -9,7 +9,7 @@
 @endif
 
 @foreach ($transaksis as $transaksi)
-@if ($transaksi->status == 'Menunggu Pengiriman' || $transaksi->status == 'Proses Pengiriman')
+@if ($transaksi->status == 'Dibatalkan')
 
 <div class="row list-pemesanan mx-4 my-4 px-3 py-3 bg-light">
 
@@ -76,7 +76,6 @@
         <div class="btnTransaksi col-12">
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <a href="#" class="btn btn-secondary">Detail</a>
-                    <a href="#" class="btn btn-danger">Batalkan</a>
             </div>
         </div>
 

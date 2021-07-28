@@ -9,7 +9,7 @@
 @endif
 
 @foreach ($transaksis as $transaksi)
-@if ($transaksi->status == 'Menunggu Pengiriman' || $transaksi->status == 'Proses Pengiriman')
+@if ($transaksi->status == 'Telah Dikirim' || $transaksi->status == 'Selesai')
 
 <div class="row list-pemesanan mx-4 my-4 px-3 py-3 bg-light">
 

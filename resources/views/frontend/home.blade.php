@@ -93,15 +93,20 @@
             <div class="card-body">
                 <h5 class="card-title">{{ $benih->judul }}</h5>
                 <div class="row g-0">
-                <div class="col">
-                    <p class="harga">Rp. {{ number_format($benih->harga, 0, ',', '.') }}</p>
+                    <div class="col">
+                        <p class="harga">Rp. {{ number_format($benih->harga, 0, ',', '.') }}</p>
+                    </div>
+                    <div class="col">
+                        <p class="card-text">
+                        <i class="fas fa-star text-warning"></i>
+                        0 | Terjual 0
+                        </p>
+                    </div>
                 </div>
-                <div class="col">
-                    <p class="card-text">
-                    <i class="fas fa-star text-warning"></i>
-                    0 | Terjual 0
-                    </p>
-                </div>
+                <div class="row">
+                    <div class="col">
+                        <p class=""><i class="fas fa-map-marker-alt me-2"></i>{{ $benih->user->name }}</p>
+                    </div>
                 </div>
                 <div class="row justify-content-center g-1">
                     @auth
@@ -111,7 +116,7 @@
                             </a>
                         </div> --}}
                         <div class="col">
-                            <a href="{{ route('home-detail', $benih->id) }}" class="detailBtn container-fluid btn btn-secondary">Detail</a>
+                            <a href="{{ route('home-detail', $benih->id) }}" class="detailBtn container-fluid btn btn-success">Detail</a>
                         </div>
                     @else
                         {{-- <div class="col">
@@ -120,7 +125,7 @@
                             </a>
                         </div> --}}
                         <div class="col">
-                            <a href="{{ route('login') }}" class="detailBtn container-fluid btn btn-secondary">Detail</a>
+                            <a href="{{ route('login') }}" class="detailBtn container-fluid btn btn-success">Detail</a>
                         </div>
                     @endauth
                 </div>

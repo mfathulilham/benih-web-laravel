@@ -192,7 +192,7 @@
       </div>
 
       <!-- Modal Pembayaran-->
-    <div class="modal fade" id="modalBayar{{$transaksi->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="modalBayar{{$transaksi->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -204,7 +204,13 @@
                 <div class="modal-body">
                         <div class="row g-3">
                             <div class="col-4">
-                                Total Pembayaran
+                                Harga Pengiriman
+                            </div>
+                            <div class="col-8">
+                                <a href="https://api.whatsapp.com/send?phone=6281298069650&text=*NEGOSIASI%20PENGIRIMAN%20BENIH*%0A%0APesanan Saya%20:%0A1.%20Nama%20Benih%20{{$keranjang->benih->judul}}%0A2.%20Kemasan%20{{$keranjang->benih->variasi}}%20kg%20Jumlah%20{{ $keranjang->jumlah}}%20Pcs%0A3.%20*TOTAL%20HARGA%20Benih%20=%20Rp.%20{{ number_format($transaksi->keranjang()->sum('total_harga'), 0, ',', '.') }}*%0A%0ABerapa%20*HARGA*%20untuk%20pengiriman%20ke%20Alamat%20{{$keranjang->user->alamat}}%20Kecamatan%20{{$keranjang->user->kec}}%20Kabupaten%20{{$keranjang->user->kab}}%20?" target="_blank" class="btn btn-danger" rel="noopener noreferrer">Klik Untuk Negosiasi</a>
+                            </div>
+                            <div class="col-4">
+                                Harga Benih
                             </div>
                             <div class="col-8">
                                 <input type="text" class="form-control" id="pembayaran" aria-describedby="nilai" value="Rp. {{ number_format($transaksi->keranjang()->sum('total_harga'), 0, ',', '.') }}" disabled>
@@ -214,8 +220,8 @@
                             </div>
                             <div class="col-8">
                                 <select class="form-select" aria-label="Default select example" name="rekening">
-                                    <option value="Fathul - BRI - 1234567">Fathul - BRI - 1234567</option>
-                                    <option value="Ilham - BNI - 7891011">Ilham - BNI - 7891011</option>
+                                    {{-- <option value="Fathul - BRI - 1234567">Fathul - BRI - 1234567</option> --}}
+                                    <option value="Ilham - BNI - 7891011">M FATHUL ILHAM - BNI - 0612295910</option>
                                 </select>
                             </div>
                             <div class="col-4">
@@ -233,7 +239,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
-                        <button type="submit" onclick="return confirm('Pemesanan tidak dapat dibatalkan setelah ini, Setuju?')" class="btn btn-primary">Bayar Sekarang</button>
+                        <button type="submit" onclick="return confirm('Pemesanan tidak dapat dibatalkan setelah ini, Setuju?')" class="btn btn-success">Bayar Sekarang</button>
                     </div>
                 </div>
             </form>

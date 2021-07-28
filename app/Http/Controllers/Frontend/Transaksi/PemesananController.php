@@ -17,7 +17,6 @@ class PemesananController extends Controller
                 $seller = User::findOrFail($keranjang->benih->user_id);
                 $user = User::findOrFail($keranjang->user_id);
             }
-
         }
         return view('frontend.pemesanan', ['transaksis' => $transaksis, 'seller' => $seller, 'user' => $user]);
     }

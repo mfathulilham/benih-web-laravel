@@ -15,14 +15,14 @@
               <h3>Pengiriman</h3>
           </div> --}}
 
-          <div class="row g-0 mx-4 mt-3">
+          {{-- <div class="row g-0 mx-4 mt-3">
               <div class="col">
                   <input class="form-control me-2" type="search" placeholder="Cari..." aria-label="Search">
               </div>
               <div class="col-2 col-md-2 col-lg-1">
                   <button class="btn btn-outline-success" type="submit">Search</button>
               </div>
-          </div>
+          </div> --}}
 
           @yield('content-transaksi')
 

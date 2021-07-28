@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\{HomeController, KeranjangController, ProfileController};
 use App\Http\Controllers\Frontend\Transaksi\PemesananController;
 use App\Http\Controllers\Backend\Admin\{DashboardController, CustomersController, SellerController, OrderController};
-use App\Http\Controllers\Backend\Seller\{SellerHomeController,SellerTransaksiController, SellerPemesananController, SellerPengirimanController, SellerBenihController};
+use App\Http\Controllers\Backend\Seller\{SellerHomeController,SellerTransaksiController, SellerBenihController};
 
 /*
 |--------------------------------------------------------------------------
@@ -53,11 +53,13 @@ Route::middleware('user')->group(function () {
 Route::middleware('seller')->group(function () {
         //Home
         Route::get('/home', [SellerHomeController::class, 'index'])->name('home');
+
         //Transaksi
-        Route::prefix('transaksi')->name('transaksi')->group(function(){
-            Route::get('', [SellerPemesananController::class, 'index'])->name('');
-            Route::get('/pengiriman', [SellerPengirimanController::class, 'index'])->name('-pengiriman');
-        });
+        Route::get('/seller_pemesanan', [SellerTransaksiController::class, 'pemesanan'])->name('seller_pemesanan');
+        Route::get('/seller_pengiriman', [SellerTransaksiController::class, 'pengiriman'])->name('seller_pengiriman');
+        Route::get('/seller_selesai', [SellerTransaksiController::class, 'selesai'])->name('seller_selesai');
+        Route::get('/seller_cancel', [SellerTransaksiController::class, 'cancel'])->name('seller_cancel');
+
         //Benih
         Route::prefix('benih')->name('benih')->group(function(){
             Route::get('', [SellerBenihController::class, 'index'])->name('');

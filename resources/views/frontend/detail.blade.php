@@ -12,6 +12,8 @@
             <p>Terjual 0 | Stok {{ $benih->stok }} | <i class="fas fa-star text-warning"></i>0</p>
             <h2 class="text-success">Rp. {{ number_format($benih->harga, 0, ',', '.') }}</h2>
             <hr>
+            <h5 class="text-success"><i class="fas fa-map-marker-alt me-2"></i>{{ $benih->user->name }}</h5>
+            <hr>
             <p>Kategori : {{ $benih->kategori }}</p>
             <p>Varietas : {{ $benih->varietas }}</p>
             <p>Umur Tanaman : {{ $benih->umur }} Hari</p>

@@ -55,7 +55,7 @@
                           <div class="col">
                               <p class="card-text text-end mb-3">
                                   <i class="fas fa-star text-warning"></i>
-                                  0 | Terjual 0
+                                  {{ $benih->rating }} | Terjual 0
                               </p>
                           </div>
                       </div>
@@ -67,9 +67,7 @@
                         <form method="POST" action="{{ route('benih-delete', $benih->id) }}">
                             @csrf
                             @method('DELETE')
-
                                 <button class="container-fluid btn btn-outline-danger" onclick="return confirm('Want to delete ?')" type="submit"><i class="far fa-trash-alt me-2"></i>Hapus</button>
-
                             </form>
                         </div>
                       </div>

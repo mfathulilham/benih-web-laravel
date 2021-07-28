@@ -89,7 +89,6 @@
                             <label for="prov" class="col-md-4 col-form-label text-md-right">{{ __('Provinsi') }} @{{ sapi }}</label>
 
                             <div class="col-md-6">
-                                {{-- <input id="prov" type="text" class="form-control" v-model="sapi" name="prov" required> --}}
                                 <select onchange="loadKabupaten()" name="prov" class="form-control" id="provcoba"></select>
                             </div>
                         </div>
@@ -99,7 +98,7 @@
 
                             <div class="col-md-6">
                                 <select onchange="loadKecamatan()" name="kab" id="kabcoba" class="form-control">
-                                    <option disabled>Pilih Provinsi Dulu</option>
+                                    {{-- <option disabled>Pilih Provinsi Dulu</option> --}}
                                 </select>
                                 {{-- <input id="kab" type="text" class="form-control" name="kab" required> --}}
                             </div>
@@ -176,3 +175,67 @@
 </script>
 @endpush
 @endsection
+
+
+
+
+
+
+{{-- SUARMIN TERAKHIR UNTUK DAPAT API DARI RAJA ONGKIR
+                        <div class="form-group row">
+                            <label for="kab" class="col-md-4 col-form-label text-md-right">{{ __('Kabupaten\Kota') }}</label>
+
+                            <div class="col-md-6">
+                                <select onchange="loadKecamatan()" name="kab" id="kabcoba" class="form-control"></select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-success">
+                                    {{ __('Register') }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@push('vuejs')
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+    new Vue({
+        el: '#test',
+        data(){
+            return {
+                sapi:'',
+                provinsi:[]
+            }
+        },
+        methods:{
+            loadProvinsi:function(){
+                console.log("asd")
+                fetch('https://dev.farizdotid.com/api/daerahindonesia/provinsi').then(data => data.json()).then(data => this.provinsi = data)
+            },
+        },
+    })
+</script>
+<script>
+    function loadKabupaten(){
+        let kab = document.getElementById('kabcoba');
+        kab.innerHTML = '';
+        fetch('https://api.rajaongkir.com/starter/city?province=28',{
+            mode:'cors',
+            headers:{
+                'key': '58fd02cea4959108f86597972e692176',
+            },
+        }).then(data => data.json()).then(data =>{ console.log(data); data.rajaongkir.results.map(e => kab.innerHTML +=`<option value="${e.city_name},${e.city_id}">${e.city_name}</option>`)})
+    }
+    document.addEventListener("DOMContentLoaded", function() {
+        loadKabupaten();
+    });
+</script>
+@endpush
+@endsection --}}

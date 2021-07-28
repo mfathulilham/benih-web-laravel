@@ -21,13 +21,13 @@
           <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
             Transaksi
           </button>
-          <div class="collapse {{ request()->is('transaksi') ? 'show' : '' }} {{ request()->is('transaksi/*') ? 'show' : '' }}" id="dashboard-collapse">
+          <div class="collapse {{ request()->is('seller_pemesanan') ? 'show' : '' }} {{ request()->is('seller_pengiriman') ? 'show' : '' }} {{ request()->is('seller_selesai') ? 'show' : '' }} {{ request()->is('seller_cancel') ? 'show' : '' }}" id="dashboard-collapse">
             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
               {{-- <li><a href="#" class="link-dark rounded {{ request()->is('pemesanan') ? 'fw-bold' : '' }}">Pemesanan</a></li> --}}
-              <li><a href="{{ route('transaksi') }}" class="link-dark rounded {{ request()->is('transaksi') ? 'fw-bold' : '' }}">Pemesanan</a></li>
-              <li><a href="{{ route('transaksi-pengiriman') }}" class="link-dark rounded {{ request()->is('transaksi/pengiriman') ? 'fw-bold' : '' }}">Pengiriman</a></li>
-              <li><a href="#" class="link-dark rounded">Selesai</a></li>
-              <li><a href="#" class="link-dark rounded">Cancel</a></li>
+              <li><a href="{{ route('seller_pemesanan') }}" class="link-dark rounded {{ request()->is('seller_pemesanan') ? 'fw-bold' : '' }}">Pemesanan</a></li>
+              <li><a href="{{ route('seller_pengiriman') }}" class="link-dark rounded {{ request()->is('seller_pengiriman') ? 'fw-bold' : '' }}">Pengiriman</a></li>
+              <li><a href="{{ route('seller_selesai') }}" class="link-dark rounded {{ request()->is('seller_selesai') ? 'fw-bold' : '' }}">Selesai</a></li>
+              <li><a href="{{ route('seller_cancel') }}" class="link-dark rounded {{ request()->is('seller_cancel') ? 'fw-bold' : '' }}">Cancel</a></li>
             </ul>
           </div>
         </li>

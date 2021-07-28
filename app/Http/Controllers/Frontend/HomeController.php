@@ -14,6 +14,11 @@ class HomeController extends Controller
     public function index()
     {
         $benihs = Benih::where('stok','>', 0)->get();
+        // foreach ($benihs as $benih) {
+        //     foreach ($benih->user_id as $user_id) {
+        //         $seller = User::findOrFail($user_id);
+        //     }
+        // }
         // $keranjang_notif = Keranjang::where('user_id',Auth::user()->id);
         return view('frontend.home', compact('benihs'));
     }
@@ -40,20 +45,26 @@ class HomeController extends Controller
             'status' => 'Menunggu Pembayaran'
         ]);
 
-        foreach ($request->keranjang_checks as $keranjang_check) {
-            $keranjang = Keranjang::findOrFail($keranjang_check);
-            $keranjang->update([
-                "transaksi_id" => $transaksi->id,
-                "status" => $transaksi->status,
-            ]);
-            // Add Seller_id to database transaksi
-            $transaksi->seller_id = $keranjang->benih->user_id;
-            $transaksi->save();
+        if (isset($request->keranjang_checks)) {
+            //
+            foreach ($request->keranjang_checks as $keranjang_check) {
+                $keranjang = Keranjang::findOrFail($keranjang_check);
+                $keranjang->update([
+                    "transaksi_id" => $transaksi->id,
+                    "status" => $transaksi->status,
+                ]);
+                // Add Seller_id to database transaksi
+                $transaksi->seller_id = $keranjang->benih->user_id;
+                $transaksi->save();
 
-            // Reduce stok benih saat memesan
-            $benih = Benih::findOrFail($keranjang->benih_id);
-            $data['stok'] = $benih->stok - $keranjang->jumlah;
-            $benih->update($data);
+                // Reduce stok benih saat memesan
+                $benih = Benih::findOrFail($keranjang->benih_id);
+                $data['stok'] = $benih->stok - $keranjang->jumlah;
+                $benih->update($data);
+            }
+        }
+        else {
+            return back()->with('error', 'Pilih keranjang terlebih dahulu');
         }
         return redirect('pemesanan')->with('msg', 'Benih telah dimasukkan ke keranjang');
 
