@@ -68,8 +68,12 @@
 
         <div class="col-8 col-lg-9"></div>
 
-        <div class="statusTransaksi col-4 col-lg-3 fw-bold">
-            <p>{{ $transaksi->status }}</p>
+        <div class="col-12">
+            <div class="d-md-flex justify-content-md-end fw-bold me-3">
+                <p>Status : {{ $transaksi->status}}</p>
+            </div>
+        </div>
+        <div class="col-1">
         </div>
 
 
@@ -150,7 +154,7 @@
                         <p>{{ $user->name }}, {{ $user->alamat }} Kec. {{ $user->kec }}, Kab. {{ $user->kab }}</p>
                     </div>
 
-                    <div class="col-4"></div>
+                    {{-- <div class="col-4"></div>
                     <div class="col-4 text-success">Biaya Pengiriman</div>
                     <div class="col-4 text-success">
                         <p>Rp. XX.XXX</p>
@@ -162,7 +166,7 @@
                     <div class="col-4 fw-bold text-success">Total Keseluruhan</div>
                     <div class="col-4 fw-bold text-success">
                         <p>Rp. X.XXX.XXX</p>
-                    </div>
+                    </div> --}}
 
                 </div>
 
@@ -171,6 +175,28 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
                 </div>
             </div>
+        </div>
+      </div>
+
+      {{-- MODAL CANCEL --}}
+      <div class="modal fade" id="modalCancel{{$transaksi->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Pembayaran</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('seller_pemesanan-cancel', $transaksi->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body">
+                        <p>Yakin Ingin Membatalkan Pemesanan ?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Batalkan Pemesanan</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                    </div>
+                </div>
+            </form>
         </div>
       </div>
 

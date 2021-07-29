@@ -82,10 +82,13 @@
     <hr>
 
 
-    <div class="col-8 col-lg-9"></div>
-        <div class="statusTransaksi col-4 col-lg-3 fw-bold">
-            <p>{{ $transaksi->status}}</p>
+    <div class="col-12">
+        <div class="d-md-flex justify-content-md-end fw-bold me-3">
+            <p>Status : {{ $transaksi->status}}</p>
         </div>
+    </div>
+    <div class="col-1">
+    </div>
 
         <div class="btnTransaksi col-12">
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -167,7 +170,7 @@
                         <p>{{ $user->name }}, {{ $user->alamat }} Kec. {{ $user->kec }}, Kab. {{ $user->kab }}</p>
                     </div>
 
-                    <div class="col-4"></div>
+                    {{-- <div class="col-4"></div>
                     <div class="col-4 text-success">Biaya Pengiriman</div>
                     <div class="col-4 text-success">
                         <p>Rp. XX.XXX</p>
@@ -179,7 +182,7 @@
                     <div class="col-4 fw-bold text-success">Total Keseluruhan</div>
                     <div class="col-4 fw-bold text-success">
                         <p>Rp. X.XXX.XXX</p>
-                    </div>
+                    </div> --}}
 
                 </div>
 

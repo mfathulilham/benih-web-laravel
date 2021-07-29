@@ -68,8 +68,12 @@
 
         <div class="col-8 col-lg-9"></div>
 
-        <div class="statusTransaksi col-4 col-lg-3 fw-bold">
-            <p>{{ $transaksi->status }}</p>
+        <div class="col-12">
+            <div class="d-md-flex justify-content-md-end fw-bold me-3">
+                <p>Status : {{ $transaksi->status}}</p>
+            </div>
+        </div>
+        <div class="col-1">
         </div>
 
 

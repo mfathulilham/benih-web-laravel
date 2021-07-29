@@ -50,6 +50,9 @@
             <p class="alert alert-success">{{ session('msg') }}</p>
         @endif
 
+        @foreach ($transaksis as $transaksi)
+        @if ($transaksi->status == 'Menunggu Pembayaran')
+
         <div class="table-responsive">
             <table class="table table-striped table-bordered table-sm">
             <thead>
@@ -63,21 +66,22 @@
                 </tr>
             </thead>
             <tbody>
+
                 @php
                     $angkaAwal = 1
                 @endphp
-                @foreach ($transaksis as $transaksi)
+                @foreach ($transaksi->keranjang as $keranjang)
 
                 <tr>
                     <td>{{ $angkaAwal++ }}</td>
-                    <td>2021090{{ $transaksi->id}}</td>
-                    <td>{{ $transaksi->user->name}}</td>
-                    <td>{{ $transaksi->rekening}}</td>
+                    <td>2021090{{ $keranjang->id}}</td>
+                    <td>{{ $keranjang->user->name}}</td>
+                    <td>{{ $keranjang->rekening}}</td>
                     <td>
                         <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalBukti{{$transaksi->id}}">Lihat Bukti</a>
                     </td>
                     <td>
-                        <form action="{{ route('order-confirm', $transaksi->id) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('order-confirm', $keranjang->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             {{-- <a href="#" class="btn btn-secondary"><i class="far fa-edit"></i></a> --}}
                                 <button class="btn btn-success" onclick="return confirm('Konfirmasi Pembayaran ?')" type="submit">Confirm</button>
@@ -85,6 +89,8 @@
                         </form>
                     </td>
                 </tr>
+
+                @endforeach
 
                 <!-- Modal Bukti Pembayaran-->
                 <div class="modal fade" id="modalBukti{{$transaksi->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -106,11 +112,13 @@
                         </form>
                     </div>
                 </div>
-                @endforeach
 
             </tbody>
             </table>
         </div>
+
+        @endif
+        @endforeach
 
     </div>
 </div>

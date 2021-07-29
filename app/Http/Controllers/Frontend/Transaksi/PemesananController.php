@@ -58,18 +58,36 @@ class PemesananController extends Controller
     public function user_pengiriman()
     {
         $transaksis = Transaksi::where('user_id', Auth::user()->id)->get();
-        return view('frontend.pengiriman', ['transaksis' => $transaksis]);
+        foreach ($transaksis as $transaksi) {
+            foreach ($transaksi->keranjang as $keranjang) {
+                $seller = User::findOrFail($keranjang->benih->user_id);
+                $user = User::findOrFail($keranjang->user_id);
+            }
+        }
+        return view('frontend.pengiriman', ['transaksis' => $transaksis, 'seller' => $seller, 'user' => $user]);
     }
 
     public function user_cancel()
     {
         $transaksis = Transaksi::where('user_id', Auth::user()->id)->get();
-        return view('frontend.cancel', ['transaksis' => $transaksis]);
+        foreach ($transaksis as $transaksi) {
+            foreach ($transaksi->keranjang as $keranjang) {
+                $seller = User::findOrFail($keranjang->benih->user_id);
+                $user = User::findOrFail($keranjang->user_id);
+            }
+        }
+        return view('frontend.cancel', ['transaksis' => $transaksis, 'seller' => $seller, 'user' => $user]);
     }
 
     public function user_selesai()
     {
         $transaksis = Transaksi::where('user_id', Auth::user()->id)->get();
-        return view('frontend.selesai', ['transaksis' => $transaksis]);
+        foreach ($transaksis as $transaksi) {
+            foreach ($transaksi->keranjang as $keranjang) {
+                $seller = User::findOrFail($keranjang->benih->user_id);
+                $user = User::findOrFail($keranjang->user_id);
+            }
+        }
+        return view('frontend.selesai', ['transaksis' => $transaksis, 'seller' => $seller, 'user' => $user]);
     }
 }

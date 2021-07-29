@@ -57,4 +57,28 @@ class SellerTransaksiController extends Controller
         return view('backend.seller.transaksi.cancel.index', ['transaksis'=> $transaksis, 'seller' => $seller, 'user' => $user]);
     }
 
+    public function seller_pemesanan_cancel($id)
+    {
+        //  Status Berubah menjadi dibatalkan
+        if (isset($id)) {
+            $data['status'] = 'Dibatalkan';
+            $transaksi = Transaksi::findOrFail($id);
+            $transaksi->update($data);
+            return redirect('seller_pemesanan')->with('msg', 'Pemesanan telah dibatalkan');
+        }
+    }
+
+    public function seller_pengiriman_kirim($id)
+    {
+        //  Status Berubah menjadi dibatalkan
+        if (isset($id)) {
+            $data['status'] = 'Proses Pengiriman';
+            $transaksi = Transaksi::findOrFail($id);
+            $transaksi->update($data);
+            return redirect('seller_pengiriman')->with('msg', 'Status Benih Dalam Proses Pengiriman');
+        }
+    }
+
+
+
 }

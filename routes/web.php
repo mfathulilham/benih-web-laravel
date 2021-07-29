@@ -56,7 +56,11 @@ Route::middleware('seller')->group(function () {
 
         //Transaksi
         Route::get('/seller_pemesanan', [SellerTransaksiController::class, 'pemesanan'])->name('seller_pemesanan');
+        Route::post('/seller_pemesanan/cancel/{id}', [SellerTransaksiController::class, 'seller_pemesanan_cancel'])->name('seller_pemesanan-cancel');
+
         Route::get('/seller_pengiriman', [SellerTransaksiController::class, 'pengiriman'])->name('seller_pengiriman');
+        Route::post('/seller_pengiriman/kirim/{id}', [SellerTransaksiController::class, 'seller_pengiriman_kirim'])->name('seller_pengiriman-kirim');
+
         Route::get('/seller_selesai', [SellerTransaksiController::class, 'selesai'])->name('seller_selesai');
         Route::get('/seller_cancel', [SellerTransaksiController::class, 'cancel'])->name('seller_cancel');
 

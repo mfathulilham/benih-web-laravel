@@ -32,7 +32,7 @@
                 Keranjang
                 @if (Auth::user()->keranjangs()->where('status','keranjang')->count() != 0)
                     <span class="badge bg-danger rounded-pill">{{Auth::user()->keranjangs()->where('status','keranjang')->count()}}</span>
-                @endif
+                    @endif
                 </a>
             </li>
             <li class="nav-item ms-4 mt-1">
@@ -40,7 +40,7 @@
                 <i class="fas fa-shopping-bag"></i>
                 Transaksi
                 @if (Auth::user()->keranjangs()->where('status','!=','keranjang')->count() != 0)
-                    <span class="badge bg-danger rounded-pill">{{ Auth::user()->transaksis()->count() }}</span>
+                    <span class="badge bg-danger rounded-pill">{{ Auth::user()->transaksis()->where('status','Menunggu Pembayaran')->count() }}</span>
                 @endif
                 </a>
             </li>

@@ -11,7 +11,7 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $transaksis = Transaksi::where('status', "Menunggu Konfirmasi")->get();
+        $transaksis = Transaksi::where('status', '!=' ,'keranjang')->get();
         return view('backend.admin.order.index', ['transaksis' => $transaksis]);
     }
 
