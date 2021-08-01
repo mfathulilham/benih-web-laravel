@@ -20,7 +20,6 @@
             <div class="container-3">
                 <div class="card-3 pb-3 bg-white">
 
-                    @include('layouts.frontend._navtabs')
 
                     {{-- CONTENT --}}
 

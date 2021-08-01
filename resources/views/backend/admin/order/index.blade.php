@@ -51,7 +51,7 @@
         @endif
 
         @foreach ($transaksis as $transaksi)
-        @if ($transaksi->status == 'Menunggu Pembayaran')
+        @if ($transaksi->status == 'Menunggu Konfirmasi' || $transaksi->status == 'Selesai')
 
         <div class="table-responsive">
             <table class="table table-striped table-bordered table-sm">
@@ -60,8 +60,9 @@
                     <th>No</th>
                     <th>Id Transaksi</th>
                     <th>Nama Pengirim</th>
+                    <th>Harga Pemesanan</th>
                     <th>Kirim Ke Rekening</th>
-                    <th>Bukti Pembayaran</th>
+                    <th>Bukti</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -74,19 +75,28 @@
 
                 <tr>
                     <td>{{ $angkaAwal++ }}</td>
-                    <td>2021090{{ $keranjang->id}}</td>
+                    <td>2021090{{ $transaksi->id}}</td>
                     <td>{{ $keranjang->user->name}}</td>
-                    <td>{{ $keranjang->rekening}}</td>
+                    <td>Rp. {{ number_format($transaksi->keranjang()->sum('total_harga'), 0, ',', '.') }}</td>
+                    <td>{{ $transaksi->rekening}}</td>
                     <td>
-                        <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalBukti{{$transaksi->id}}">Lihat Bukti</a>
+                        <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalBukti{{$transaksi->id}}">Bukti</a>
                     </td>
                     <td>
-                        <form action="{{ route('order-confirm', $keranjang->id) }}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            {{-- <a href="#" class="btn btn-secondary"><i class="far fa-edit"></i></a> --}}
-                                <button class="btn btn-success" onclick="return confirm('Konfirmasi Pembayaran ?')" type="submit">Confirm</button>
-                                <button class="btn btn-danger" onclick="return confirm('Tolak Pembayaran ?')" type="submit">Cancel</button>
-                        </form>
+                        @if ($transaksi->status == 'Menunggu Konfirmasi')
+                            <form action="{{ route('order-confirm', $transaksi->id) }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                {{-- <a href="#" class="btn btn-secondary"><i class="far fa-edit"></i></a> --}}
+                                    <button class="btn btn-success" onclick="return confirm('Konfirmasi Pembayaran ?')" type="submit">Confirm</button>
+                                    <button class="btn btn-danger" onclick="return confirm('Tolak Pembayaran ?')" type="submit">Cancel</button>
+                            </form>
+                        @else
+                            {{-- <form action="#" method="POST" enctype="multipart/form-data">
+                                @csrf --}}
+                                {{-- <a href="#" class="btn btn-secondary"><i class="far fa-edit"></i></a> --}}
+                                    <button class="btn btn-success" onclick="return confirm('Konfirmasi Pembayaran ?')" type="submit">Telah di transfer</button>
+                            {{-- </form> --}}
+                        @endif
                     </td>
                 </tr>
 

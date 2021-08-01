@@ -40,7 +40,11 @@
                     <p class="checkText">Pilih</p>
                 </div>
 
-                <div class="col-5">
+                <div class="col-2">
+                  <p>Nama IKB</p>
+                </div>
+
+                <div class="col-4">
                   <p>Nama Benih</p>
                 </div>
 
@@ -48,7 +52,7 @@
                   <p>Harga Satuan</p>
                 </div>
 
-                <div class="col-2">
+                <div class="col-1">
                   <p>Jumlah</p>
                 </div>
 
@@ -61,7 +65,9 @@
             <form action="{{ route('home-keranjang-add') }}" method="POST">
                 @csrf
 
-            @foreach ($keranjangs as $keranjang)
+            @forelse ($keranjangs as $keranjang)
+
+
                 <div class="row mx-2 mt-3 px-2 pt-4 pb-2 bg-light">
 
                     <div class="col-1">
@@ -70,11 +76,15 @@
                         </div>
                     </div>
 
+                    <div class="col-2 titleBenih">
+                        <p>{{$keranjang->benih->user->name}}</p>
+                    </div>
+
                     <div class="col-1 imageBenih">
                         <img src="{{ $keranjang->benih->img }}" alt="">
                     </div>
 
-                    <div class="col-4 titleBenih">
+                    <div class="col-3 titleBenih">
                         <p>{{$keranjang->benih->judul}}</p>
                     </div>
 
@@ -82,7 +92,7 @@
                         <p>Rp. {{number_format($keranjang->benih->harga, 0, ',', '.') }}</p>
                     </div>
 
-                    <div class="col-2 jumlahBenih">
+                    <div class="col-1 jumlahBenih">
                         <p>{{$keranjang->jumlah}}</p>
                     </div>
 
@@ -91,16 +101,29 @@
                     </div>
 
                 </div>
-            @endforeach
 
-            {{-- @if ($keranjangs == NULL) --}}
+                @empty
+
+                <div class="row mx-2 mt-3 px-2 pt-4 pb-2 bg-light">
+                    <div class="col text-center">
+                        <p>Belum ada data</p>
+                    </div>
+                </div>
+
+
+            @endforelse
+
+            {{-- @foreach ($keranjangs as $keranjang)
+            @if ($keranjang->status == 'keranjang') --}}
                 <div class="row mt-4">
                     <div class="col-5"></div>
                     <div class="col-3">
                         <button type="submit" class="btn btn-success"></i>Pesan Sekarang</button>
                     </div>
                 </div>
-            {{-- @endif --}}
+            {{-- @endif
+            @endforeach --}}
+
 
         </form>
 

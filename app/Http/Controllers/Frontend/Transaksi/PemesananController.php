@@ -11,6 +11,7 @@ class PemesananController extends Controller
 {
     public function index()
     {
+        // $transaksis = Transaksi::where('user_id', Auth::user()->id)->where('status','Menunggu Pembayaran')->get();
         $transaksis = Transaksi::where('user_id', Auth::user()->id)->get();
         foreach ($transaksis as $transaksi) {
             foreach ($transaksi->keranjang as $keranjang) {

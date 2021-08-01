@@ -9,6 +9,9 @@
     <h3>Pemesanan</h3>
 </div> --}}
 
+@include('layouts.frontend._navtabs')
+
+
 @if (session('msg'))
     <div class="row g-0 mx-4 mt-4">
         <p class="alert alert-success">{{ session('msg') }}</p>

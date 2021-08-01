@@ -34,18 +34,19 @@ class HomeController extends Controller
         $user = Auth::user()->id;
         // $keranjangs = Keranjang::all();
         $keranjangs = Keranjang::where('user_id', Auth::user()->id)->where('status','keranjang')->get();
+        // $keranjangs = Keranjang::where('user_id', Auth::user()->id)->get();
 
         return view('frontend.keranjang', compact('name', 'alamat','kec','kab','prov', 'keranjangs'));
     }
 
     public function keranjang_add(Request $request)
     {
-        $transaksi =Transaksi::create([
-            'user_id' => Auth::user()->id,
-            'status' => 'Menunggu Pembayaran'
-        ]);
-
         if (isset($request->keranjang_checks)) {
+
+            $transaksi =Transaksi::create([
+                'user_id' => Auth::user()->id,
+                'status' => 'Menunggu Pembayaran'
+            ]);
             //
             foreach ($request->keranjang_checks as $keranjang_check) {
                 $keranjang = Keranjang::findOrFail($keranjang_check);

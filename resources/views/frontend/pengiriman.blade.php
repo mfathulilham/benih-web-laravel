@@ -8,6 +8,8 @@
 {{-- <div class="row mx-3 mt-4 text-success">
     <h3>Pemesanan</h3>
 </div> --}}
+@include('layouts.frontend._navtabs')
+
 
 @if (session('msg'))
     <div class="row g-0 mx-4 mt-4">

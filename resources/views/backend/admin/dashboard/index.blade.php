@@ -15,23 +15,23 @@
 
         <div class="row mt-4">
             <div class="col-4">
-                <a href="#" class="btnOrders container-fluid btn btn-warning text-light text-center">
-                  <h4 class="pemesanan-count mt-5">60</h4>
-                  <p>Orders</p>
+                <a href="#" class="btnOrders container-fluid btn btn-info text-light text-center">
+                  <h4 class="pemesanan-count mt-5">{{ $selesai->count() }}</h4>
+                  <p>Transaksi</p>
                 </a>
               </div>
 
               <div class="col-4">
                 <a href="#" class="btnUserRegistration container-fluid btn btn-info text-light text-center">
-                  <h4 class="pengiriman-count mt-5">35</h4>
+                  <h4 class="pengiriman-count mt-5">{{ $user->count() }}</h4>
                   <p>User Registration</p>
                 </a>
               </div>
 
               <div class="col-4">
-                <a href="#" class="btnVisitor container-fluid btn btn-danger text-light text-center">
-                  <h4 class="cancel-count mt-5">99</h4>
-                  <p>Visitor</p>
+                <a href="#" class="btnVisitor container-fluid btn btn-info text-light text-center">
+                  <h4 class="cancel-count mt-5">{{ $benih->count() }}</h4>
+                  <p>Benih Tersedia</p>
                 </a>
               </div>
         </div>

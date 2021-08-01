@@ -7,22 +7,22 @@
         <hr>
         <div class="row overview-ikb">
             <div class="col-4">
-                <a href="{{ route('seller_pemesanan') }}" class="container-fluid btn btn-warning text-light text-center">
-                <h4 class="pemesanan-count">{{ $transaksis->count() }}</h4>
+                <a href="{{ route('seller_pemesanan') }}" class="container-fluid btn btn-info text-light text-center">
+                <h4 class="pemesanan-count">{{ $pemesanan->count() }}</h4>
                     <p>Pemesanan Berlangsung</p>
                 </a>
             </div>
 
             <div class="col-4">
-                <a href="#" class="container-fluid btn btn-info text-light text-center">
-                <h4 class="pengiriman-count">0</h4>
+                <a href="{{ route('seller_pengiriman') }}" class="container-fluid btn btn-info text-light text-center">
+                <h4 class="pengiriman-count">{{ $pengiriman->count() }}</h4>
                 <p>Perlu Dikirim</p>
                 </a>
             </div>
 
             <div class="col-4">
-                <a href="#" class="container-fluid btn btn-danger text-light text-center">
-                <h4 class="cancel-count">0</h4>
+                <a href="{{ route('seller_cancel') }}" class="container-fluid btn btn-info text-light text-center">
+                <h4 class="cancel-count">{{ $batal->count() }}</h4>
                 <p>Dibatalkan</p>
                 </a>
             </div>

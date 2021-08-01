@@ -7,6 +7,8 @@
 {{-- <div class="row mx-3 mt-4 text-success">
     <h3>Pemesanan</h3>
 </div> --}}
+@include('layouts.frontend._navtabs')
+
 
 @if (session('msg'))
     <div class="row g-0 mx-4 mt-4">
@@ -193,6 +195,7 @@
             </div>
         </div>
       </div>
+    </div>
 
       <!-- Modal Pembayaran-->
       <div class="modal fade" id="modalBayar{{$transaksi->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -210,7 +213,8 @@
                                 Harga Pengiriman
                             </div>
                             <div class="col-8">
-                                <a href="https://api.whatsapp.com/send?phone=6281298069650&text=*NEGOSIASI%20PENGIRIMAN%20BENIH*%0A%0APesanan Saya%20:%0A1.%20Nama%20Benih%20{{$keranjang->benih->judul}}%0A2.%20Kemasan%20{{$keranjang->benih->variasi}}%20kg%20Jumlah%20{{ $keranjang->jumlah}}%20Pcs%0A3.%20*TOTAL%20HARGA%20Benih%20=%20Rp.%20{{ number_format($transaksi->keranjang()->sum('total_harga'), 0, ',', '.') }}*%0A%0ABerapa%20*HARGA*%20untuk%20pengiriman%20ke%20Alamat%20{{$keranjang->user->alamat}}%20Kecamatan%20{{$keranjang->user->kec}}%20Kabupaten%20{{$keranjang->user->kab}}%20?" target="_blank" class="btn btn-danger" rel="noopener noreferrer">Klik Untuk Negosiasi</a>
+                                <a href="https://api.whatsapp.com/send?phone=6281298069650&text=*NEGOSIASI%20PENGIRIMAN%20BENIH*%0A%0APesanan Saya%20:%0A1.%20Nama%20Benih%20{{$keranjang->benih->judul}}%0A2.%20Kemasan%20{{$keranjang->benih->variasi}}%20kg%20Jumlah%20{{ $keranjang->jumlah}}%20Pcs%0A3.%20*TOTAL%20HARGA%20Benih%20=%20Rp.%20{{ number_format($transaksi->keranjang()->sum('total_harga'), 0, ',', '.') }}*%0A%0AUntuk%20pengiriman%20ke%20Alamat%20{{$keranjang->user->alamat}}%20Kecamatan%20{{$keranjang->user->kec}}%20Kabupaten%20{{$keranjang->user->kab}}%20?" target="_blank" class="btn btn-danger" rel="noopener noreferrer">Klik Untuk Negosiasi</a>
+                                {{-- <a href="https://api.whatsapp.com/send?phone=6281298069650&text=*NEGOSIASI%20PENGIRIMAN%20BENIH*%0A%0APesanan Saya%20:%0A1.%20Nama%20Benih%20{{$keranjang->benih->judul}}%0A2.%20Kemasan%20{{$keranjang->benih->variasi}}%20kg%20Jumlah%20{{ $keranjang->jumlah}}%20Pcs%0A3.%20*TOTAL%20HARGA%20Benih%20=%20Rp.%20{{ number_format($transaksi->keranjang()->sum('total_harga'), 0, ',', '.') }}*%0A%0ABerapa%20*HARGA*%20untuk%20pengiriman%20ke%20Alamat%20{{$keranjang->user->alamat}}%20Kecamatan%20{{$keranjang->user->kec}}%20Kabupaten%20{{$keranjang->user->kab}}%20?" target="_blank" class="btn btn-danger" rel="noopener noreferrer">Klik Untuk Negosiasi</a> --}}
                             </div>
                             <div class="col-4">
                                 Harga Benih
@@ -270,6 +274,14 @@
             </form>
         </div>
       </div>
+
+      {{-- @empty --}}
+
+    {{-- <div class="col text-center">
+            <p>Belum ada data</p>
+        </div>
+    </div> --}}
+
 
 @endif
 @endforeach

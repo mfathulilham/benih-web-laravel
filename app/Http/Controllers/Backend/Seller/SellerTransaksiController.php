@@ -79,6 +79,17 @@ class SellerTransaksiController extends Controller
         }
     }
 
+    public function seller_pengiriman_selesai($id)
+    {
+        //  Status Berubah menjadi dibatalkan
+        if (isset($id)) {
+            $data['status'] = 'Selesai';
+            $transaksi = Transaksi::findOrFail($id);
+            $transaksi->update($data);
+            return redirect('seller_selesai')->with('msg', 'Pengiriman Selesai');
+        }
+    }
+
 
 
 }
