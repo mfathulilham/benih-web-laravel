@@ -14,13 +14,24 @@ class HomeController extends Controller
     public function index()
     {
         $benihs = Benih::where('stok','>', 0)->get();
-        // foreach ($benihs as $benih) {
-        //     foreach ($benih->user_id as $user_id) {
-        //         $seller = User::findOrFail($user_id);
-        //     }
-        // }
-        // $keranjang_notif = Keranjang::where('user_id',Auth::user()->id);
         return view('frontend.home', compact('benihs'));
+    }
+
+    public function search(Request $request){
+        // Get the search value from the request
+        $search = $request->input('search');
+
+        // Search in the title and body columns from the posts table
+        $benihs = Benih::query()
+            ->where('judul', 'LIKE', "%{$search}%")
+            ->get();
+        // $benihs = Benih::query()
+        //     ->where('judul', 'LIKE', "%{$search}%")
+        //     ->orWhere('', 'LIKE', "%{$search}%")
+        //     ->get();
+
+        // Return the search view with the resluts compacted
+        return view('frontend.search', compact('benihs', 'search'));
     }
 
     public function keranjang()
@@ -34,6 +45,16 @@ class HomeController extends Controller
         $user = Auth::user()->id;
         // $keranjangs = Keranjang::all();
         $keranjangs = Keranjang::where('user_id', Auth::user()->id)->where('status','keranjang')->get();
+        // $available = NULL;
+        // foreach ($keranjangs as $keranjang) {
+        //     if ($keranjang) {
+        //         foreach ($keranjang->status as $status) {
+        //             if ($status == 'keranjang'){
+        //                 $available = 0;
+        //             }
+        //         }
+        //     }
+        // }
         // $keranjangs = Keranjang::where('user_id', Auth::user()->id)->get();
 
         return view('frontend.keranjang', compact('name', 'alamat','kec','kab','prov', 'keranjangs'));
@@ -42,6 +63,12 @@ class HomeController extends Controller
     public function keranjang_add(Request $request)
     {
         if (isset($request->keranjang_checks)) {
+            $user_id = Keranjang::findOrFail($request->keranjang_checks[0])->benih->user->id;
+            foreach ($request->keranjang_checks as $keranjang_check) {
+                $keranjang = Keranjang::findOrFail($keranjang_check);
+                if($keranjang->benih->user->id == $user_id) $user_id = $keranjang->benih->user->id;
+                else return back()->with('error', 'Hanya Bisa pilih IKB Yang Sama Bersamaan!');
+            }
 
             $transaksi =Transaksi::create([
                 'user_id' => Auth::user()->id,
@@ -67,7 +94,7 @@ class HomeController extends Controller
         else {
             return back()->with('error', 'Pilih keranjang terlebih dahulu');
         }
-        return redirect('pemesanan')->with('msg', 'Benih telah dimasukkan ke keranjang');
+        return redirect('pemesanan')->with('msg', 'Benih telah dimasukkan ke Daftar Pemesanan');
 
         // return view('frontend.pemesanan');
     }

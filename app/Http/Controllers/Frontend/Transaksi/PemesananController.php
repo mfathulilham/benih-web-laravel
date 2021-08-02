@@ -11,8 +11,10 @@ class PemesananController extends Controller
 {
     public function index()
     {
-        // $transaksis = Transaksi::where('user_id', Auth::user()->id)->where('status','Menunggu Pembayaran')->get();
-        $transaksis = Transaksi::where('user_id', Auth::user()->id)->get();
+        $transaksis = Transaksi::where('user_id', Auth::user()->id)->where('status','Menunggu Pembayaran')->orWhere('status','Menunggu Konfirmasi')->orWhere('status','Verifikasi Gagal')->get();
+        // $transaksis = Transaksi::where('user_id', Auth::user()->id)->get();
+        $seller = NULL;
+        $user = NULL;
         foreach ($transaksis as $transaksi) {
             foreach ($transaksi->keranjang as $keranjang) {
                 $seller = User::findOrFail($keranjang->benih->user_id);
@@ -58,7 +60,9 @@ class PemesananController extends Controller
 
     public function user_pengiriman()
     {
-        $transaksis = Transaksi::where('user_id', Auth::user()->id)->get();
+        $transaksis = Transaksi::where('user_id', Auth::user()->id)->where('status','Menunggu Pengiriman')->orWhere('status','Proses Pengiriman')->get();
+        $seller = NULL;
+        $user = NULL;
         foreach ($transaksis as $transaksi) {
             foreach ($transaksi->keranjang as $keranjang) {
                 $seller = User::findOrFail($keranjang->benih->user_id);
@@ -70,7 +74,9 @@ class PemesananController extends Controller
 
     public function user_cancel()
     {
-        $transaksis = Transaksi::where('user_id', Auth::user()->id)->get();
+        $transaksis = Transaksi::where('user_id', Auth::user()->id)->where('status','Dibatalkan')->get();
+        $seller = NULL;
+        $user = NULL;
         foreach ($transaksis as $transaksi) {
             foreach ($transaksi->keranjang as $keranjang) {
                 $seller = User::findOrFail($keranjang->benih->user_id);
@@ -82,7 +88,9 @@ class PemesananController extends Controller
 
     public function user_selesai()
     {
-        $transaksis = Transaksi::where('user_id', Auth::user()->id)->get();
+        $transaksis = Transaksi::where('user_id', Auth::user()->id)->where('status','Pengiriman Selesai')->orWhere('status','Selesai')->get();
+        $seller = NULL;
+        $user = NULL;
         foreach ($transaksis as $transaksi) {
             foreach ($transaksi->keranjang as $keranjang) {
                 $seller = User::findOrFail($keranjang->benih->user_id);

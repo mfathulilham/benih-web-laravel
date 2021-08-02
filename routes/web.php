@@ -31,6 +31,8 @@ Route::middleware('user')->group(function () {
         Route::post('/keranjang/add', [HomeController::class, 'keranjang_add'])->name('-keranjang-add');
         // Profile
         Route::get('profile', [HomeController::class, 'profile'])->name('-profile');
+        // Search
+        Route::get('/search', [HomeController::class, 'search'])->name('-search');
     });
 
 

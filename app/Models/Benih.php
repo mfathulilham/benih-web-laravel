@@ -20,6 +20,8 @@ class Benih extends Model
         'variasi',
         'stok',
         'harga',
+        'rating',
+        'terjual',
         'user_id'
     ];
     public function getImgAttribute()

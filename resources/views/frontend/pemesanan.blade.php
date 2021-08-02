@@ -24,8 +24,8 @@
 @endif
 
 {{-- MAIN CONTENT --}}
-@foreach ($transaksis as $transaksi)
-@if ($transaksi->status == 'Menunggu Pembayaran' || $transaksi->status == 'Menunggu Konfirmasi')
+@forelse ($transaksis as $transaksi)
+{{-- @if ($transaksi->status == 'Menunggu Pembayaran' || $transaksi->status == 'Menunggu Konfirmasi') --}}
 
 <div class="row list-pemesanan mx-4 my-3 px-3 py-3 bg-light">
 
@@ -41,9 +41,8 @@
 
     @foreach ($transaksi->keranjang as $keranjang)
 
-
         <div class="imgTransaksi col-2 col-lg-1">
-        <img src="{{ $keranjang->benih->img}}" style="width: 60px; height: 30px;  border-radius: 5px;" alt="">
+            <img src="{{ $keranjang->benih->img}}" style="width: 60px; height: 30px;  border-radius: 5px;" alt="">
         </div>
 
         <div class="titleTransaksi col-10 col-lg-3 fw-bold">
@@ -92,18 +91,16 @@
     <div class="col-1">
     </div>
 
-        <div class="btnTransaksi col-12">
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                @if ($transaksi->status != 'Menunggu Pembayaran')
-                    <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalDetail{{$transaksi->id}}">Detail</a>
-                @else
-                    <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalDetail{{$transaksi->id}}">Detail</a>
-                    <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalBayar{{$transaksi->id}}">Bayar</a>
-                    <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalCancel{{$transaksi->id}}">Batalkan</a>
-                @endif
-            </div>
+    <div class="btnTransaksi col-12">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            @if ($transaksi->status != 'Menunggu Pembayaran')
+                <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalDetail{{$transaksi->id}}">Detail</a>
+            @else
+                <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalDetail{{$transaksi->id}}">Detail</a>
+                <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalBayar{{$transaksi->id}}">Bayar</a>
+                <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalCancel{{$transaksi->id}}">Batalkan</a>
+            @endif
         </div>
-
     </div>
 
     <!-- Modal Detail-->
@@ -256,24 +253,24 @@
     <!-- Modal Cancel-->
     <div class="modal fade" id="modalCancel{{$transaksi->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Pembayaran</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="{{ route('pemesanan-cancel', $transaksi->id) }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="modal-body">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Pembayaran</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('pemesanan-cancel', $transaksi->id) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
                         <p>Yakin Ingin Membatalkan Pemesanan ?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
                         <button type="submit" class="btn btn-primary">Batalkan Pemesanan</button>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-      </div>
+    </div>
 
       {{-- @empty --}}
 
@@ -282,9 +279,11 @@
         </div>
     </div> --}}
 
-
-@endif
-@endforeach
+{{--
+@endif --}}
+@empty
+    <h5 class="text-center mt-5">Belum Ada Data</h5>
+@endforelse
 
 
 @endsection

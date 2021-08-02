@@ -14,19 +14,12 @@
 @if (session('msg'))
     <div class="row g-0 mx-4 mt-4">
         <p class="alert alert-success">{{ session('msg') }}</p>
-
-                {{-- <div class="col">
-                    <input class="form-control me-2" type="search" placeholder="Cari..." aria-label="Search">
-                </div>
-                <div class="col-2 col-md-1">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </div> --}}
     </div>
 @endif
 
 {{-- MAIN CONTENT --}}
-@foreach ($transaksis as $transaksi)
-@if ($transaksi->status == 'Telah Dikirim' || $transaksi->status == 'Selesai')
+@forelse ($transaksis as $transaksi)
+{{-- @if ($transaksi->status == 'Telah Dikirim' || $transaksi->status == 'Selesai') --}}
 
 <div class="row list-pemesanan mx-4 my-3 px-3 py-3 bg-light">
 
@@ -215,8 +208,9 @@
         </div>
       </div>
 
-@endif
-@endforeach
+      @empty
+      <h5 class="text-center mt-5">Belum Ada Data</h5>
+  @endforelse
 
 
 @endsection

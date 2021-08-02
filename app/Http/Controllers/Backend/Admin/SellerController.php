@@ -24,7 +24,9 @@ class SellerController extends Controller
     {
         $data = $request->validated();
         $data['role'] = 1;
-
+        $data['prov'] = explode(',',$request->prov)[0];
+        $data['kab'] = explode(',',$request->kab)[0];
+        $data['kec'] = explode(',',$request->kec)[0];
         $data['password'] = Hash::make($request->password);
 
         User::create($data);
@@ -52,6 +54,10 @@ class SellerController extends Controller
             'kec' => ['required', 'string']
         ]);
 
+        $data['role'] = 1;
+        $data['prov'] = explode(',',$request->prov)[0];
+        $data['kab'] = explode(',',$request->kab)[0];
+        $data['kec'] = explode(',',$request->kec)[0];
         $data['password'] = Hash::make($request->password);
 
         $user->update($data);

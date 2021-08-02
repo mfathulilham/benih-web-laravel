@@ -8,8 +8,8 @@
     </div>
 @endif
 
-@foreach ($transaksis as $transaksi)
-@if ($transaksi->status == 'Menunggu Pembayaran' || $transaksi->status == 'Menunggu Konfirmasi')
+@forelse ($transaksis as $transaksi)
+{{-- @if ($transaksi->status == 'Menunggu Pembayaran' || $transaksi->status == 'Menunggu Konfirmasi') --}}
 
 <div class="row list-pemesanan mx-4 my-4 px-3 py-3 bg-light">
 
@@ -82,7 +82,7 @@
                 @if ($transaksi->status == 'Menunggu Pembayaran' || $transaksi->status == 'Verifikasi Pembayaran Gagal')
                     <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalDetail{{$transaksi->id}}">Detail</a>
                     <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalCancel{{$transaksi->id}}">Batalkan</a>
-                @elseif ($transaksi->status != 'Menunggu Konfirmasi')
+                @elseif ($transaksi->status == 'Menunggu Konfirmasi')
                     <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalDetail{{$transaksi->id}}">Detail</a>
                 @endif
             </div>
@@ -201,7 +201,8 @@
       </div>
 
 </div>
-@endif
-@endforeach
+@empty
+    <h5 class="text-center mt-5">Belum Ada Data</h5>
+@endforelse
 
 @endsection

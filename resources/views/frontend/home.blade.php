@@ -81,10 +81,15 @@
 
 <!-- Benih Card -->
 <div class="benihCard mx-4 my-4">
-    <h3 class="mt-4">Benih Tersedia</h3>
+
+    {{-- KALAU BENIH TERSEDIA --}}
+    @if (sizeOf($benihs) != 0)
+        <h3 class="mt-4">Benih Tersedia</h3>
+    @endif
+
     <div class="row mt-3 mb-3 g-3">
 
-        @foreach ($benihs as $benih)
+        @forelse ($benihs as $benih)
 
         <!-- BENIH 1 -->
         <div class="col-6 col-md-4 col-lg-3">
@@ -99,7 +104,7 @@
                     <div class="col">
                         <p class="card-text">
                         <i class="fas fa-star text-warning"></i>
-                        0 | Terjual 0
+                        {{$benih->rating}} | Terjual {{$benih->terjual}}
                         </p>
                     </div>
                 </div>
@@ -132,7 +137,12 @@
             </div>
             </div>
         </div>
-      @endforeach
+
+        @empty
+
+        <h3 class="text-center mb-4 mt-5">Benih Belum Tersedia...</h3>
+
+      @endforelse
 
       </div>
   </div>

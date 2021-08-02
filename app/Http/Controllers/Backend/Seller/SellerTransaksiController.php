@@ -11,7 +11,10 @@ class SellerTransaksiController extends Controller
 {
     public function pemesanan()
     {
-        $transaksis = Transaksi::where('seller_id', Auth::user()->id)->get();
+        $transaksis = Transaksi::where('seller_id', Auth::user()->id)->where('status','Menunggu Pembayaran')->orWhere('status','Menunggu Konfirmasi')->get();
+        // $transaksis = Transaksi::where('user_id', Auth::user()->id)->get();
+        $seller = NULL;
+        $user = NULL;
         foreach ($transaksis as $transaksi) {
             foreach ($transaksi->keranjang as $keranjang) {
                 $seller = User::findOrFail($keranjang->benih->user_id);
@@ -23,7 +26,9 @@ class SellerTransaksiController extends Controller
 
     public function pengiriman()
     {
-        $transaksis = Transaksi::where('seller_id', Auth::user()->id)->get();
+        $transaksis = Transaksi::where('seller_id', Auth::user()->id)->where('status','Menunggu Pengiriman')->orWhere('status','Proses Pengiriman')->get();
+        $seller = NULL;
+        $user = NULL;
         foreach ($transaksis as $transaksi) {
             foreach ($transaksi->keranjang as $keranjang) {
                 $seller = User::findOrFail($keranjang->benih->user_id);
@@ -35,7 +40,9 @@ class SellerTransaksiController extends Controller
 
     public function selesai()
     {
-        $transaksis = Transaksi::where('seller_id', Auth::user()->id)->get();
+        $transaksis = Transaksi::where('seller_id', Auth::user()->id)->where('status','Telah Dikirim')->orWhere('status','Pengiriman Selesai')->get();
+        $seller = NULL;
+        $user = NULL;
         foreach ($transaksis as $transaksi) {
             foreach ($transaksi->keranjang as $keranjang) {
                 $seller = User::findOrFail($keranjang->benih->user_id);
@@ -47,7 +54,9 @@ class SellerTransaksiController extends Controller
 
     public function cancel()
     {
-        $transaksis = Transaksi::where('seller_id', Auth::user()->id)->get();
+        $transaksis = Transaksi::where('seller_id', Auth::user()->id)->where('status','Dibatalkan')->get();
+        $seller = NULL;
+        $user = NULL;
         foreach ($transaksis as $transaksi) {
             foreach ($transaksi->keranjang as $keranjang) {
                 $seller = User::findOrFail($keranjang->benih->user_id);
@@ -83,9 +92,17 @@ class SellerTransaksiController extends Controller
     {
         //  Status Berubah menjadi dibatalkan
         if (isset($id)) {
-            $data['status'] = 'Selesai';
+            $data['status'] = 'Pengiriman Selesai';
             $transaksi = Transaksi::findOrFail($id);
             $transaksi->update($data);
+
+            $keranjangs = Keranjang::where('transaksi_id', $id);
+            foreach ($keranjangs as $keranjang) {
+                $benih = Benih::findOrFail($keranjang->benih_id);
+                $terjual['terjual'] = $benih->terjual += $keranjang->jumlah;
+                $benih->update($terjual);
+            }
+
             return redirect('seller_selesai')->with('msg', 'Pengiriman Selesai');
         }
     }

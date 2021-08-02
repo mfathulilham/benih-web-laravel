@@ -53,16 +53,20 @@
                     <td>{{ $seller->kab }}</td>
                     <td>{{ $seller->kec }}</td>
                     <td>
-                        <a href="{{ route('seller-edit', $seller->id) }}" class="btn btn-secondary"><i class="far fa-edit"></i></a>
-                        {{-- <a href="/seller/{{ $seller->id }}/edit" class="btn btn-secondary"><i class="far fa-edit me-2"></i>Edit</a> --}}
-                        {{-- <a href="" class="btn btn-danger"><i class="far fa-trash-alt"></i></a> --}}
-                        <form method="POST" action="{{ route('seller-delete', $seller->id) }}">
-                            @csrf
-                            @method('DELETE')
+                        <div class="row g-0">
+                            <div class="col">
+                                <a href="{{ route('seller-edit', $seller->id) }}" class="btn btn-secondary"><i class="far fa-edit"></i></a>
+                            </div>
+                            <div class="col">
+                                <form method="POST" action="{{ route('seller-delete', $seller->id) }}">
+                                    @csrf
+                                    @method('DELETE')
 
-                            <button class="btn btn-danger" onclick="return confirm('Want to delete ?')" type="submit"><i class="far fa-trash-alt"></i></button>
+                                    <button class="btn btn-danger" onclick="return confirm('Want to delete ?')" type="submit"><i class="far fa-trash-alt"></i></button>
 
-                        </form>
+                                </form>
+                            </div>
+                        </div>
                     </td>
                 </tr>
                 @endforeach

@@ -70,6 +70,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $prov = explode(',',$data["prov"]);
+        $kab = explode(',',$data["kab"]);
+        $kec = explode(',',$data["kec"]);
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -77,9 +81,9 @@ class RegisterController extends Controller
             'lahir' => $data['lahir'],
             'telp' => $data['telp'],
             'alamat' => $data['alamat'],
-            'prov' => $data['prov'],
-            'kab' => $data['kab'],
-            'kec' => $data['kec'],
+            'prov' => $prov[0],
+            'kab' => $kab[0],
+            'kec' => $kec[0],
         ]);
     }
 }

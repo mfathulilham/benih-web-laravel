@@ -26,8 +26,8 @@
 @endif
 
 {{-- MAIN CONTENT --}}
-@foreach ($transaksis as $transaksi)
-@if ($transaksi->status == 'Dibatalkan')
+@forelse ($transaksis as $transaksi)
+{{-- @if ($transaksi->status == 'Dibatalkan') --}}
 
 <div class="row list-pemesanan mx-4 my-3 px-3 py-3 bg-light">
 
@@ -193,8 +193,9 @@
         </div>
       </div>
 
-@endif
-@endforeach
+      @empty
+      <h5 class="text-center mt-5">Belum Ada Data</h5>
+  @endforelse
 
 
 @endsection

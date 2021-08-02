@@ -9,7 +9,7 @@
         </div>
         <div class="col-12 col-md-6">
             <h5>{{ $benih->judul }}</h5>
-            <p>Terjual 0 | Stok {{ $benih->stok }} | <i class="fas fa-star text-warning"></i>0</p>
+            <p>Terjual {{ $benih->terjual }} | Stok {{ $benih->stok }} | <i class="fas fa-star text-warning"></i>{{ $benih->rating }}</p>
             <h2 class="text-success">Rp. {{ number_format($benih->harga, 0, ',', '.') }}</h2>
             <hr>
             <h5 class="text-success"><i class="fas fa-map-marker-alt me-2"></i>{{ $benih->user->name }}</h5>

@@ -86,7 +86,7 @@
                         </div>
 
                         <div class="form-group row" >
-                            <label for="prov" class="col-md-4 col-form-label text-md-right">{{ __('Provinsi') }} @{{ sapi }}</label>
+                            <label for="prov" class="col-md-4 col-form-label text-md-right">{{ __('Provinsi') }} </label>
 
                             <div class="col-md-6">
                                 <select onchange="loadKabupaten()" name="prov" class="form-control" id="provcoba"></select>
@@ -98,7 +98,7 @@
 
                             <div class="col-md-6">
                                 <select onchange="loadKecamatan()" name="kab" id="kabcoba" class="form-control">
-                                    {{-- <option disabled>Pilih Provinsi Dulu</option> --}}
+                                    <option disabled>Pilih Provinsi Dulu</option>
                                 </select>
                                 {{-- <input id="kab" type="text" class="form-control" name="kab" required> --}}
                             </div>
@@ -130,7 +130,7 @@
 </div>
 @push('vuejs')
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-<script>
+{{-- <script>
     new Vue({
         el: '#test',
         data(){
@@ -146,7 +146,7 @@
             },
         },
     })
-</script>
+</script> --}}
 <script>
     function loadProvinsiCoba(){
         let prov = document.getElementById('provcoba');

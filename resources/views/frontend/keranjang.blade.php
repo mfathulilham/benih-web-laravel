@@ -19,7 +19,7 @@
                     <p class="fw-bold">{{ $name }}</p>
                 </div>
                 <div class="alamatPengiriman col">
-                    <p>{{ $alamat }}, Kecamatan {{ $kec }}, Kabupaten {{ $kab }}, Provinsi {{ $prov }}</p>
+                    <p>{{ $alamat }}, Kecamatan {{ $kec }}, {{ $kab }}, Provinsi {{ $prov }}</p>
                 </div>
                 <div class="col-12 col-md-2">
                     <a href="{{ route('home-profile') }}" class="container-fluid btn btn-success">Ubah</a>
@@ -113,16 +113,20 @@
 
             @endforelse
 
-            {{-- @foreach ($keranjangs as $keranjang)
-            @if ($keranjang->status == 'keranjang') --}}
+            {{-- @forelse ($keranjangs as $keranjang) --}}
+            {{-- @if ($available) --}}
+
+            @if (sizeOf($keranjangs) != 0)
                 <div class="row mt-4">
                     <div class="col-5"></div>
                     <div class="col-3">
                         <button type="submit" class="btn btn-success"></i>Pesan Sekarang</button>
                     </div>
                 </div>
-            {{-- @endif
-            @endforeach --}}
+            {{-- @endforelse --}}
+
+            @endif
+
 
 
         </form>

@@ -8,8 +8,8 @@
     </div>
 @endif
 
-@foreach ($transaksis as $transaksi)
-@if ($transaksi->status == 'Menunggu Pengiriman' || $transaksi->status == 'Proses Pengiriman')
+@forelse ($transaksis as $transaksi)
+{{-- @if ($transaksi->status == 'Menunggu Pengiriman' || $transaksi->status == 'Proses Pengiriman') --}}
 
 <div class="row list-pemesanan mx-4 my-4 px-3 py-3 bg-light">
 
@@ -82,7 +82,7 @@
                 @if ($transaksi->status == 'Menunggu Pengiriman')
                     <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalKirim{{$transaksi->id}}">Kirim</a>
                     <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalDetail{{$transaksi->id}}">Detail</a>
-                    <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalCancel{{$transaksi->id}}">Batalkan</a>
+                    {{-- <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalCancel{{$transaksi->id}}">Batalkan</a> --}}
                 @elseif ($transaksi->status == 'Proses Pengiriman')
                     <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalSudahkirim{{$transaksi->id}}">Sudah Dikirim</a>
                     <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalDetail{{$transaksi->id}}">Detail</a>
@@ -201,7 +201,7 @@
             <form action="{{ route('seller_pengiriman-selesai', $transaksi->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
-                        <p>Pemesanan Sudah diKirim ?</p>
+                        <p>Pemesanan Sudah dikirim ?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Selesai</button>
@@ -213,7 +213,8 @@
       </div>
 
 </div>
-@endif
-@endforeach
+@empty
+    <h5 class="text-center mt-5">Belum Ada Data</h5>
+@endforelse
 
 @endsection

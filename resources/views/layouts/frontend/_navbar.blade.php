@@ -8,12 +8,19 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto">
-        <form class="nav-item d-flex form-control-sm me-5">
-          <input class="searchInput form-control me-2 ps-4 pe-5" type="search" placeholder="Temukan Benih..." aria-label="Search">
+        <form class="nav-item d-flex form-control-sm me-5" action="{{ route('home-search') }}" method="GET">
+            @csrf
+            <input class="searchInput form-control me-2 ps-4 pe-5" type="search" placeholder="Temukan Benih..." aria-label="Search" name="search" required>
+
+            @auth
             <button class="btn btn-outline-light" type="submit">
-                {{-- <i class="fas fa-search me-2"></i> --}}
                 Search
             </button>
+            @else
+            <a class="btn btn-outline-light" href="{{ route('login') }}">
+                Search
+            </a>
+            @endauth
         </form>
         @auth
         {{-- Show Dashboard For Admin--}}

@@ -25,8 +25,8 @@
 @endif
 
 {{-- MAIN CONTENT --}}
-@foreach ($transaksis as $transaksi)
-@if ($transaksi->status == 'Menunggu Pengiriman' || $transaksi->status == 'Proses Pengiriman')
+@forelse ($transaksis as $transaksi)
+{{-- @if ($transaksi->status == 'Menunggu Pengiriman' || $transaksi->status == 'Proses Pengiriman') --}}
 
 <div class="row list-pemesanan mx-4 my-3 px-3 py-3 bg-light">
 
@@ -172,20 +172,6 @@
                         <p>{{ $user->name }}, {{ $user->alamat }} Kec. {{ $user->kec }}, Kab. {{ $user->kab }}</p>
                     </div>
 
-                    {{-- <div class="col-4"></div>
-                    <div class="col-4 text-success">Biaya Pengiriman</div>
-                    <div class="col-4 text-success">
-                        <p>Rp. XX.XXX</p>
-                    </div>
-
-                    <hr>
-
-                    <div class="col-4"></div>
-                    <div class="col-4 fw-bold text-success">Total Keseluruhan</div>
-                    <div class="col-4 fw-bold text-success">
-                        <p>Rp. X.XXX.XXX</p>
-                    </div> --}}
-
                 </div>
 
                 </div>
@@ -196,9 +182,9 @@
         </div>
       </div>
 
-@endif
-
-@endforeach
+      @empty
+      <h5 class="text-center mt-5">Belum Ada Data</h5>
+@endforelse
 
 
 @endsection

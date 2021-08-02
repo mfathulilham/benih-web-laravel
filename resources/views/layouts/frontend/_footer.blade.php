@@ -1,18 +1,18 @@
 <section>
 
-    <div class="mt-5 px-5 pt-5 pb-3" style="border-top: 3px solid green">
+    <div class="mt-5 mb-4 px-5 pt-5 pb-5" style="border-top: 3px solid green">
         <div class="row g-0 footer">
 
             <div class="col-md-4">
                 <ul>
                     <p class="fw-bold">PEMBAYARAN</p>
                     <li>
-                        <img src="{{ asset('img/payment/bca.png')}}" alt="">
+                        {{-- <img src="{{ asset('img/payment/bca.png')}}" alt=""> --}}
                         <img src="{{ asset('img/payment/bni.png')}}" class="mx-2" alt="">
-                        <img src="{{ asset('img/payment/mandiri.png')}}" alt="">
-                        <img src="{{ asset('img/payment/atmbersama.png')}}" class="ms-2" alt="">
+                        {{-- <img src="{{ asset('img/payment/mandiri.png')}}" alt="">
+                        <img src="{{ asset('img/payment/atmbersama.png')}}" class="ms-2" alt=""> --}}
                     </li>
-                    <li class="my-3">
+                    {{-- <li class="my-3">
                         <img src="{{ asset('img/payment/gopay.png')}}" alt="">
                         <img src="{{ asset('img/payment/alfamart.png')}}" alt="">
                         <img src="{{ asset('img/payment/indomaret.png')}}" class="ms-2" alt="">
@@ -20,28 +20,27 @@
                     <li>
                         <img src="{{ asset('img/payment/visa.png')}}" alt="">
                         <img src="{{ asset('img/payment/mastercard.png')}}" class="ms-2" alt="">
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
             <div class="col">
                 <ul>
-                    <p class="fw-bold">CONTACT</p>
-                    <li>+0411-xxxx</li>
-                    <li>+0812-xxxx-xxxx</li>
+                    <p class="fw-bold">KONTAK BANTUAN</p>
+                    <li>Telp : +0812-9806-9650</li>
+                    <li>E-mail : benihku@gmail.com</li>
                 </ul>
             </div>
-            <div class="col">
+            {{-- <div class="col">
                 <ul>
                     <p class="fw-bold">BANTUAN</p>
                     <li>Cara Transaksi</li>
                     <li>Cara Pemesanan</li>
-                </div>
+                </div> --}}
             <div class="col-md">
                 <ul>
-                    <p class="fw-bold">GET IN TOUCH</p>
+                    <p class="fw-bold">Sistem Persediaan dan Penyaluran Benih Varietas Unggul Tanaman Pangan</p>
                     <li>
-                        <li>Dinas Pertanian Sulawesi Selatan</li>
-                        <li>Jalan Amirullah, Makassar, Sulawesi Selatan</li>
+                        <li>Instalasi Kebun Benih se-Sulawesi Selatan</li>
                     </li>
                 </ul>
             </div>
