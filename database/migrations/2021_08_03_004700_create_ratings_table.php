@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRekeningsTable extends Migration
+class CreateRatingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateRekeningsTable extends Migration
      */
     public function up()
     {
-        Schema::create('rekenings', function (Blueprint $table) {
+        Schema::create('ratings', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_rekening');
-            $table->string('nomor_rekening');
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->string('rating');
+            $table->foreignId('benih_id')->constrained('benihs')->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateRekeningsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rekenings');
+        Schema::dropIfExists('ratings');
     }
 }

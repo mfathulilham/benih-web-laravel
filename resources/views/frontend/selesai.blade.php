@@ -88,8 +88,12 @@
 
     <div class="btnTransaksi col-12">
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalRating{{$transaksi->id}}">Beri Rating</a>
-            <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalDetail{{$transaksi->id}}">Detail</a>
+            @if ($transaksi->rating == NULL)
+                <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalRating{{$transaksi->id}}">Beri Rating</a>
+                <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalDetail{{$transaksi->id}}">Detail</a>
+            @else
+                <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalDetail{{$transaksi->id}}">Detail</a>
+            @endif
         </div>
     </div>
 
@@ -191,20 +195,64 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Rating Benih</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Beri Rating</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            {{-- <form action="#" method="POST" enctype="multipart/form-data"> --}}
-                {{-- @csrf --}}
+            <form action="{{ route('selesai-rating', $transaksi->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
                 <div class="modal-body">
-                        <p>Beri Rating</p>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-4"></div>
+                        <div class="col form-check">
+                            <input class="form-check-input" type="radio" name="rating" id="rating" value="5" checked>
+                            <label class="form-check-label ms-2" for="radio">
+                                <i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4"></div>
+                        <div class="col form-check">
+                            <input class="form-check-input" type="radio" name="rating" id="rating" value="4">
+                            <label class="form-check-label ms-2" for="radio">
+                                <i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4"></div>
+                        <div class="col form-check">
+                            <input class="form-check-input" type="radio" name="rating" id="rating" value="3">
+                            <label class="form-check-label ms-2" for="radio">
+                                <i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4"></div>
+                        <div class="col form-check">
+                            <input class="form-check-input" type="radio" name="rating" id="rating" value="2">
+                            <label class="form-check-label ms-2" for="radio">
+                                <i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4"></div>
+                        <div class="col form-check">
+                            <input class="form-check-input" type="radio" name="rating" id="rating" value="1">
+                            <label class="form-check-label ms-2" for="radio">
+                                <i class="fas fa-star text-warning"></i>
+                            </label>
+                        </div>
                     </div>
                     <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Kirim</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
-                        <button type="submit" class="btn btn-primary">#</button>
                     </div>
-                </div>
-            {{-- </form> --}}
+            </form>
         </div>
       </div>
 

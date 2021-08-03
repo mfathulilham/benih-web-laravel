@@ -14,6 +14,7 @@ class Transaksi extends Model
         'rekening',
         'gambar',
         'status',
+        'rating',
         'seller_id',
     ];
 

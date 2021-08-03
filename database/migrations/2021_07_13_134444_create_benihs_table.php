@@ -27,7 +27,6 @@ class CreateBenihsTable extends Migration
             $table->integer('stok');
             $table->double('harga');
             $table->integer('terjual')->default(0);
-            $table->double('rating')->default(0);
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->timestamps();
         });

@@ -15,21 +15,26 @@
             <div class="card cardBenih">
             <img src="{{ $benih->img }}" class="card-img-top img-thumbnail" alt="...">
             <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <p><i class="fas fa-map-marker-alt text-success me-2"></i>{{ $benih->user->name }}</p>
+                    </div>
+                </div>
+
                 <h5 class="card-title">{{ $benih->judul }}</h5>
+
+
                 <div class="row g-0">
                     <div class="col">
                         <p class="harga">Rp. {{ number_format($benih->harga, 0, ',', '.') }}</p>
                     </div>
                     <div class="col">
-                        <p class="card-text">
-                        <i class="fas fa-star text-warning"></i>
-                        0 | Terjual 0
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <p class=""><i class="fas fa-map-marker-alt me-2"></i>{{ $benih->user->name }}</p>
+                        <div class="d-flex justify-content-end">
+                            <p class="card-text">
+                            <i class="fas fa-star text-warning"></i>
+                            {{($benih->rating()->avg('rating') == NULL) ? '0' : $benih->rating()->avg('rating')}} | Terjual {{$benih->terjual}}
+                            </p>
+                        </div>
                     </div>
                 </div>
                 <div class="row justify-content-center g-1">

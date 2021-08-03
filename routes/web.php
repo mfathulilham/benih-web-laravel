@@ -47,7 +47,12 @@ Route::middleware('user')->group(function () {
         Route::get('', [PemesananController::class, 'user_pengiriman'])->name('');
     });
     Route::get('cancel', [PemesananController::class, 'user_cancel'])->name('cancel');
-    Route::get('selesai', [PemesananController::class, 'user_selesai'])->name('selesai');
+
+    Route::prefix('selesai')->name('selesai')->group(function(){
+        Route::get('/', [PemesananController::class, 'user_selesai'])->name('');
+        Route::post('rating/{id}', [PemesananController::class, 'user_rating'])->name('-rating');
+
+    });
 
 });
 

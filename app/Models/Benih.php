@@ -20,7 +20,6 @@ class Benih extends Model
         'variasi',
         'stok',
         'harga',
-        'rating',
         'terjual',
         'user_id'
     ];
@@ -37,5 +36,10 @@ class Benih extends Model
     public function keranjangs()
     {
         return $this->hasMany(Keranjang::class);
+    }
+
+    public function rating()
+    {
+        return $this->hasMany(Rating::class);
     }
 }

@@ -99,4 +99,25 @@ class PemesananController extends Controller
         }
         return view('frontend.selesai', ['transaksis' => $transaksis, 'seller' => $seller, 'user' => $user]);
     }
+
+    public function user_rating(Request $request, $id)
+    {
+        $request->validate([
+            'rating'  => ['required', 'numeric'],
+        ]);
+        // TRANSAKSI RATING = FINISH
+        $data['rating'] = 'finish';
+        $transaksi = Transaksi::findOrFail($id);
+        $transaksi->update($data);
+
+        // dd($transaksi->keranjang->benih_id);
+        foreach ($transaksi->keranjang as $keranjang) {
+            $keranjang->benih->rating()->create($request->all());
+        }
+        // $benih = Benih::findOrFail($transaksi->keranjang->benih->id);
+        // dd($benih);
+        // dd($request->rating);
+
+        return redirect('selesai')->with('msg', 'Rating telah ditambahkan');
+    }
 }

@@ -73,13 +73,22 @@ class SellerTransaksiController extends Controller
             $data['status'] = 'Dibatalkan';
             $transaksi = Transaksi::findOrFail($id);
             $transaksi->update($data);
+
+            // Add stok benih saat dibatalkan
+            $keranjangs = $transaksi->keranjang;
+            foreach($keranjangs as $keranjang){
+                $benih = Benih::findOrFail($keranjang->benih_id);
+                $data['stok'] = $benih->stok + $keranjang->jumlah;
+                $benih->update($data);
+            }
+
             return redirect('seller_pemesanan')->with('msg', 'Pemesanan telah dibatalkan');
         }
     }
 
     public function seller_pengiriman_kirim($id)
     {
-        //  Status Berubah menjadi dibatalkan
+        //  Status Berubah menjadi Proses Pengiriman
         if (isset($id)) {
             $data['status'] = 'Proses Pengiriman';
             $transaksi = Transaksi::findOrFail($id);
@@ -90,13 +99,13 @@ class SellerTransaksiController extends Controller
 
     public function seller_pengiriman_selesai($id)
     {
-        //  Status Berubah menjadi dibatalkan
+        //  Status Berubah menjadi Pengiriman Selesai
         if (isset($id)) {
             $data['status'] = 'Pengiriman Selesai';
             $transaksi = Transaksi::findOrFail($id);
             $transaksi->update($data);
 
-            $keranjangs = Keranjang::where('transaksi_id', $id);
+            $keranjangs = Keranjang::where('transaksi_id', $id)->get();
             foreach ($keranjangs as $keranjang) {
                 $benih = Benih::findOrFail($keranjang->benih_id);
                 $terjual['terjual'] = $benih->terjual += $keranjang->jumlah;

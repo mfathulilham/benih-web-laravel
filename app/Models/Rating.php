@@ -5,17 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Rekening extends Model
+class Rating extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'nama_rekening',
-        'nomor_rekening',
-        'user_id'
+        'rating',
+        'benih_id'
     ];
 
-    public function user()
+    public function benih()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Benih::class);
     }
 }

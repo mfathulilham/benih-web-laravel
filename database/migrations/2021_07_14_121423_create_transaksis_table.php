@@ -19,6 +19,7 @@ class CreateTransaksisTable extends Migration
             $table->string('status');
             $table->string('rekening')->nullable();
             $table->string('gambar')->nullable();
+            $table->string('rating')->nullable();
             $table->bigInteger('seller_id')->nullable();
             $table->timestamps();
         });
