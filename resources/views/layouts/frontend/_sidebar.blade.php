@@ -12,7 +12,7 @@
             </li>
             <li class="nav-item my-2">
                 <a href="{{ route('home-profile') }}" class=" text-dark text-decoration-none {{ request()->is('profile') ? 'fw-bold' : '' }}">
-                    <i class="far fa-user me-2"></i>Ubah Profile
+                    <i class="far fa-user me-2"></i>Informasi Akun
                 </a>
             </li>
             {{-- <li>

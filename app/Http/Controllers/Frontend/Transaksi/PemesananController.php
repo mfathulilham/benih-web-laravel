@@ -114,9 +114,6 @@ class PemesananController extends Controller
         foreach ($transaksi->keranjang as $keranjang) {
             $keranjang->benih->rating()->create($request->all());
         }
-        // $benih = Benih::findOrFail($transaksi->keranjang->benih->id);
-        // dd($benih);
-        // dd($request->rating);
 
         return redirect('selesai')->with('msg', 'Rating telah ditambahkan');
     }

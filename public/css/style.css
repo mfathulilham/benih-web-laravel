@@ -102,6 +102,12 @@ main {
 .footer ul {
     list-style: none;
 }
+
+/* TABEL WIDTH */
+.table tr th:nth-child(4) {
+    width: 20%;  /*Custom your width*/
+ }
+
 /* Small devices (landscape phones, 576px and up) */
 @media (max-width: 576px) {
     main {

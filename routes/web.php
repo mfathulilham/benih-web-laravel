@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Frontend\{HomeController, KeranjangController, ProfileController};
+use App\Http\Controllers\Frontend\{HomeController, KeranjangController, ProfileController, RekeningController};
 use App\Http\Controllers\Frontend\Transaksi\PemesananController;
 use App\Http\Controllers\Backend\Admin\{DashboardController, CustomersController, SellerController, OrderController};
 use App\Http\Controllers\Backend\Seller\{SellerHomeController,SellerTransaksiController, SellerBenihController};
@@ -31,6 +31,18 @@ Route::middleware('user')->group(function () {
         Route::post('/keranjang/add', [HomeController::class, 'keranjang_add'])->name('-keranjang-add');
         // Profile
         Route::get('profile', [HomeController::class, 'profile'])->name('-profile');
+        Route::patch('profile/update', [HomeController::class, 'profile_update'])->name('-profile-update');
+        // Rekening
+        Route::prefix('rekening')->name('-rekening')->group(function(){
+            Route::get('', [RekeningController::class, 'index'])->name('');
+            Route::post('add', [RekeningController::class, 'add'])->name('-add');
+            Route::delete('delete/{id}', [RekeningController::class, 'delete'])->name('-delete');
+        });
+        // Password
+        Route::prefix('password')->name('-password')->group(function(){
+            Route::get('', [HomeController::class, 'password'])->name('');
+            Route::patch('pass_update', [HomeController::class, 'pass_update'])->name('-update');
+        });
         // Search
         Route::get('/search', [HomeController::class, 'search'])->name('-search');
     });

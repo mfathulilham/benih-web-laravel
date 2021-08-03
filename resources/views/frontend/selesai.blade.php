@@ -166,6 +166,16 @@
                         <p>{{ $user->name }}, {{ $user->alamat }} Kec. {{ $user->kec }}, Kab. {{ $user->kab }}</p>
                     </div>
 
+                    {{-- <div class="col-12 fw-bold text-success">
+                        <p>Rating Benih</p>
+                    </div>
+                    <div class="col-2">
+                        <p>Rating Diberikan :</p>
+                    </div>
+                    <div class="col-10">
+                        <p><i class="fas fa-star text-warning me-2"></i>{{ Auth::user()->benihs }}</p>
+                    </div> --}}
+
                     {{-- <div class="col-4"></div>
                     <div class="col-4 text-success">Biaya Pengiriman</div>
                     <div class="col-4 text-success">

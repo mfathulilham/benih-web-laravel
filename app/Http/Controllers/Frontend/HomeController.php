@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-// use App\Models\Benih;
-use App\Models\{Benih,User,Keranjang,Transaksi};
+use App\Models\{Benih,User,Keranjang,Transaksi,Rekening};
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
 {
@@ -105,12 +105,6 @@ class HomeController extends Controller
         return view('frontend.detail', ['benih' => $benih]);
     }
 
-    public function profile()
-    {
-        $user = Auth::user();
-        return view('frontend.profile', ['user' => $user]);
-    }
-
     public function add(Request $request, $id)
     {
         $data = $request->validate([
@@ -141,5 +135,61 @@ class HomeController extends Controller
 
         Keranjang::create($data);
         return redirect('keranjang')->with('msg', 'Benih telah dimasukkan ke keranjang');
+    }
+
+    public function profile()
+    {
+        $user = Auth::user();
+        return view('frontend.profile', ['user' => $user]);
+    }
+
+    public function profile_update(Request $request)
+    {
+        $user = User::findOrFail(Auth::user()->id);
+        $data = $request->validate([
+            'name'  => ['required', 'string'],
+            'password' => ['confirmed'],
+            'lahir' => ['required', 'date'],
+            'telp' => ['required', 'numeric'],
+            'alamat' => ['required'],
+            'prov' => ['required', 'string'],
+            'kab' => ['required', 'string'],
+            'kec' => ['required', 'string']
+        ]);
+
+        $data['prov'] = explode(',',$request->prov)[0];
+        $data['kab'] = explode(',',$request->kab)[0];
+        $data['kec'] = explode(',',$request->kec)[0];
+        $data['password'] = Hash::make($request->password);
+
+        $user->update($data);
+        return redirect('profile')->with('msg', 'Data Telah Diubah');
+    }
+
+    public function password()
+    {
+        return view('frontend.password');
+    }
+
+    public function pass_update(Request $request)
+    {
+        $data = $request->validate([
+            'pass_old' => ['required'],
+            'password' => ['required', 'string', 'min:8', 'confirmed']
+        ]);
+
+        $check = Hash::check($request->pass_old, Auth::user()->password);
+        if ($check) {
+            if ($request->pass_old == $request->password) {
+                return redirect('password')->with('msg', 'Password Baru Tidak Boleh Sama dengan Password Lama');
+            }
+            else {
+                $user = User::findOrFail(Auth::user()->id);
+                $data['password'] = Hash::make($request->password);
+                $user->update($data);
+                return redirect('profile')->with('msg', 'Password Telah diubah');
+            }
+        }
+        else return redirect('password')->with('msg', 'Password lama salah, Coba lagi');
     }
 }
