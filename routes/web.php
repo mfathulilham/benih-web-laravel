@@ -27,8 +27,11 @@ Route::middleware('user')->group(function () {
         Route::get('/detail/{id}', [HomeController::class, 'detail'])->name('-detail');
         Route::post('/add/{id}', [HomeController::class, 'add'])->name('-add');
         // Keranjang
-        Route::get('/keranjang', [HomeController::class, 'keranjang'])->name('-keranjang');
-        Route::post('/keranjang/add', [HomeController::class, 'keranjang_add'])->name('-keranjang-add');
+        Route::prefix('keranjang')->name('-keranjang')->group(function(){
+            Route::get('', [KeranjangController::class, 'keranjang'])->name('');
+            Route::post('/add', [KeranjangController::class, 'keranjang_add'])->name('-add');
+            Route::delete('/delete/{id}', [KeranjangController::class, 'delete'])->name('-delete');
+        });
         // Profile
         Route::get('profile', [HomeController::class, 'profile'])->name('-profile');
         Route::patch('profile/update', [HomeController::class, 'profile_update'])->name('-profile-update');

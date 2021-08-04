@@ -44,7 +44,7 @@
                   <p>Nama IKB</p>
                 </div>
 
-                <div class="col-4">
+                <div class="col-3">
                   <p>Nama Benih</p>
                 </div>
 
@@ -59,7 +59,18 @@
                 <div class="col-2">
                   <p>Total Harga</p>
                 </div>
+
+                <div class="col-1">
+                  <p>Aksi</p>
+                </div>
             </div>
+
+            @foreach ($keranjangs as $keranjang)
+            <form class="d-none" id="hapus{{$keranjang->id}}" action="{{ route('home-keranjang-delete', $keranjang->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+            </form>
+            @endforeach
 
 
             <form action="{{ route('home-keranjang-add') }}" method="POST">
@@ -84,7 +95,7 @@
                         <img src="{{ $keranjang->benih->img }}" alt="">
                     </div>
 
-                    <div class="col-3 titleBenih">
+                    <div class="col-2 titleBenih">
                         <p>{{$keranjang->benih->judul}}</p>
                     </div>
 
@@ -98,6 +109,14 @@
 
                     <div class="col-2 totalBenih">
                         <p>Rp. {{number_format($keranjang->total_harga, 0, ',', '.') }}</p>
+                    </div>
+                    <div class="col-1">
+                        <a class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('hapus{{$keranjang->id}}').submit();">Hapus</a>
+                        {{-- <form method="POST" action="{{ route('home-keranjang-delete', $keranjang->id) }}">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger" onclick="return confirm('Ingin Menghapus Benih yang Dipilih?')" type="submit">Hapus</button>
+                        </form> --}}
                     </div>
 
                 </div>
@@ -118,16 +137,13 @@
 
             @if (sizeOf($keranjangs) != 0)
                 <div class="row mt-4">
-                    <div class="col-5"></div>
-                    <div class="col-3">
-                        <button type="submit" class="btn btn-success"></i>Pesan Sekarang</button>
+                    <div class="col-12">
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-success me-2"></i>Pesan Sekarang</button>
+                        </div>
                     </div>
                 </div>
-            {{-- @endforelse --}}
-
             @endif
-
-
 
         </form>
 

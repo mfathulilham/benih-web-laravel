@@ -84,8 +84,8 @@
                     <td>{{ $transaksi->user->name}}</td>
                     <td>Rp. {{ number_format($transaksi->keranjang()->sum('total_harga'), 0, ',', '.') }}</td>
                     {{-- <td>{{ $sellers->rekenings()->nama_rekening }}</td> --}}
-                    <td>BELUM BISA MUNCUL</td>
-                    {{-- <td>BELUM BISA{{ $sellers[0] }}</td> --}}
+                    {{-- <td>BELUM BISA MUNCUL</td> --}}
+                    <td>{{ $sellers[0][0]->rekenings()->first()->nama_rekening }} {{ $sellers[0][0]->rekenings()->first()->nomor_rekening }}</td>
                     <td>
                         <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalBukti{{$transaksi->id}}">Bukti</a>
                     </td>

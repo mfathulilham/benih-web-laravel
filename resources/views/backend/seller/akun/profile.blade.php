@@ -34,7 +34,7 @@
                 <input class="form-control" value="{{ $user->email }}" required autocomplete="email" disabled>
             </div>
             <div class="col-md-3">
-                <label for="telp" class="form-label">{{ __('Telepon') }}</label>
+                <label for="telp" class="form-label">{{ __('Nomor Whatsapp') }}</label>
             </div>
             <div class="col-md-9">
                 <input type="text" class="form-control @error('telp') is-invalid @enderror" id="telp" name="telp" value="{{ old('telp')?? $user->telp }}" required>

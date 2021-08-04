@@ -25,6 +25,7 @@ class OrderController extends Controller
         foreach ($transaksis as $transaksi) {
             $seller = User::where('id', $transaksi->seller_id)->get();
             array_push($sellers, $seller);
+            // array_push($sellers, $seller);
             // dd($sellers[0]->rekenings()->id);
         }
 
