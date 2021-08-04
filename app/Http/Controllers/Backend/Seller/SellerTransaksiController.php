@@ -11,7 +11,7 @@ class SellerTransaksiController extends Controller
 {
     public function pemesanan()
     {
-        $transaksis = Transaksi::where('seller_id', Auth::user()->id)->where('status','Menunggu Pembayaran')->orWhere('status','Menunggu Konfirmasi')->get();
+        $transaksis = Transaksi::where('seller_id', Auth::user()->id)->where('status','Menunggu Pembayaran')->orWhere('status','Menunggu Konfirmasi')->orWhere('status','Pembayaran Gagal')->get();
         // $transaksis = Transaksi::where('user_id', Auth::user()->id)->get();
         $seller = NULL;
         $user = NULL;
@@ -66,7 +66,7 @@ class SellerTransaksiController extends Controller
         return view('backend.seller.transaksi.cancel.index', ['transaksis'=> $transaksis, 'seller' => $seller, 'user' => $user]);
     }
 
-    public function seller_pemesanan_cancel($id)
+    public function seller_pengiriman_cancel($id)
     {
         //  Status Berubah menjadi dibatalkan
         if (isset($id)) {
@@ -82,7 +82,7 @@ class SellerTransaksiController extends Controller
                 $benih->update($data);
             }
 
-            return redirect('seller_pemesanan')->with('msg', 'Pemesanan telah dibatalkan');
+            return redirect('seller_cancel')->with('msg', 'Transaksi telah dibatalkan');
         }
     }
 

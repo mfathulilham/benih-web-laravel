@@ -18,6 +18,12 @@
     margin-top: 40px;
 }
 
+/* TABEL WIDTH */
+/* .table tr th:nth-child(10) { */
+    /* width: 9%;  Custom your width */
+ /* } */
+
+
 /* Small devices (landscape phones, 576px and up) */
 @media (max-width: 576px) {
     .sidebar {

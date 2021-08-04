@@ -55,7 +55,7 @@
                           <div class="col">
                               <p class="card-text text-end mb-3">
                                   <i class="fas fa-star text-warning"></i>
-                                  {{ $benih->rating }} | Terjual 0
+                                  {{($benih->rating()->avg('rating') == NULL) ? '0' : $benih->rating()->avg('rating')}} | Terjual {{ $benih->terjual }}
                               </p>
                           </div>
                       </div>

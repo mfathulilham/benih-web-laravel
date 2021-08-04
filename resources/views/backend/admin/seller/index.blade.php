@@ -7,7 +7,7 @@
 
         <h3>
             <i class="fas fa-users me-2"></i>
-            IKB Account
+            IKB Accounts
         </h3>
 
         @if (session('msg'))
@@ -24,9 +24,9 @@
         </div>
 
         <div class="table-responsive">
-            <table class="table table-striped table-bordered table-sm">
+            <table class="table table-hover table-success table-bordered table-sm">
             <thead>
-                <tr>
+                <tr class="align-top text-center">
                 <th>No</th>
                 <th>Nama</th>
                 <th>Email</th>
@@ -42,7 +42,7 @@
                 @php
                     $angkaAwal = 1
                 @endphp
-                @foreach ($sellers as $seller)
+                @forelse ($sellers as $seller)
                 <tr>
                     <td>{{ $angkaAwal++ }}</td>
                     <td>{{ $seller->name }}</td>
@@ -53,23 +53,21 @@
                     <td>{{ $seller->kab }}</td>
                     <td>{{ $seller->kec }}</td>
                     <td>
-                        <div class="row g-0">
-                            <div class="col">
-                                <a href="{{ route('seller-edit', $seller->id) }}" class="btn btn-secondary"><i class="far fa-edit"></i></a>
-                            </div>
-                            <div class="col">
-                                <form method="POST" action="{{ route('seller-delete', $seller->id) }}">
-                                    @csrf
-                                    @method('DELETE')
-
-                                    <button class="btn btn-danger" onclick="return confirm('Want to delete ?')" type="submit"><i class="far fa-trash-alt"></i></button>
-
-                                </form>
-                            </div>
+                        <div class="d-flex justify-content-center">
+                            <a href="{{ route('seller-edit', $seller->id) }}" class="btn btn-secondary"><i class="far fa-edit"></i></a>
+                            <form method="POST" action="{{ route('seller-delete', $seller->id) }}">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger" onclick="return confirm('Want to delete ?')" type="submit"><i class="far fa-trash-alt"></i></button>
+                            </form>
                         </div>
                     </td>
                 </tr>
-                @endforeach
+                @empty
+                <td colspan="9">
+                    <p class="text-center mt-3">Belum Ada Data IKB</p>
+                </td>
+                @endforelse
             </tbody>
             </table>
         </div>

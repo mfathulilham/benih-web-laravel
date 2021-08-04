@@ -47,12 +47,13 @@
           <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
             Account
           </button>
-          <div class="collapse" id="account-collapse">
+          <div class="collapse {{ request()->is('seller_profile') ? 'show' : '' }} {{ request()->is('seller_password') ? 'show' : '' }} {{ request()->is('seller_rekening') ? 'show' : '' }}" id="account-collapse">
             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
               {{-- <li><a href="#" class="link-dark rounded">New...</a></li>
               <li><a href="#" class="link-dark rounded">Profile</a></li> --}}
-              <li><a href="#" class="link-dark rounded">Settings</a></li>
-              <li><a href="#" class="link-dark rounded">Sign out</a></li>
+              <li><a href="{{ route('seller_profile') }}" class="link-dark rounded {{ request()->is('seller_profile') ? 'fw-bold' : '' }}">Profile IKB</a></li>
+              <li><a href="{{ route('seller_pass') }}" class="link-dark rounded {{ request()->is('seller_password') ? 'fw-bold' : '' }}">Ubah Password</a></li>
+              <li><a href="{{ route('seller_rekening') }}" class="link-dark rounded {{ request()->is('seller_rekening') ? 'fw-bold' : '' }}">Ubah Rekening</a></li>
             </ul>
           </div>
         </li>

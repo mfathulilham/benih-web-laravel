@@ -50,22 +50,21 @@
             <p class="alert alert-success">{{ session('msg') }}</p>
         @endif
 
-        @foreach ($transaksis as $transaksi)
-        @if ($transaksi->status == 'Menunggu Konfirmasi' || $transaksi->status == 'Selesai' || $transaksi->status == 'Pengiriman Selesai')
+        {{-- @if ($transaksi->status == 'Menunggu Konfirmasi' || $transaksi->status == 'Selesai' || $transaksi->status == 'Pengiriman Selesai') --}}
 
         <div class="table-responsive">
-            <table class="table table-striped table-bordered table-sm">
+            <table class="table table-success table-hover table-bordered table-sm">
             <thead>
-                <tr>
+                <tr class="align-top text-center">
                     <th>No</th>
                     <th>Id</th>
                     <th>Status Transaksi</th>
+                    <th>Bayar Ke Rek</th>
                     <th>Nama Pengirim</th>
-                    <th>Harga Pemesanan</th>
-                    <th>Rekening Admin</th>
-                    <th>Rekening IKB</th>
+                    <th>Nilai Transfer</th>
+                    <th>Rekening Pengembalian</th>
                     <th>Bukti</th>
-                    <th>Aksi</th>
+                    <th>Ket</th>
                 </tr>
             </thead>
             <tbody>
@@ -73,36 +72,55 @@
                 @php
                     $angkaAwal = 1
                 @endphp
-                @foreach ($transaksi->keranjang as $keranjang)
+                {{-- @foreach ($transaksi->keranjang as $keranjang) --}}
+
+                @forelse ($transaksis as $transaksi)
 
                 <tr>
                     <td>{{ $angkaAwal++ }}</td>
                     <td>2021090{{ $transaksi->id}}</td>
                     <td>{{ $transaksi->status}}</td>
-                    <td>{{ $keranjang->user->name}}</td>
-                    <td>Rp. {{ number_format($transaksi->keranjang()->sum('total_harga'), 0, ',', '.') }}</td>
                     <td>{{ $transaksi->rekening}}</td>
-                    <td>BELUM ADA</td>
+                    <td>{{ $transaksi->user->name}}</td>
+                    <td>Rp. {{ number_format($transaksi->keranjang()->sum('total_harga'), 0, ',', '.') }}</td>
+                    {{-- <td>{{ $sellers->rekenings()->nama_rekening }}</td> --}}
+                    <td>BELUM BISA MUNCUL</td>
+                    {{-- <td>BELUM BISA{{ $sellers[0] }}</td> --}}
                     <td>
                         <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalBukti{{$transaksi->id}}">Bukti</a>
                     </td>
                     <td>
                         @if ($transaksi->status == 'Menunggu Konfirmasi')
-                            <form action="{{ route('order-confirm', $transaksi->id) }}" method="POST" enctype="multipart/form-data">
+                            <div class="d-flex justify-content-center">
+                                <form action="{{ route('order-confirm', $transaksi->id) }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                        <button class="btn btn-success" onclick="return confirm('Konfirmasi Pembayaran ?')" type="submit">Confirm</button>
+                                </form>
+                                <form action="{{ route('order-cancel', $transaksi->id) }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                        <button class="btn btn-danger" onclick="return confirm('Tolak Pembayaran ?')" type="submit">Cancel</button>
+                                </form>
+                        @elseif ($transaksi->status == 'Pengiriman Selesai')
+                            <form action="{{ route('order-selesai', $transaksi->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
-                                    <button class="btn btn-success" onclick="return confirm('Konfirmasi Pembayaran ?')" type="submit">Confirm</button>
-                                    <button class="btn btn-danger" onclick="return confirm('Tolak Pembayaran ?')" type="submit">Cancel</button>
+                                    <button class="btn btn-success" onclick="return confirm('Transfer Ke Penjual Telah Selesai ?')" type="submit">Transfer Penjual</button>
                             </form>
+                        @elseif ($transaksi->status == 'Selesai')
+                            Transfer Penjual Berhasil
                         @else
-                            <form action="#" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                    <button class="btn btn-success" onclick="return confirm('Konfirmasi Pembayaran ?')" type="submit">Telah di transfer</button>
-                            </form>
+                                @if ($transaksi->gambar == NULL)
+                                    Dibatalkan
+                                @else
+                                    <form action="{{ route('order-dana_pembeli', $transaksi->id) }}" method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                            <button class="btn btn-success" onclick="return confirm('Transfer Ke Pembeli Telah Selesai ?')" type="submit">Transfer Pembeli</button>
+                                    </form>
+                                @endif
                         @endif
                     </td>
                 </tr>
 
-                @endforeach
+                {{-- @endforeach --}}
 
                 <!-- Modal Bukti Pembayaran-->
                 <div class="modal fade" id="modalBukti{{$transaksi->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -125,12 +143,17 @@
                     </div>
                 </div>
 
+                @empty
+                <td colspan="9">
+                    <p class="text-center mt-3">Belum Ada Data Pembayaran</p>
+                </td>
+                @endforelse
+
             </tbody>
             </table>
         </div>
 
-        @endif
-        @endforeach
+        {{-- @endif --}}
 
     </div>
 </div>

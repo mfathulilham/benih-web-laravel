@@ -22,7 +22,9 @@
                 <!-- <strong>Logout</strong> -->
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end text-small shadow" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Akun Saya</a></li>
+                <li><a class="dropdown-item" href="{{ route('seller_profile') }}">Akun Saya</a></li>
+                <li><a class="dropdown-item" href="{{ route('seller_rekening') }}">Ubah Rekening</a></li>
+                <li><a class="dropdown-item" href="{{ route('seller_pass') }}">Ubah Password</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li>
                     <a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>

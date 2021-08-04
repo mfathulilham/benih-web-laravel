@@ -18,9 +18,9 @@
         <hr>
 
         <div class="table-responsive">
-            <table class="table table-striped table-bordered table-sm">
+            <table class="table table-hover table-success table-striped table-bordered table-sm">
                 <thead>
-                    <tr>
+                    <tr class="align-top text-center">
                     <th>No</th>
                     <th>Nama</th>
                     <th>Email</th>
@@ -37,7 +37,7 @@
                     @php
                         $angkaAwal = 1
                     @endphp
-                    @foreach ($customers as $customer)
+                    @forelse ($customers as $customer)
                         <tr>
                             <td>{{ $angkaAwal++ }}</td>
                             <td>{{ $customer->name }}</td>
@@ -49,17 +49,21 @@
                             <td>{{ $customer->kab }}</td>
                             <td>{{ $customer->kec }}</td>
                             <td>
-                                <a href="{{ route('customer-edit', $customer->id) }}" class="btn btn-secondary"><i class="far fa-edit"></i></a>
-                                <form method="POST" action="{{ route('customer-delete', $customer->id) }}">
-                                    @csrf
-                                    @method('DELETE')
-
-                                    <button class="btn btn-danger" onclick="return confirm('Want to delete ?')" type="submit"><i class="far fa-trash-alt"></i></button>
-
-                                </form>
+                                <div class="d-flex justify-content-center">
+                                    <a href="{{ route('customer-edit', $customer->id) }}" class="btn btn-secondary"><i class="far fa-edit"></i></a>
+                                    <form method="POST" action="{{ route('customer-delete', $customer->id) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger" onclick="return confirm('Want to delete ?')" type="submit"><i class="far fa-trash-alt"></i></button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                    <td colspan="10">
+                        <p class="text-center mt-3">Belum Ada Data Customers</p>
+                    </td>
+                    @endforelse
 
                 </tbody>
             </table>

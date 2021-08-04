@@ -82,7 +82,7 @@
                 @if ($transaksi->status == 'Menunggu Pengiriman')
                     <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalKirim{{$transaksi->id}}">Kirim</a>
                     <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalDetail{{$transaksi->id}}">Detail</a>
-                    {{-- <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalCancel{{$transaksi->id}}">Batalkan</a> --}}
+                    <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalCancel{{$transaksi->id}}">Batalkan</a>
                 @elseif ($transaksi->status == 'Proses Pengiriman')
                     <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalSudahkirim{{$transaksi->id}}">Sudah Dikirim</a>
                     <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalDetail{{$transaksi->id}}">Detail</a>
@@ -166,7 +166,30 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    {{-- MODAL Cancel --}}
+    <div class="modal fade" id="modalCancel{{$transaksi->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Batalkan Transaksi</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('seller_pengiriman-cancel', $transaksi->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body">
+                        <p>Yakin ingin membatalkan transaksi ?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Kirim</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                    </div>
+                </div>
+            </form>
+        </div>
       </div>
+
 
       {{-- MODAL Kirim --}}
       <div class="modal fade" id="modalKirim{{$transaksi->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -118,10 +118,6 @@
                             </span>
                         @enderror
                     </div>
-                    {{-- ROLE --}}
-                    <div class="col-md-5">
-                        <input type="number" class="form-control" id="role" value="1" name="role" hidden>
-                    </div>
 
                     <div class="col-3">
                         <button type="submit" class="btn btn-success">

@@ -1,22 +1,20 @@
-@extends('layouts.frontend.transaksi_master')
+@extends('layouts.backend.seller.master')
 @section('content')
 
+<div class="col-12 ikb-content col-md-8 col-lg-9 pb-3">
+    <div class="container">
+        <h3 class="mb-3 mt-3"> <i class="fas fa-users me-2"></i>Profile IKB</h3>
 
-<div class="mx-4 pt-4">
-    <h3>
-        <i class="fas fa-users me-2"></i>
-        Daftar Rekening
-    </h3>
-    <hr>
+        <hr>
 
-    @if (session('msg'))
-            <p class="alert alert-success">{{ session('msg') }}</p>
+        @if (session('msg'))
+                <p class="alert alert-success">{{ session('msg') }}</p>
         @endif
 
         <div class="table-responsive">
             <table class="table table-success table-striped table-bordered table-sm">
             <thead>
-                <tr class="text-center">
+                <tr class="align-top text-center">
                     <th>No</th>
                     <th>Nama Rekening</th>
                     <th>Nomor Rekening</th>
@@ -38,7 +36,7 @@
                                 <a href="{{ route('home-rekening', $rekening->id) }}" class="btn btn-secondary"><i class="far fa-edit me-2"></i>Edit</a>
                             </div> --}}
                             <div class="col">
-                                <form method="POST" action="{{ route('home-rekening-delete', $rekening->id) }}">
+                                <form method="POST" action="{{ route('seller_rekening-delete', $rekening->id) }}">
                                     @csrf
                                     @method('DELETE')
 
@@ -64,7 +62,7 @@
 
 
 
-    <form method="POST" action="{{ route('home-rekening-add') }}" class="row g-3 mt-2">
+    <form method="POST" action="{{ route('seller_rekening-add') }}" class="row g-3 mt-2">
         @csrf
         <div class="col-md-12">
             <h5>Tambah Rekening</h5>
@@ -84,7 +82,7 @@
             @enderror
         </div>
         <div class="col-md-3">
-            <label for="nama_pemilik" class="form-label">{{ __('Nama Pemilik') }}</label>
+            <label for="nomor_rekening" class="form-label">{{ __('Nama Pemilik') }}</label>
         </div>
         <div class="col-md-9">
             <input id="nama_pemilik" type="text" class="form-control @error('nama_pemilik') is-invalid @enderror" name="nama_pemilik" value="{{ old('nama_pemilik') }}">
@@ -110,7 +108,7 @@
             <button type="submit" class="btn btn-success">Tambah Rekening</button>
         </div>
     </form>
-
+  </div>
 </div>
 
 @endsection

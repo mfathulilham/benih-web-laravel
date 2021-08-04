@@ -24,6 +24,7 @@ class HomeController extends Controller
         // Search in the title and body columns from the posts table
         $benihs = Benih::query()
             ->where('judul', 'LIKE', "%{$search}%")
+            ->where('stok', '>', 0)
             ->get();
         // $benihs = Benih::query()
         //     ->where('judul', 'LIKE', "%{$search}%")
@@ -160,7 +161,6 @@ class HomeController extends Controller
         $data['prov'] = explode(',',$request->prov)[0];
         $data['kab'] = explode(',',$request->kab)[0];
         $data['kec'] = explode(',',$request->kec)[0];
-        $data['password'] = Hash::make($request->password);
 
         $user->update($data);
         return redirect('profile')->with('msg', 'Data Telah Diubah');

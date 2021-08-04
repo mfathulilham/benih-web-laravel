@@ -19,8 +19,10 @@ class RekeningController extends Controller
     {
         $request->validate([
             'nama_rekening'  => ['required', 'string'],
+            'nama_pemilik'  => ['required', 'string'],
             'nomor_rekening'  => ['required', 'string']
         ]);
+        $request['nama_rekening'] =  $request->nama_rekening  . ' a/n ' . $request->nama_pemilik;
         $user = User::findOrFail(Auth::user()->id);
         $user->rekenings()->create($request->all());
 

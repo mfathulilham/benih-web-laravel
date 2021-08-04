@@ -11,7 +11,7 @@ class PemesananController extends Controller
 {
     public function index()
     {
-        $transaksis = Transaksi::where('user_id', Auth::user()->id)->where('status','Menunggu Pembayaran')->orWhere('status','Menunggu Konfirmasi')->orWhere('status','Verifikasi Gagal')->get();
+        $transaksis = Transaksi::where('user_id', Auth::user()->id)->where('status','Menunggu Pembayaran')->orWhere('status','Menunggu Konfirmasi')->orWhere('status','Pembayaran Gagal')->get();
         // $transaksis = Transaksi::where('user_id', Auth::user()->id)->get();
         $seller = NULL;
         $user = NULL;

@@ -93,7 +93,7 @@
 
     <div class="btnTransaksi col-12">
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            @if ($transaksi->status != 'Menunggu Pembayaran')
+            @if ($transaksi->gambar != NULL)
                 <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalDetail{{$transaksi->id}}">Detail</a>
             @else
                 <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalDetail{{$transaksi->id}}">Detail</a>

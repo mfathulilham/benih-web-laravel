@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\{HomeController, KeranjangController, ProfileController, RekeningController};
 use App\Http\Controllers\Frontend\Transaksi\PemesananController;
 use App\Http\Controllers\Backend\Admin\{DashboardController, CustomersController, SellerController, OrderController};
-use App\Http\Controllers\Backend\Seller\{SellerHomeController,SellerTransaksiController, SellerBenihController};
+use App\Http\Controllers\Backend\Seller\{SellerHomeController,SellerTransaksiController, SellerBenihController, SellerProfileController};
 
 /*
 |--------------------------------------------------------------------------
@@ -80,6 +80,7 @@ Route::middleware('seller')->group(function () {
         Route::get('/seller_pengiriman', [SellerTransaksiController::class, 'pengiriman'])->name('seller_pengiriman');
         Route::post('/seller_pengiriman/kirim/{id}', [SellerTransaksiController::class, 'seller_pengiriman_kirim'])->name('seller_pengiriman-kirim');
         Route::post('/seller_pengiriman/selesai/{id}', [SellerTransaksiController::class, 'seller_pengiriman_selesai'])->name('seller_pengiriman-selesai');
+        Route::post('/seller_pengiriman/cancel/{id}', [SellerTransaksiController::class, 'seller_pengiriman_cancel'])->name('seller_pengiriman-cancel');
 
         Route::get('/seller_selesai', [SellerTransaksiController::class, 'selesai'])->name('seller_selesai');
         Route::get('/seller_cancel', [SellerTransaksiController::class, 'cancel'])->name('seller_cancel');
@@ -93,6 +94,22 @@ Route::middleware('seller')->group(function () {
             Route::patch('/update/{id}', [SellerBenihController::class, 'update'])->name('-update');
             Route::delete('/delete/{id}', [SellerBenihController::class, 'delete'])->name('-delete');
         });
+
+        // Profile
+        Route::prefix('seller_profile')->name('seller_profile')->group(function(){
+            Route::get('', [SellerProfileController::class, 'index'])->name('');
+            Route::patch('/update', [SellerProfileController::class, 'update'])->name('-update');
+        });
+        // Password
+        Route::get('seller_password', [SellerProfileController::class, 'pass'])->name('seller_pass');
+        Route::patch('/seller_password/update', [SellerProfileController::class, 'pass_update'])->name('seller_pass_update');
+        // Rekening
+        Route::prefix('seller_rekening')->name('seller_rekening')->group(function(){
+            Route::get('', [SellerProfileController::class, 'rekening'])->name('');
+            Route::post('add', [SellerProfileController::class, 'add'])->name('-add');
+            Route::delete('delete/{id}', [SellerProfileController::class, 'delete'])->name('-delete');
+        });
+
 
 });
 
@@ -121,6 +138,9 @@ Route::middleware('admin')->group(function() {
     Route::prefix('order')->name('order')->group(function(){
         Route::get('', [OrderController::class, 'index'])->name('');
         Route::post('/confirm/{id}', [OrderController::class, 'confirm'])->name('-confirm');
+        Route::post('/selesai/{id}', [OrderController::class, 'selesai'])->name('-selesai');
+        Route::post('/dana_pembeli/{id}', [OrderController::class, 'dana_pembeli'])->name('-dana_pembeli');
+        Route::post('/cancel/{id}', [OrderController::class, 'cancel'])->name('-cancel');
     });
 });
 

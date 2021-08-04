@@ -3,7 +3,7 @@
 
 <div class="col-12 ikb-content col-md-8 col-lg-9 pb-3">
     <div class="container">
-        <h3 class="mb-3 text-success mt-3">Perlu Penanganan</h3>
+        <h3 class="mb-3 mt-3">Perlu Penanganan</h3>
         <hr>
         <div class="row overview-ikb">
             <div class="col-4">
@@ -21,9 +21,9 @@
             </div>
 
             <div class="col-4">
-                <a href="{{ route('seller_cancel') }}" class="container-fluid btn btn-info text-light text-center">
-                <h4 class="cancel-count">{{ $batal->count() }}</h4>
-                <p>Dibatalkan</p>
+                <a href="{{ route('benih') }}" class="container-fluid btn btn-info text-light text-center">
+                <h4 class="cancel-count">{{ $benih->count() }}</h4>
+                <p>Benih Tersedia</p>
                 </a>
             </div>
 
