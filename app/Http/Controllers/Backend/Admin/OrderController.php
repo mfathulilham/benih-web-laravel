@@ -11,7 +11,7 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $transaksis = Transaksi::all();
+        // $transaksis = Transaksi::all();
 
         // MENAMBAH REKENING SELLER
         // $selesais = Transaksi::where('status', 'Pengiriman Selesai')->get();
@@ -21,15 +21,15 @@ class OrderController extends Controller
         // }
         // dd($rekenings = $pengiriman_selesai[0]->seller_id);
         $transaksis = Transaksi::where('seller_id', Auth::user()->id)->where('status','Menunggu Pembayaran')->orWhere('status','Menunggu Konfirmasi')->orWhere('status','Pengiriman Selesai')->orWhere('status','Dibatalkan')->orWhere('status','Selesai')->get();
-        $sellers = array();
-        foreach ($transaksis as $transaksi) {
-            $seller = User::where('id', $transaksi->seller_id)->get();
-            array_push($sellers, $seller);
+        // $sellers = array();
+        // foreach ($transaksis as $transaksi) {
+        //     $seller = User::where('id', $transaksi->seller_id)->get();
+        //     array_push($sellers, $seller);
             // array_push($sellers, $seller);
             // dd($sellers[0]->rekenings()->id);
-        }
+        // }
 
-        return view('backend.admin.order.index', compact('transaksis', 'sellers'));
+        return view('backend.admin.order.index', compact('transaksis'));
 
     }
 

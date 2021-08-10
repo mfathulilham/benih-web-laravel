@@ -38,7 +38,7 @@
                 </div> --}}
             <div class="col-md">
                 <ul>
-                    <p class="fw-bold">Sistem Persediaan dan Penyaluran Benih Varietas Unggul Tanaman Pangan</p>
+                    <p class="fw-bold">Dapatkan Benih Varietas Unggul Tanaman Pangan</p>
                     <li>
                         <li>Instalasi Kebun Benih se-Sulawesi Selatan</li>
                     </li>

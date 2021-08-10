@@ -25,7 +25,7 @@
                     <th>Nama</th>
                     <th>Email</th>
                     <th>TTL</th>
-                    <th>Telp</th>
+                    <th>No. WA</th>
                     <th>Alamat</th>
                     <th>Provinsi</th>
                     <th>Kabupaten</th>

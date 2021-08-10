@@ -50,10 +50,7 @@
             </div>
             <div class="col-md-3">
                 <label for="varietas" class="form-label">{{ __('Varietas') }}</label>
-                <select class="form-select @error('varietas') is-invalid @enderror" aria-label="Default select example" id="varietas" name="varietas">
-                    <option {{ $benih->varietas == 'Cigeulis' ? 'selected' : '' }} value="Cigeulis">Cigeulis</option>
-                    <option {{ $benih->varietas == 'Ciherang' ? 'selected' : '' }} value="Ciherang">Ciherang</option>
-                </select>
+                <input type="text" class="form-control @error('varietas') is-invalid @enderror" id="varietas" name="varietas" value="{{ $benih->varietas }}">
                 @error('varietas')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>

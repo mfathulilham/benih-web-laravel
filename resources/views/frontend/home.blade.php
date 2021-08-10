@@ -7,18 +7,18 @@
     <div class="carousel-indicators ">
       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      {{-- <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button> --}}
     </div>
     <div class="carousel-inner mt-5">
       <div class="carousel-item active">
-        <img src="img/carousel4.jpg" class="d-block w-100" alt="Benih 1">
+        <img src="img/banner2.png" class="d-block w-100" alt="Benih 1">
       </div>
       <div class="carousel-item">
-        <img src="img/carousel5.jpg" class="d-block w-100" alt="Benih 2">
+        <img src="img/banner3.png" class="d-block w-100" alt="Benih 2">
       </div>
-      <div class="carousel-item">
-        <img src="img/carousel6.jpg" class="d-block w-100" alt="Benih 3">
-      </div>
+      {{-- <div class="carousel-item">
+        <img src="img/carousel4.jpg" class="d-block w-100" alt="Benih 3">
+      </div> --}}
     </div>
 </div>
 

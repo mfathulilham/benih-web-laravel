@@ -104,95 +104,7 @@
     </div>
 
     <!-- Modal Detail-->
-    <div class="modal fade" id="modalDetail{{$transaksi->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Detail</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            @foreach ($transaksi->keranjang as $keranjang)
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-12 fw-bold text-success">
-                        <p>Benih</p>
-                    </div>
-                    <div class="col-2">
-                        <img src="{{ $keranjang->benih->img}}" style="width: 60px; height: 30px;  border-radius: 5px;" alt="">
-                    </div>
-                    <div class="col-10 fw-bold">
-                        <p>{{ $keranjang->benih->judul}}</p>
-                    </div>
-
-                    <div class="col-2"></div>
-
-                    <div class="col-1 fw-light">
-                        <p>{{ $keranjang->jumlah}}</p>
-                    </div>
-
-                    <div class="col-1 fw-light">
-                        <p>x</p>
-                    </div>
-
-                    <div class="col-4 fw-light">
-                        <p>Rp. {{ number_format($keranjang->benih->harga, 0, ',', '.') }}</p>
-                    </div>
-
-                    <div class="col-4 text-success">
-                        <p>Rp. {{ number_format($keranjang->total_harga, 0, ',', '.') }}</p>
-                    </div>
-                    <hr>
-                </div>
-                @endforeach
-                <div class="row">
-                    <div class="col-6"></div>
-                    <div class="col-2 text-success">Total</div>
-                    <div class="col-4 fw-bold text-success">
-                        <p>Rp. {{ number_format($transaksi->keranjang()->sum('total_harga'), 0, ',', '.') }}</p>
-                    </div>
-
-                    <hr>
-
-                    <div class="col-12 fw-bold text-success">
-                        <p>Pengiriman</p>
-                    </div>
-                    <div class="col-2">
-                        <p>Dari :</p>
-                    </div>
-                    <div class="col-10">
-                        <p>{{ $seller->name }}, {{ $seller->alamat }} Kec. {{ $seller->kec }}, Kab. {{ $seller->kab }}</p>
-                    </div>
-                    <div class="col-2">
-                        <p>Ke :</p>
-                    </div>
-                    <div class="col-10">
-                        <p>{{ $user->name }}, {{ $user->alamat }} Kec. {{ $user->kec }}, Kab. {{ $user->kab }}</p>
-                    </div>
-
-                    {{-- <div class="col-4"></div>
-                    <div class="col-4 text-success">Biaya Pengiriman</div>
-                    <div class="col-4 text-success">
-                        <p>Rp. XX.XXX</p>
-                    </div>
-
-                    <hr>
-
-                    <div class="col-4"></div>
-                    <div class="col-4 fw-bold text-success">Total Keseluruhan</div>
-                    <div class="col-4 fw-bold text-success">
-                        <p>Rp. X.XXX.XXX</p>
-                    </div> --}}
-
-                </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
-                </div>
-            </div>
-        </div>
-      </div>
-    </div>
+    @include('layouts.frontend.detail_modal')
 
       <!-- Modal Pembayaran-->
       <div class="modal fade" id="modalBayar{{$transaksi->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -207,10 +119,10 @@
                 <div class="modal-body">
                         <div class="row g-3">
                             <div class="col-4">
-                                Harga Pengiriman
+                                Pengiriman
                             </div>
                             <div class="col-8">
-                                <a href="https://api.whatsapp.com/send?phone=6281298069650&text=*NEGOSIASI%20PENGIRIMAN%20BENIH*%0A%0APesanan%20Saya%20:%0A1.%20TOTAL%20HARGA%20=%20*Rp.%20{{ number_format($transaksi->keranjang()->sum('total_harga'), 0, ',', '.') }}*%0A%0AUntuk%20pengiriman%20ke%20Alamat%20{{$keranjang->user->alamat}}%20Kecamatan%20{{$keranjang->user->kec}}%20%20{{$keranjang->user->kab}}." target="_blank" class="btn btn-danger" rel="noopener noreferrer">Klik Untuk Negosiasi</a>
+                                <a href="https://api.whatsapp.com/send?phone=62{{$keranjang->benih->user->telp}}&text=*NEGOSIASI%20PENGIRIMAN%20BENIH*%0A%0APesanan%20Saya%20:%0A1.%20TOTAL%20HARGA%20=%20*Rp.%20{{ number_format($transaksi->keranjang()->sum('total_harga'), 0, ',', '.') }}*%0A%0AUntuk%20pengiriman%20ke%20Alamat%20{{$keranjang->user->alamat}}%20Kecamatan%20{{$keranjang->user->kec}}%20%20{{$keranjang->user->kab}}." target="_blank" class="btn btn-danger" rel="noopener noreferrer">Klik Untuk Negosiasi</a>
                                 {{-- <a href="https://api.whatsapp.com/send?phone=6281298069650&text=*NEGOSIASI%20PENGIRIMAN%20BENIH*%0A%0APesanan Saya%20:%0A1.%20Nama%20Benih%20{{$keranjang->benih->judul}}%0A2.%20Kemasan%20{{$keranjang->benih->variasi}}%20kg%20Jumlah%20{{ $keranjang->jumlah}}%20Pcs%0A3.%20*TOTAL%20HARGA%20Benih%20=%20Rp.%20{{ number_format($transaksi->keranjang()->sum('total_harga'), 0, ',', '.') }}*%0A%0ABerapa%20*HARGA*%20untuk%20pengiriman%20ke%20Alamat%20{{$keranjang->user->alamat}}%20Kecamatan%20{{$keranjang->user->kec}}%20Kabupaten%20{{$keranjang->user->kab}}%20?" target="_blank" class="btn btn-danger" rel="noopener noreferrer">Klik Untuk Negosiasi</a> --}}
                             </div>
                             <div class="col-4">
@@ -225,7 +137,8 @@
                             <div class="col-8">
                                 <select class="form-select" aria-label="Default select example" name="rekening">
                                     {{-- <option value="Fathul - BRI - 1234567">Fathul - BRI - 1234567</option> --}}
-                                    <option value="Ilham - BNI - 7891011">M FATHUL ILHAM - BNI - 0612295910</option>
+                                    <option value="BNI a/n M FATHUL ILHAM 0612295910">BNI a/n M FATHUL ILHAM 0612295910</option>
+                                    {{-- <option value="BNI a/n M FATHUL ILHAM 341801032606533">BRI a/n M FATHUL ILHAM 341801032606533</option> --}}
                                 </select>
                             </div>
                             <div class="col-4">

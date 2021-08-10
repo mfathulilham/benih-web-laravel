@@ -88,7 +88,7 @@ class PemesananController extends Controller
 
     public function user_selesai()
     {
-        $transaksis = Transaksi::where('user_id', Auth::user()->id)->where('status','Pengiriman Selesai')->orWhere('status','Selesai')->get();
+        $transaksis = Transaksi::where('user_id', Auth::user()->id)->where('status','Telah Dikirim')->orWhere('status','Pengiriman Selesai')->orWhere('status','Selesai')->get();
         $seller = NULL;
         $user = NULL;
         foreach ($transaksis as $transaksi) {

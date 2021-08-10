@@ -79,13 +79,16 @@
 
         <div class="btnTransaksi col-12">
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <a href="#" class="btn btn-secondary">Detail</a>
+                <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalDetail{{$transaksi->id}}">Detail</a>
             </div>
         </div>
 
-</div>
+        @include('layouts.frontend.detail_modal')
+
 @empty
     <h5 class="text-center  mt-5">Belum Ada Data</h5>
 @endforelse
+
+</div>
 
 @endsection

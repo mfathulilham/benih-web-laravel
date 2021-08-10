@@ -14,11 +14,11 @@
 
             @auth
             <button class="btn btn-outline-light" type="submit">
-                Search
+                Cari
             </button>
             @else
             <a class="btn btn-outline-light" href="{{ route('login') }}">
-                Search
+                Cari
             </a>
             @endauth
         </form>
@@ -64,7 +64,7 @@
                 <li><a class="dropdown-item" href="{{ route('home-password') }}">Ubah Password</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li>
-                    <a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                    <a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Keluar</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>
@@ -74,12 +74,12 @@
         @else
             <li class="nav-item ms-4 mt-1">
                 <a href="/login" class="keranjangBtn nav-link text-light">
-                Login
+                Masuk
                 </a>
             </li>
             <li class="nav-item ms-4 mt-1">
                 <a href="{{ route('register') }}" class="notifikasiBtn nav-link text-light">
-                Register
+                Daftar
                 </a>
             </li>
         @endauth

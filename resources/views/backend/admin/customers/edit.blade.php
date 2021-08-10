@@ -70,7 +70,7 @@
                         @enderror
                     </div>
                     <div class="col-md-3">
-                        <label for="telp" class="form-label">{{ __('Telepon') }}</label>
+                        <label for="telp" class="form-label">{{ __('Nomor Whatsapp') }}</label>
                     </div>
                     <div class="col-md-9">
                         <input type="text" class="form-control @error('telp') is-invalid @enderror" id="telp" name="telp" value="{{ old('telp')?? $customer->telp }}" required>
@@ -119,10 +119,12 @@
                         @enderror
                     </div>
 
-                    <div class="col-3">
-                        <button type="submit" class="btn btn-success">
-                            Simpan
-                        </button>
+                    <div class="col-12">
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-success">
+                                Simpan
+                            </button>
+                        </div>
                     </div>
 
                 </form>

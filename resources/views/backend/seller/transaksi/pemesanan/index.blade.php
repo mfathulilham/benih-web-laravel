@@ -200,9 +200,11 @@
         </div>
       </div>
 
-</div>
 @empty
     <h5 class="text-center mt-5">Belum Ada Data</h5>
+
+</div>
+
 @endforelse
 
 @endsection

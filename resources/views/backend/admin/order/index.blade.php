@@ -59,7 +59,7 @@
                     <th>No</th>
                     <th>Id</th>
                     <th>Status Transaksi</th>
-                    <th>Bayar Ke Rek</th>
+                    <th>Rekening Admin</th>
                     <th>Nama Pengirim</th>
                     <th>Nilai Transfer</th>
                     <th>Rekening Pengembalian</th>
@@ -85,7 +85,12 @@
                     <td>Rp. {{ number_format($transaksi->keranjang()->sum('total_harga'), 0, ',', '.') }}</td>
                     {{-- <td>{{ $sellers->rekenings()->nama_rekening }}</td> --}}
                     {{-- <td>BELUM BISA MUNCUL</td> --}}
-                    <td>{{ $sellers[0][0]->rekenings()->first()->nama_rekening }} {{ $sellers[0][0]->rekenings()->first()->nomor_rekening }}</td>
+                    @if ($transaksi->status == 'Dibatalkan')
+                        <td>{{ $transaksi->user->where('id', $transaksi->user_id)->first()->rekenings()->first()->nama_rekening }} {{ $transaksi->user->where('id', $transaksi->user_id)->first()->rekenings()->first()->nomor_rekening }}</td>
+                    @else
+                        <td>{{ $transaksi->user->where('id', $transaksi->seller_id)->first()->rekenings()->first()->nama_rekening }} {{ $transaksi->user->where('id', $transaksi->seller_id)->first()->rekenings()->first()->nomor_rekening }}</td>
+                    @endif
+                    {{-- <td>{{ $sellers[0][0]->rekenings()->first()->nama_rekening }} {{ $sellers[0][0]->rekenings()->first()->nomor_rekening }}</td> --}}
                     <td>
                         <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalBukti{{$transaksi->id}}">Bukti</a>
                     </td>
@@ -103,7 +108,7 @@
                         @elseif ($transaksi->status == 'Pengiriman Selesai')
                             <form action="{{ route('order-selesai', $transaksi->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
-                                    <button class="btn btn-success" onclick="return confirm('Transfer Ke Penjual Telah Selesai ?')" type="submit">Transfer Penjual</button>
+                                    <button class="btn btn-success" onclick="return confirm('Transfer Ke Penjual Telah Selesai ?')" type="submit">Transfer</button>
                             </form>
                         @elseif ($transaksi->status == 'Selesai')
                             Transfer Penjual Berhasil
@@ -113,7 +118,7 @@
                                 @else
                                     <form action="{{ route('order-dana_pembeli', $transaksi->id) }}" method="POST" enctype="multipart/form-data">
                                         @csrf
-                                            <button class="btn btn-success" onclick="return confirm('Transfer Ke Pembeli Telah Selesai ?')" type="submit">Transfer Pembeli</button>
+                                            <button class="btn btn-success" onclick="return confirm('Transfer Ke Pembeli Telah Selesai ?')" type="submit">Transfer</button>
                                     </form>
                                 @endif
                         @endif

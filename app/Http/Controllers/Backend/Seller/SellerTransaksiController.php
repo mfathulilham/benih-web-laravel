@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Backend\Seller;
 
-use App\Models\{Benih,User,Keranjang,Transaksi};
+use App\Models\{Benih,User,Keranjang,Transaksi,Rating};
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -40,7 +40,7 @@ class SellerTransaksiController extends Controller
 
     public function selesai()
     {
-        $transaksis = Transaksi::where('seller_id', Auth::user()->id)->where('status','Telah Dikirim')->orWhere('status','Pengiriman Selesai')->get();
+        $transaksis = Transaksi::where('seller_id', Auth::user()->id)->where('status','Telah Dikirim')->orWhere('status','Pengiriman Selesai')->orWhere('status','Selesai')->get();
         $seller = NULL;
         $user = NULL;
         foreach ($transaksis as $transaksi) {

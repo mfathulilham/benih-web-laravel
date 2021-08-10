@@ -30,7 +30,7 @@
                 <th>No</th>
                 <th>Nama</th>
                 <th>Email</th>
-                <th>No. Telp</th>
+                <th>No. WA</th>
                 <th>Alamat</th>
                 <th>Provinsi</th>
                 <th>Kabupaten</th>
