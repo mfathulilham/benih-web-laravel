@@ -53,7 +53,7 @@
 
         <hr>
 
-        @endforeach
+            @endforeach
 
         <div class="col-8 col-lg-8">
         </div>
@@ -93,7 +93,9 @@
         </div>
 
         <!-- Modal Detail-->
-    <div class="modal fade" id="modalDetail{{$transaksi->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        @include('layouts.frontend.detail_modal')
+
+    {{-- <div class="modal fade" id="modalDetail{{$transaksi->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -166,7 +168,8 @@
                 </div>
             </div>
         </div>
-    </div>
+        </div>
+    </div> --}}
 
     {{-- MODAL Cancel --}}
     <div class="modal fade" id="modalCancel{{$transaksi->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -179,6 +182,7 @@
             <form action="{{ route('seller_pengiriman-cancel', $transaksi->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
+                    <div>
                         <p>Yakin ingin membatalkan transaksi ?</p>
                     </div>
                     <div class="modal-footer">
@@ -187,36 +191,40 @@
                     </div>
                 </div>
             </form>
+          </div>
         </div>
     </div>
+
 
 
       {{-- MODAL Kirim --}}
       <div class="modal fade" id="modalKirim{{$transaksi->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Pengiriman</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="{{ route('seller_pengiriman-kirim', $transaksi->id) }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="modal-body">
-                        <p>Kirim  Sekarang ?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Kirim</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
-                    </div>
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Pengiriman</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-            </form>
+                <form action="{{ route('seller_pengiriman-kirim', $transaksi->id) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                        <div>
+                            <p>Kirim  Sekarang ?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Kirim</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
       </div>
 
       {{-- MODAL SUDAH KIRIM --}}
       <div class="modal fade" id="modalSudahkirim{{$transaksi->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-          <div class="modal-content">
+        <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">Pengiriman</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -233,13 +241,13 @@
                 </div>
             </form>
         </div>
+        </div>
       </div>
+
 
 @empty
     <h5 class="text-center mt-5">Belum Ada Data</h5>
-
 </div>
-
 @endforelse
 
 @endsection

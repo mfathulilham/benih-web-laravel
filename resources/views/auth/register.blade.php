@@ -73,7 +73,10 @@
                             <label for="telp" class="col-md-4 col-form-label text-md-right">{{ __('Nomor Whatsapp') }}</label>
 
                             <div class="col-md-6">
-                                <input id="telp" type="text" class="form-control" name="telp" required>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">+62</span>
+                                    <input id="telp" type="text" class="form-control" name="telp" placeholder="812-xxxx-xxxx" required>
+                                </div>
                             </div>
                         </div>
 

@@ -43,7 +43,7 @@
                             <td>{{ $customer->name }}</td>
                             <td>{{ $customer->email }}</td>
                             <td>{{ $customer->lahir }}</td>
-                            <td>{{ $customer->telp }}</td>
+                            <td>62{{ $customer->telp }}</td>
                             <td>{{ $customer->alamat }}</td>
                             <td>{{ $customer->prov }}</td>
                             <td>{{ $customer->kab }}</td>

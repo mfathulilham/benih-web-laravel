@@ -48,15 +48,18 @@
             @enderror
         </div>
         <div class="col-md-3">
-            <label for="telp" class="form-label">{{ __('Telepon') }}</label>
+            <label for="telp" class="form-label">{{ __('Nomor Whatsapp') }}</label>
         </div>
         <div class="col-md-9">
-            <input type="text" class="form-control @error('telp') is-invalid @enderror" id="telp" name="telp" value="{{ old('telp')?? $user->telp }}" required>
-            @error('telp')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
+            <div class="input-group">
+                <span class="input-group-text" id="basic-addon1">+62</span>
+                <input type="text" class="form-control @error('telp') is-invalid @enderror" id="telp" placeholder="812-xxxx-xxxx" name="telp" value="{{ old('telp')?? $user->telp }}" required>
+                @error('telp')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
         </div>
         <div class="col-md-3">
             <label for="alamat" class="form-label">{{ __('Alamat') }} </label>

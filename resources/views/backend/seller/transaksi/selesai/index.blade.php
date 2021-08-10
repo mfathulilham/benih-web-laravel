@@ -25,35 +25,35 @@
 
             @foreach ($transaksi->keranjang as $keranjang)
 
-            <div class="imgTransaksi col-2 col-lg-1">
-                <img src="{{ $keranjang->benih->img}}" style="width: 60px; height:30px; border-radius: 5px;" alt="">
-            </div>
+                <div class="imgTransaksi col-2 col-lg-1">
+                    <img src="{{ $keranjang->benih->img}}" style="width: 60px; height:30px; border-radius: 5px;" alt="">
+                </div>
 
-            <div class="titleTransaksi col-10 col-lg-3 fw-bold">
-                <p>{{ $keranjang->benih->judul }}</p>
-            </div>
+                <div class="titleTransaksi col-10 col-lg-3 fw-bold">
+                    <p>{{ $keranjang->benih->judul }}</p>
+                </div>
 
-            <div class="col-2"></div>
+                <div class="col-2"></div>
 
-            <div class="jumlahTransaksi col-1 col-lg-1 fw-light">
-                <p>{{ $keranjang->jumlah }}</p>
-            </div>
+                <div class="jumlahTransaksi col-1 col-lg-1 fw-light">
+                    <p>{{ $keranjang->jumlah }}</p>
+                </div>
 
-            <div class="col-1 col-lg-1 fw-light">
-                <p>x</p>
-            </div>
+                <div class="col-1 col-lg-1 fw-light">
+                    <p>x</p>
+                </div>
 
-            <div class="hargaTransaksi col-4 col-lg-2 fw-light">
-                <p>Rp. {{ number_format($keranjang->benih->harga, 0, ',', '.') }}</p>
-            </div>
+                <div class="hargaTransaksi col-4 col-lg-2 fw-light">
+                    <p>Rp. {{ number_format($keranjang->benih->harga, 0, ',', '.') }}</p>
+                </div>
 
-            <div class="totalTransaksi col-4 col-lg-2 fw-bold text-success">
-                <p>Rp. {{ number_format($keranjang->total_harga, 0, ',', '.') }}</p>
-            </div>
+                <div class="totalTransaksi col-4 col-lg-2 fw-bold text-success">
+                    <p>Rp. {{ number_format($keranjang->total_harga, 0, ',', '.') }}</p>
+                </div>
 
         <hr>
 
-        @endforeach
+            @endforeach
 
         <div class="col-8 col-lg-8">
         </div>
@@ -87,8 +87,8 @@
 
 @empty
     <h5 class="text-center  mt-5">Belum Ada Data</h5>
-@endforelse
-
 </div>
+
+@endforelse
 
 @endsection

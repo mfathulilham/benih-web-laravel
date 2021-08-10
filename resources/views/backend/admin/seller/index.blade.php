@@ -47,7 +47,7 @@
                     <td>{{ $angkaAwal++ }}</td>
                     <td>{{ $seller->name }}</td>
                     <td>{{ $seller->email }}</td>
-                    <td>{{ $seller->telp }}</td>
+                    <td>62{{ $seller->telp }}</td>
                     <td>{{ $seller->alamat }}</td>
                     <td>{{ $seller->prov }}</td>
                     <td>{{ $seller->kab }}</td>
