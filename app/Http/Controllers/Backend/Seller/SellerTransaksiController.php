@@ -22,6 +22,7 @@ class SellerTransaksiController extends Controller
             }
         }
         return view('backend.seller.transaksi.pemesanan.index', ['transaksis'=> $transaksis, 'seller' => $seller, 'user' => $user]);
+
     }
 
     public function pengiriman()

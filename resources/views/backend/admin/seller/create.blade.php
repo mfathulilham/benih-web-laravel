@@ -32,6 +32,20 @@
                         @enderror
                     </div>
                     <div class="col-md-3">
+                        <label for="telp" class="form-label">{{ __('Nomor Whatsapp') }}</label>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="input-group">
+                            {{-- <span class="input-group-text" id="basic-addon1">+62</span> --}}
+                            <input type="number" class="form-control @error('telp') is-invalid @enderror" id="telp" value="{{ old('telp') }}" name="telp" placeholder="62xxx-xxxx-xxxx" required>
+                            @error('telp')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-3">
                         <label for="email" class="form-label">{{ __('Email') }}</label>
                     </div>
                     <div class="col-md-9">
@@ -67,20 +81,6 @@
                         @enderror
                     </div>
 
-                    <div class="col-md-3">
-                        <label for="telp" class="form-label">{{ __('Nomor Whatsapp') }}</label>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="input-group">
-                            <span class="input-group-text" id="basic-addon1">+62</span>
-                            <input type="number" class="form-control @error('telp') is-invalid @enderror" id="telp" value="{{ old('telp') }}" name="telp" placeholder="812-xxxx-xxxx" required>
-                            @error('telp')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
                     <div class="col-md-3">
                         <label for="alamat" class="form-label">{{ __('Alamat') }}</label>
                     </div>

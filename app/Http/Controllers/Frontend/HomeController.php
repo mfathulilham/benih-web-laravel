@@ -43,34 +43,40 @@ class HomeController extends Controller
 
     public function add(Request $request, $id)
     {
-        $data = $request->validate([
-            'jumlah' => ['required','numeric','gt:0']
-        ]);
-
-        $benih = Benih::findOrFail($id);
-        foreach ($benih->keranjangs as $keranjang) {
-            if ($keranjang->transaksi_id == NULL) {
-                $jumlah = ($keranjang->jumlah) + $request->jumlah;
-                $total_harga = $jumlah * $benih->harga;
-
-                $data['jumlah'] = $jumlah;
-                $data['total_harga'] = $total_harga;
-
-                $keranjang->update($data);
-                return redirect('keranjang')->with('msg', 'Benih telah dimasukkan ke keranjang');
-            }
+        $rekening = Rekening::where('user_id', Auth::user()->id)->get();
+        if (Auth::user()->lahir == NULL) {
+            return redirect('profile')->with('err', 'Lengkapi Profil terlebih dahulu');
         }
+        elseif (count($rekening) == 0) {
+            return redirect('rekening')->with('err', 'Tambahkan Rekening terlebih dahulu');
+        } else {
+            $data = $request->validate([
+                'jumlah' => ['required','numeric','gt:0']
+            ]);
 
-        $total_harga = ($benih->harga) * $request->jumlah ;
+            $benih = Benih::findOrFail($id);
+            foreach ($benih->keranjangs as $keranjang) {
+                if ($keranjang->transaksi_id == NULL) {
+                    $jumlah = ($keranjang->jumlah) + $request->jumlah;
+                    $total_harga = $jumlah * $benih->harga;
 
-        $data['user_id'] = Auth::user()->id;
-        $data['benih_id'] = $benih->id;
-        $data['total_harga'] = $total_harga;
+                    $data['jumlah'] = $jumlah;
+                    $data['total_harga'] = $total_harga;
 
-        // dd($data);
+                    $keranjang->update($data);
+                    return redirect('keranjang')->with('msg', 'Benih telah dimasukkan ke keranjang');
+                }
+            }
 
-        Keranjang::create($data);
-        return redirect('keranjang')->with('msg', 'Benih telah dimasukkan ke keranjang');
+            $total_harga = ($benih->harga) * $request->jumlah ;
+
+            $data['user_id'] = Auth::user()->id;
+            $data['benih_id'] = $benih->id;
+            $data['total_harga'] = $total_harga;
+
+            Keranjang::create($data);
+            return redirect('keranjang')->with('msg', 'Benih telah dimasukkan ke keranjang');
+        }
     }
 
     public function profile()
@@ -84,9 +90,10 @@ class HomeController extends Controller
         $user = User::findOrFail(Auth::user()->id);
         $data = $request->validate([
             'name'  => ['required', 'string'],
+            'email'  => ['email'],
             'password' => ['confirmed'],
             'lahir' => ['required', 'date'],
-            'telp' => ['required', 'numeric'],
+            // 'telp' => ['required', 'numeric'],
             'alamat' => ['required'],
             'prov' => ['required', 'string'],
             'kab' => ['required', 'string'],

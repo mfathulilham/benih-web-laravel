@@ -20,8 +20,9 @@ class SellerProfileController extends Controller
         $user = User::findOrFail(Auth::user()->id);
         $data = $request->validate([
             'name'  => ['required', 'string'],
+            'email' => ['email'],
             'password' => ['confirmed'],
-            'telp' => ['required', 'numeric'],
+            // 'telp' => ['required', 'numeric'],
             'alamat' => ['required'],
             'prov' => ['required', 'string'],
             'kab' => ['required', 'string'],

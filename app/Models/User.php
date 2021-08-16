@@ -6,8 +6,10 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
+// class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
 
@@ -17,16 +19,17 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'telp',
+        'password',
         'name',
         'email',
-        'password',
         'lahir',
-        'telp',
         'alamat',
         'prov',
         'kab',
         'kec',
-        'role'
+        'role',
+        'confirmed'
     ];
 
     /**
@@ -45,8 +48,21 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        // 'email_verified_at' => 'datetime',
+        'telp_verified_at' => 'datetime',
     ];
+
+    // public function hasVerifiedPhone()
+    // {
+    //     return ! is_null($this->telp_verified_at);
+    // }
+
+    // public function markPhoneAsVerified()
+    // {
+    //     return $this->forceFill([
+    //         'telp_verified_at' => $this->freshTimestamp(),
+    //     ])->save();
+    // }
 
     public function benihs()
     {

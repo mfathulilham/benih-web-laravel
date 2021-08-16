@@ -11,7 +11,7 @@
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nama') }}</label>
 
                             <div class="col-md-6">
@@ -25,19 +25,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Alamat E-Mail') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
 
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
@@ -67,19 +54,79 @@
                             <div class="col-md-6">
                                 <input id="lahir" type="date" class="form-control" name="lahir" required>
                             </div>
+                        </div> --}}
+
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nama') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="telp" class="col-md-4 col-form-label text-md-right">{{ __('Nomor Whatsapp') }}</label>
 
                             <div class="col-md-6">
-                                <div class="input-group">
-                                    <span class="input-group-text" id="basic-addon1">+62</span>
-                                    <input id="telp" type="text" class="form-control" name="telp" placeholder="812-xxxx-xxxx" required>
+                                <input id="telp" type="tel" class="form-control @error('telp') is-invalid @enderror" name="telp" value="{{ old('telp') }}" required autocomplete="telp">
+
+                                @error('telp')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Ulangi Password') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="pembeli" class="col-md-4 col-form-label text-md-right">{{ __('Daftar Sebagai') }}</label>
+
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="daftar" value="0" id="pembeli" checked>
+                                    <label class="form-check-label" for="pembeli">
+                                        Pembeli
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="daftar" value="1" id="ikb">
+                                    <label class="form-check-label" for="ikb">
+                                        IKB
+                                    </label>
                                 </div>
                             </div>
                         </div>
 
+                        {{--
                         <div class="form-group row">
                             <label for="alamat" class="col-md-4 col-form-label text-md-right">{{ __('Alamat') }}</label>
 
@@ -103,7 +150,6 @@
                                 <select onchange="loadKecamatan()" name="kab" id="kabcoba" class="form-control">
                                     <option disabled>Pilih Provinsi Dulu</option>
                                 </select>
-                                {{-- <input id="kab" type="text" class="form-control" name="kab" required> --}}
                             </div>
                         </div>
 
@@ -114,14 +160,13 @@
                                 <select name="kec" id="keccoba" class="form-control">
                                     <option disabled>Pilih Kabupaten Dulu</option>
                                 </select>
-                                {{-- <input id="kec" type="text" class="form-control" name="kec" required> --}}
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-success">
-                                    {{ __('Daftar') }}
+                                    {{ __('Buat Akun') }}
                                 </button>
                             </div>
                         </div>
@@ -150,7 +195,7 @@
         },
     })
 </script> --}}
-<script>
+{{-- <script>
     function loadProvinsiCoba(){
         let prov = document.getElementById('provcoba');
         fetch('https://dev.farizdotid.com/api/daerahindonesia/provinsi').then(data => data.json()).then(data => data.provinsi.map(e => prov.innerHTML +=`<option value="${e.nama},${e.id}">${e.nama}</option>`))
@@ -175,7 +220,7 @@
     document.addEventListener("DOMContentLoaded", function() {
         loadProvinsiCoba();
     });
-</script>
+</script> --}}
 @endpush
 @endsection
 

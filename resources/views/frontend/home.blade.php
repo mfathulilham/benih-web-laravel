@@ -7,7 +7,6 @@
     <div class="carousel-indicators ">
       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      {{-- <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button> --}}
     </div>
     <div class="carousel-inner mt-5">
       <div class="carousel-item active">
@@ -16,71 +15,15 @@
       <div class="carousel-item">
         <img src="img/banner3.png" class="d-block w-100" alt="Benih 2">
       </div>
-      {{-- <div class="carousel-item">
-        <img src="img/carousel4.jpg" class="d-block w-100" alt="Benih 3">
-      </div> --}}
     </div>
 </div>
-
-<!-- Kategori -->
-{{-- <section>
-    <div class="category mx-4 mt-5">
-      <div class="row card-2 px-3 pt-2 py-3 mx-1 g-3">
-        <h3 class="my-3">Kategori Benih</h3>
-
-        <div class="col-6 col-md-3">
-          <div class="card text-center">
-            <h1>
-              <i class="fas fa-seedling text-danger card-img-top mt-5"></i>
-            </h1>
-            <div class="card-body">
-              <h5 class="card-title">Padi</h5>
-              <p class="card-text">Inpari, Ciherang Dll</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-6 col-md-3">
-          <div class="card text-center">
-            <h1>
-              <i class="fas fa-seedling text-warning card-img-top mt-5"></i>
-            </h1>
-            <div class="card-body">
-              <h5 class="card-title">Jagung</h5>
-              <p class="card-text">Landu, Cikuyi Dll</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-6 col-md-3">
-          <div class="card text-center">
-            <h1>
-              <i class="fas fa-seedling text-secondary card-img-top mt-5"></i>
-            </h1>
-            <div class="card-body">
-              <h5 class="card-title">Kedelai</h5>
-              <p class="card-text">Kasa, Ciafe Dll</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-6 col-md-3">
-          <div class="card text-center">
-            <h1>
-              <i class="fas fa-seedling text-success card-img-top mt-5"></i>
-            </h1>
-            <div class="card-body">
-              <h5 class="card-title">Kacang</h5>
-              <p class="card-text">Cisadane, Luwu Dll</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-</section> --}}
 
 <hr class="mx-4 mt-5 text-secondary">
 
 <!-- Benih Card -->
 <div class="benihCard mx-4 my-4">
+
+    @auth
 
     {{-- KALAU BENIH TERSEDIA --}}
     @if (sizeOf($benihs) != 0)
@@ -122,20 +65,10 @@
 
                 <div class="row justify-content-center g-1">
                     @auth
-                        {{-- <div class="col">
-                            <a href="#" class="addKeranjangBtn container-fluid btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                <i class="fas fa-plus me-1"></i>Keranjang
-                            </a>
-                        </div> --}}
                         <div class="col">
                             <a href="{{ route('home-detail', $benih->id) }}" class="detailBtn container-fluid btn btn-success">Detail</a>
                         </div>
                     @else
-                        {{-- <div class="col">
-                            <a href="{{ route('login') }}" class="addKeranjangBtn container-fluid btn btn-success">
-                                <i class="fas fa-plus me-1"></i>Keranjang
-                            </a>
-                        </div> --}}
                         <div class="col">
                             <a href="{{ route('login') }}" class="detailBtn container-fluid btn btn-success">Detail</a>
                         </div>
@@ -186,5 +119,67 @@
       </div>
     </div>
   <!-- DETAIL Benih End -->
+
+  @else
+
+  <h3 class="text-center mt-5">Apa itu BenihKu?</h3>
+  <p class="lead mt-4 mb-5"><strong>BenihKu</strong> merupakan Platform <strong>Jual Beli benih varietas unggul tanaman pangan</strong>. Benih berasal dari <strong>27 Instalasi Kebun Benih</strong> yang berada di <strong>Sulawesi Selatan</strong> dengan proses perbanyakan benih diawasi oleh Badan Sertifikasi dan Mutu Benih (BSMB) sehingga kualitas benih dapat terjamin. Nikmati berbelanja benih unggul, daftar dan mulai transaksimu !</p>
+
+  <hr>
+  <h3 class="text-center mt-5">Benih yang Disediakan</h3>
+  <section>
+      <div class="row px-3 pt-2 py-3 mx-4 mt-5 g-3">
+
+        <div class="col-6 col-md-3">
+          <div class="card text-center">
+            <h1>
+              <i class="fas fa-spa text-success card-img-top mt-5"></i>
+            </h1>
+            <div class="card-body">
+              <h5 class="card-title">Padi</h5>
+              <p class="card-text">Varietas Inpari, Ciherang Dll</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="card text-center">
+            <h1>
+              <i class="fas fa-spa text-success card-img-top mt-5"></i>
+            </h1>
+            <div class="card-body">
+              <h5 class="card-title">Jagung</h5>
+              <p class="card-text">Varietas Lamuru, Bisma Dll</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="card text-center">
+            <h1>
+              <i class="fas fa-spa text-success card-img-top mt-5"></i>
+            </h1>
+            <div class="card-body">
+              <h5 class="card-title">Kedelai</h5>
+              <p class="card-text">Varietas Dena, Dering Dll</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="card text-center">
+            <h1>
+                <i class="fas fa-spa text-success card-img-top mt-5"></i>
+            </h1>
+            <div class="card-body">
+              <h5 class="card-title">Kacang</h5>
+              <p class="card-text">Varietas Hypoma, Vima Dll</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+  </section>
+
+
+  @endauth
+
 
 @endsection

@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Nexmo;
 
 class LoginController extends Controller
 {
@@ -28,19 +31,29 @@ class LoginController extends Controller
      * @var string
      */
     // protected $redirectTo = RouteServiceProvider::HOME;
-    protected function redirectTo()
-    {
+    public function redirectTo() {
         $role = Auth::user()->role;
-        switch($role)
-        {
-            case '0': return '/';
+        switch ($role) {
+          case '0':
+            return '/';
             break;
-            case '1': return 'home';
+          case '1':
+            if (Auth::user()->confirmed == NULL) {
+                Auth::logout();
+                return '/login';
+                // return '/login'->with('msg', 'Menunggu Verifikasi oleh Admin, Silahkan tunggu atau email ke benihku@gmail.com');
+            } else {
+                return '/home';
+            }
             break;
-            case '2': return 'dashboard';
+          case '2':
+            return '/dashboard';
             break;
+          default:
+            return 'login';
+          break;
         }
-    }
+      }
 
     /**
      * Create a new controller instance.
@@ -51,5 +64,23 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+    public function username()
+    {
+        return 'telp';
+    }
+
+    // public function authenticated(Request $request, Authenticatable $user)
+    // {
+        // Auth::logout();
+        // $request->session()->put('verify:user:id', $user->id);
+        // // @TODO: Send the Verify SMS here
+        // $verification = Nexmo::verify()->start([
+        //     'number' => $user->telp,
+        //     'brand'  => 'Laravel Demo'
+        // ]);
+        // $request->session()->put('verify:request_id', $verification->getRequestId());
+
+        // return redirect('verify');
+    // }
 
 }

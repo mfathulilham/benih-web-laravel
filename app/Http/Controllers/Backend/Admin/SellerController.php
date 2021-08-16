@@ -47,7 +47,7 @@ class SellerController extends Controller
             'name'  => ['required', 'string'],
             'email' => ['required', 'email', 'unique:users,email,' . $user->id ],
             'password' => ['confirmed'],
-            'telp' => ['required', 'numeric'],
+            // 'telp' => ['required', 'numeric'],
             'alamat' => ['required'],
             'prov' => ['required', 'string'],
             'kab' => ['required', 'string'],
@@ -68,5 +68,12 @@ class SellerController extends Controller
     {
         User::findOrFail($id)->delete();
         return redirect('seller')->with('msg', 'Data Deleted');
+    }
+
+    public function confirm($id)
+    {
+        $data['confirmed'] = '1';
+        $user = User::findOrFail($id)->update($data);
+        return redirect('seller')->with('msg', 'Akun telah diverifikasi');
     }
 }

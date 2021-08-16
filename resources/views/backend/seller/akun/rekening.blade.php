@@ -8,7 +8,9 @@
         <hr>
 
         @if (session('msg'))
-                <p class="alert alert-success">{{ session('msg') }}</p>
+            <p class="alert alert-success">{{ session('msg') }}</p>
+        @elseif (session('err'))
+            <p class="alert alert-danger">{{ session('err') }}</p>
         @endif
 
         <div class="table-responsive">

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\{HomeController, KeranjangController, ProfileController, RekeningController};
 use App\Http\Controllers\Frontend\Transaksi\PemesananController;
 use App\Http\Controllers\Backend\Admin\{DashboardController, CustomersController, SellerController, OrderController};
+use App\Http\Controllers\Auth\NexmoController;
 use App\Http\Controllers\Backend\Seller\{SellerHomeController,SellerTransaksiController, SellerBenihController, SellerProfileController};
 
 /*
@@ -19,6 +20,7 @@ use App\Http\Controllers\Backend\Seller\{SellerHomeController,SellerTransaksiCon
 */
 
 Route::get('', [HomeController::class, 'index'])->name('');
+// Route::get('', [HomeController::class, 'index'])->name('')->middleware('verifiedphone');
 Route::middleware('user')->group(function () {
     //Home
 
@@ -50,7 +52,6 @@ Route::middleware('user')->group(function () {
         Route::get('/search', [HomeController::class, 'search'])->name('-search');
     });
 
-
     // Transaksi
     Route::prefix('pemesanan')->name('pemesanan')->group(function(){
         Route::get('/', [PemesananController::class, 'index'])->name('');
@@ -70,6 +71,9 @@ Route::middleware('user')->group(function () {
     });
 
 });
+
+// SMS
+
 
 
 Route::middleware('seller')->group(function () {
@@ -136,6 +140,7 @@ Route::middleware('admin')->group(function() {
         Route::get('/edit/{user:id}', [SellerController::class, 'edit'])->name('-edit');
         Route::patch('/update/{id}', [SellerController::class, 'update'])->name('-update');
         Route::delete('/delete/{id}', [SellerController::class, 'delete'])->name('-delete');
+        Route::post('/confirm/{id}', [SellerController::class, 'confirm'])->name('-confirm');
     });
     // Order
     Route::prefix('order')->name('order')->group(function(){
@@ -148,3 +153,7 @@ Route::middleware('admin')->group(function() {
 });
 
 Auth::routes();
+// Auth::routes();
+
+Route::get('/verify', [NexmoController::class, 'index'])->name('verify');
+Route::post('/verify', [NexmoController::class, 'verify'])->name('verify');

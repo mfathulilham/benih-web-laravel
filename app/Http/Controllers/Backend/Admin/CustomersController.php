@@ -24,10 +24,10 @@ class CustomersController extends Controller
         $user =  User::findOrFail($id);
         $request->validate([
             'name'  => ['required', 'string'],
-            'email' => ['required', 'email', 'unique:users,email,' . $user->id ],
+            'email' => ['email', 'unique:users,email,' . $user->id ],
             'password' => ['confirmed'],
             'lahir' => ['required', 'date'],
-            'telp' => ['required', 'numeric'],
+            // 'telp' => ['required', 'numeric'],
             'alamat' => ['required'],
             'prov' => ['required', 'string'],
             'kab' => ['required', 'string'],
@@ -41,7 +41,7 @@ class CustomersController extends Controller
             'email' => $request->email,
             'password' => $request->password,
             'lahir' => $request->lahir,
-            'telp' => $request->telp,
+            // 'telp' => $request->telp,
             'alamat' => $request->alamat,
             'prov' => $request->prov,
             'kab' => $request->kab,

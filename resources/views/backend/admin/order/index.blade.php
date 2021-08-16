@@ -105,6 +105,7 @@
                                     @csrf
                                         <button class="btn btn-danger" onclick="return confirm('Tolak Pembayaran ?')" type="submit">Cancel</button>
                                 </form>
+                            </div>
                         @elseif ($transaksi->status == 'Pengiriman Selesai')
                             <form action="{{ route('order-selesai', $transaksi->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf

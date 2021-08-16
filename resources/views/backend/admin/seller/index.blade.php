@@ -29,8 +29,8 @@
                 <tr class="align-top text-center">
                 <th>No</th>
                 <th>Nama</th>
-                <th>Email</th>
                 <th>No. WA</th>
+                <th>Email</th>
                 <th>Alamat</th>
                 <th>Provinsi</th>
                 <th>Kabupaten</th>
@@ -46,21 +46,35 @@
                 <tr>
                     <td>{{ $angkaAwal++ }}</td>
                     <td>{{ $seller->name }}</td>
+                    <td>{{ $seller->telp }}</td>
                     <td>{{ $seller->email }}</td>
-                    <td>62{{ $seller->telp }}</td>
                     <td>{{ $seller->alamat }}</td>
                     <td>{{ $seller->prov }}</td>
                     <td>{{ $seller->kab }}</td>
                     <td>{{ $seller->kec }}</td>
                     <td>
-                        <div class="d-flex justify-content-center">
-                            <a href="{{ route('seller-edit', $seller->id) }}" class="btn btn-secondary"><i class="far fa-edit"></i></a>
-                            <form method="POST" action="{{ route('seller-delete', $seller->id) }}">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger" onclick="return confirm('Want to delete ?')" type="submit"><i class="far fa-trash-alt"></i></button>
-                            </form>
-                        </div>
+                        @if ($seller->confirmed == NULL)
+                            <div class="d-flex justify-content-center">
+                                <form action="{{ route('seller-confirm', $seller->id) }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                        <button class="btn btn-success" onclick="return confirm('Verifikasi Akun IKB ?')" type="submit">Verifikasi</button>
+                                </form>
+                                <form method="POST" action="{{ route('seller-delete', $seller->id) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger" onclick="return confirm('Want to delete ?')" type="submit"><i class="far fa-trash-alt me-2"></i>Tolak</button>
+                                </form>
+                            </div>
+                        @else
+                            <div class="d-flex justify-content-center">
+                                <a href="{{ route('seller-edit', $seller->id) }}" class="btn btn-secondary"><i class="far fa-edit"></i></a>
+                                <form method="POST" action="{{ route('seller-delete', $seller->id) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger" onclick="return confirm('Want to delete ?')" type="submit"><i class="far fa-trash-alt"></i></button>
+                                </form>
+                            </div>
+                        @endif
                     </td>
                 </tr>
                 @empty

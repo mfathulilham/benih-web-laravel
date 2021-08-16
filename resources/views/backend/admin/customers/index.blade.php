@@ -23,9 +23,9 @@
                     <tr class="align-top text-center">
                     <th>No</th>
                     <th>Nama</th>
+                    <th>No. WA</th>
                     <th>Email</th>
                     <th>TTL</th>
-                    <th>No. WA</th>
                     <th>Alamat</th>
                     <th>Provinsi</th>
                     <th>Kabupaten</th>
@@ -41,9 +41,9 @@
                         <tr>
                             <td>{{ $angkaAwal++ }}</td>
                             <td>{{ $customer->name }}</td>
+                            <td>{{ $customer->telp }}</td>
                             <td>{{ $customer->email }}</td>
                             <td>{{ $customer->lahir }}</td>
-                            <td>62{{ $customer->telp }}</td>
                             <td>{{ $customer->alamat }}</td>
                             <td>{{ $customer->prov }}</td>
                             <td>{{ $customer->kab }}</td>

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Backend\Seller;
 
 use App\Http\Controllers\Controller;
-use App\Models\Benih;
+use App\Models\{Benih, Rekening};
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\SellerBenihRequest;
@@ -12,8 +12,16 @@ class SellerBenihController extends Controller
 {
     public function index()
     {
-        $benihs = Benih::where('user_id', Auth::user()->id)->get();
-        return view('backend.seller.benih.index', ['benihs' => $benihs]);
+        $rekening = Rekening::where('user_id', Auth::user()->id)->get();
+        if (Auth::user()->alamat == NULL) {
+            return redirect('seller_profile')->with('err', 'Lengkapi Profil terlebih dahulu');
+        }
+        elseif (count($rekening) == 0) {
+            return redirect('seller_rekening')->with('err', 'Tambahkan Rekening terlebih dahulu');
+        } else {
+            $benihs = Benih::where('user_id', Auth::user()->id)->get();
+            return view('backend.seller.benih.index', ['benihs' => $benihs]);
+        }
     }
 
     public function create()

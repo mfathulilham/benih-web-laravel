@@ -12,6 +12,8 @@
 
     @if (session('msg'))
             <p class="alert alert-success">{{ session('msg') }}</p>
+    @elseif (session('err'))
+            <p class="alert alert-danger">{{ session('err') }}</p>
     @endif
 
     <form method="POST" action="{{ route('home-profile-update') }}" class="row g-3">
@@ -34,7 +36,12 @@
             <label for="email" class="form-label">{{ __('Email') }}</label>
         </div>
         <div class="col-md-9">
-            <input class="form-control" value="{{ $user->email }}" required autocomplete="email" disabled>
+            <input class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email')?? $user->email }}" autocomplete="email">
+            @error('email')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
         </div>
         <div class="col-md-3">
             <label for="lahir" class="form-label">{{ __('Tanggal Lahir') }}</label>
@@ -51,15 +58,11 @@
             <label for="telp" class="form-label">{{ __('Nomor Whatsapp') }}</label>
         </div>
         <div class="col-md-9">
-            <div class="input-group">
-                <span class="input-group-text" id="basic-addon1">+62</span>
-                <input type="text" class="form-control @error('telp') is-invalid @enderror" id="telp" placeholder="812-xxxx-xxxx" name="telp" value="{{ old('telp')?? $user->telp }}" required>
-                @error('telp')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
+            {{-- <div class="input-group"> --}}
+                {{-- <span class="input-group-text" id="basic-addon1">+62</span> --}}
+                <input type="text" class="form-control" value="{{ $user->telp }}" disabled>
+
+            {{-- </div> --}}
         </div>
         <div class="col-md-3">
             <label for="alamat" class="form-label">{{ __('Alamat') }} </label>
