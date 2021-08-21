@@ -28,7 +28,8 @@ class CreateUsersTable extends Migration
             $table->string('kab')->nullable();
             $table->string('kec')->nullable();
             $table->tinyInteger('role');
-            $table->boolean('confirmed');
+            $table->string('otp');
+            $table->boolean('confirmed')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

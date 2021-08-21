@@ -65,6 +65,7 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
         'seller' => \App\Http\Middleware\SellerMiddleware::class,
         'user' => \App\Http\Middleware\UserMiddleware::class,
-        'verifiedphone' => \App\Http\Middleware\EnsurePhoneIsVerified::class
+        'verifiedphone' => \App\Http\Middleware\EnsurePhoneIsVerified::class,
+        'notverified' => \App\Http\Middleware\PhoneNotVerified::class
     ];
 }

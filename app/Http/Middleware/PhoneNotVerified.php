@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class EnsurePhoneIsVerified
+class PhoneNotVerified
 {
     /**
      * Handle an incoming request.
@@ -16,22 +16,14 @@ class EnsurePhoneIsVerified
      */
     public function handle(Request $request, Closure $next)
     {
-
         $user = $request->user();
 
         if ($user) {
-            if ( !empty($user->telp_verified_at)  ) {
-                if ($user->role == 0) {
-                    return redirect('/');
-                } else return redirect('home');
+            if ( empty($user->telp_verified_at)  ) {
+                return redirect('/verify');
             }
             return $next($request);
-        } else abort('404');
+        } return $next($request);
 
-
-        // if ($user->telp_verified_at == NULL ) {
-        //     return redirect('/login');
-        // } else
-        // return $next($request);
     }
 }

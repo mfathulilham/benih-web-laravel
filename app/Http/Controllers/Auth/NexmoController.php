@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Nexmo;
+use App\Models\User;
+use Nexmo\Laravel\Facade\Nexmo;
 
 class NexmoController extends Controller
 {
@@ -15,6 +16,28 @@ class NexmoController extends Controller
     }
 
     public function verify(Request $request) {
+
+        $user = User::findOrFail(Auth::user()->id);
+        $request->validate([
+            'code' => ['required', 'size:4'],
+        ]);
+
+        if ($request->code == $user->otp) {
+            $date = date_create();
+            DB::table('users')->where('id', $user->id)->update(['telp_verified_at' => date_format($date, 'Y-m-d H:i:s')]);
+            if ($user->role == 1) {
+                Auth::logout();
+                return redirect('/login')->with('msg', 'Silahkan tunggu proses Verifikasi oleh Admin, atau email ke benihku@gmail.com');
+            } else {
+                return redirect('/');
+            }
+            // $data['telp_verified_at'] = date_format($date, 'Y-m-d H:i:s');
+            // $user->update($data);
+
+        } else {
+            return redirect('/verify')->with('err', 'Kode OTP salah, Coba Lagi');
+        }
+
         //  $this->validate($request, [
         //      'code' => 'size:4'
         //  ]);
@@ -28,22 +51,22 @@ class NexmoController extends Controller
         //  DB::table('users')->where('id', Auth::id())->update(['telp_verified_at' => date_format($date, 'Y-m-d H:i:s')]);
 
         //  return redirect('/');
-        $this->validate($request, [
-            'code' => 'size:4',
-        ]);
+        // $this->validate($request, [
+        //     'code' => 'size:4',
+        // ]);
 
-        try {
-            Nexmo::verify()->check(
-                $request->session()->get('verify:request_id'),
-                $request->code
-            );
-            Auth::loginUsingId($request->session()->pull('verify:user:id'));
-            return redirect('/');
-        } catch (Nexmo\Client\Exception\Request $e) {
-            return redirect()->back()->withErrors([
-                'code' => $e->getMessage()
-            ]);
+        // try {
+        //     Nexmo::verify()->check(
+        //         $request->session()->get('verify:request_id'),
+        //         $request->code
+        //     );
+        //     Auth::loginUsingId($request->session()->pull('verify:user:id'));
+        //     return redirect('/');
+        // } catch (Nexmo\Client\Exception\Request $e) {
+        //     return redirect()->back()->withErrors([
+        //         'code' => $e->getMessage()
+        //     ]);
 
-        }
+        // }
     }
 }

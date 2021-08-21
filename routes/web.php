@@ -19,9 +19,9 @@ use App\Http\Controllers\Backend\Seller\{SellerHomeController,SellerTransaksiCon
 |
 */
 
-Route::get('', [HomeController::class, 'index'])->name('');
+Route::get('', [HomeController::class, 'index'])->name('')->middleware('notverified');
 // Route::get('', [HomeController::class, 'index'])->name('')->middleware('verifiedphone');
-Route::middleware('user')->group(function () {
+Route::middleware('user',)->group(function () {
     //Home
 
     Route::prefix('/')->name('home')->group(function(){
@@ -155,5 +155,6 @@ Route::middleware('admin')->group(function() {
 Auth::routes();
 // Auth::routes();
 
-Route::get('/verify', [NexmoController::class, 'index'])->name('verify');
-Route::post('/verify', [NexmoController::class, 'verify'])->name('verify');
+
+Route::get('/verify', [NexmoController::class, 'index'])->name('verify')->middleware('verifiedphone');
+Route::post('/verify', [NexmoController::class, 'verify'])->name('verify')->middleware('verifiedphone');

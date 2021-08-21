@@ -35,16 +35,23 @@ class LoginController extends Controller
         $role = Auth::user()->role;
         switch ($role) {
           case '0':
-            return '/';
+            if (Auth::user()->telp_verified_at == NULL){
+                session()->flash('msg', 'Verifikasi Akun Terlebih Dahulu');
+                return '/verify';
+            }
+            else return '/';
             break;
           case '1':
-            if (Auth::user()->confirmed == NULL) {
+            if (Auth::user()->telp_verified_at == NULL){
+                session()->flash('msg', 'Verifikasi Akun Terlebih Dahulu');
+                return '/verify';
+            }
+            elseif (Auth::user()->confirmed == NULL) {
                 Auth::logout();
+                session()->flash('msg', 'Menunggu Verifikasi oleh Admin, Silahkan tunggu atau email ke benihku@gmail.com');
                 return '/login';
                 // return '/login'->with('msg', 'Menunggu Verifikasi oleh Admin, Silahkan tunggu atau email ke benihku@gmail.com');
-            } else {
-                return '/home';
-            }
+            } else return '/home';
             break;
           case '2':
             return '/dashboard';

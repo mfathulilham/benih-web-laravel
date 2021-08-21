@@ -12,6 +12,10 @@
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
+                    @elseif (session('err'))
+                        <div class="alert alert-danger" role="alert">
+                            {{ session('err') }}
+                        </div>
                     @endif
 
                     <form method="POST" action="{{ route('verify') }}">

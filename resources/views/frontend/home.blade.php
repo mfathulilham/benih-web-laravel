@@ -122,8 +122,8 @@
 
   @else
 
-  <h3 class="text-center mt-5">Apa itu BenihKu?</h3>
-  <p class="lead mt-4 mb-5"><strong>BenihKu</strong> merupakan Platform <strong>Jual Beli benih varietas unggul tanaman pangan</strong>. Benih berasal dari <strong>27 Instalasi Kebun Benih</strong> yang berada di <strong>Sulawesi Selatan</strong> dengan proses perbanyakan benih diawasi oleh Badan Sertifikasi dan Mutu Benih (BSMB) sehingga kualitas benih dapat terjamin. Nikmati berbelanja benih unggul, daftar dan mulai transaksimu !</p>
+  <h3 class="text-center mt-4">Apa itu BenihKu?</h3>
+  <p class="lead mt-4 mb-5"><strong>BenihKu</strong> merupakan Platform <strong>Jual Beli benih varietas unggul tanaman pangan</strong>. Benih berasal dari <strong>27 Instalasi Kebun Benih</strong> yang berada di <strong>Sulawesi Selatan</strong> dengan proses perbanyakan benih diawasi oleh Badan Sertifikasi dan Mutu Benih (BSMB) sehingga kualitas benih dapat terjamin. Puluhan <strong>varietas</strong> benih dari Instalasi Kebun Benih tersedia untuk memenuhi kebutuhan tani di Sulawesi Selatan. Dengan menggunakan benih unggul, hasil produksi dapat ditingkatan baik itu kuantitas maupun kualitasnya dan menurunkan resiko gagal panen. Nikmati berbelanja di BenihKu, daftar dan mulai transaksimu !</p>
 
   <hr>
   <h3 class="text-center mt-5">Benih yang Disediakan</h3>

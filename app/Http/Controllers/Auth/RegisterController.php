@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Nexmo;
+use Nexmo\Laravel\Facade\Nexmo;
 
 class RegisterController extends Controller
 {
@@ -66,19 +66,29 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $verification = Nexmo::verify()->start([
-            'number' => $data['telp'],
-            'brand' => 'Verifikasi Telepon',
-        ]);
 
-        // session(['nexmo_request_id' => $verification->getRequestId()]);
+        // Nexmo::message()->send([
+        //     'to' => $data['telp'],
+        //     'from' => 'sender',
+        //     'text' => "Dari BenihKu : \n Kode OTP : {$otp} \n Jangan beritahu siapapun"
+        // ]);
+
+        $otp = mt_rand(1111,9999);
 
         return User::create([
             'name' => $data['name'],
             'telp' => $data['telp'],
             'password' => Hash::make($data['password']),
-            'role' => $data['daftar']
+            'role' => $data['daftar'],
+            'otp' => $otp
         ]);
+
+        // $verification = Nexmo::verify()->start([
+        //     'number' => $data['telp'],
+        //     'brand' => 'Verifikasi Telepon',
+        // ]);
+
+        // session(['nexmo_request_id' => $verification->getRequestId()]);
 
         // return redirect('/nexmo');
     }
