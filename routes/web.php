@@ -158,3 +158,4 @@ Auth::routes();
 
 Route::get('/verify', [NexmoController::class, 'index'])->name('verify')->middleware('verifiedphone');
 Route::post('/verify', [NexmoController::class, 'verify'])->name('verify')->middleware('verifiedphone');
+Route::post('/otp', [NexmoController::class, 'otp'])->name('otp')->middleware('verifiedphone');

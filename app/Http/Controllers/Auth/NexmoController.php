@@ -15,6 +15,22 @@ class NexmoController extends Controller
         return view('auth.nexmo');
     }
 
+    public function otp() {
+        $user = User::findOrFail(Auth::user()->id);
+
+        $otp = mt_rand(1111,9999);
+
+        Nexmo::message()->send([
+            'to' => Auth::user()->telp,
+            'from' => 'sender',
+            'text' => "Dari BenihKu : \n Kode OTP : {$otp} \n Jangan beritahu siapapun"
+        ]);
+
+        DB::table('users')->where('id', $user->id)->update(['otp' => $otp]);
+        // session()->flash('msg', 'Kode OTP telah dikirim silahkan cek pesan anda !');
+        return redirect()->back()->with('msg', 'Kode OTP telah dikirim silahkan cek pesan anda !');
+    }
+
     public function verify(Request $request) {
 
         $user = User::findOrFail(Auth::user()->id);

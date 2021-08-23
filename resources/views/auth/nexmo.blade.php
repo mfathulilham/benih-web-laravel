@@ -18,6 +18,11 @@
                         </div>
                     @endif
 
+                    {{-- DEFINE OTP FORM --}}
+                    <form id="otp-form" action="{{ route('otp') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+
                     <form method="POST" action="{{ route('verify') }}">
                         @csrf
 
@@ -40,6 +45,7 @@
                                 <button type="submit" class="btn btn-success">
                                     {{ __('Kirim') }}
                                 </button>
+                                <a class="btn btn-link text-dark" onclick="event.preventDefault(); document.getElementById('otp-form').submit();">Kirim Ulang</a>
                             </div>
                         </div>
                     </form>

@@ -67,13 +67,13 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
-        // Nexmo::message()->send([
-        //     'to' => $data['telp'],
-        //     'from' => 'sender',
-        //     'text' => "Dari BenihKu : \n Kode OTP : {$otp} \n Jangan beritahu siapapun"
-        // ]);
-
         $otp = mt_rand(1111,9999);
+
+        Nexmo::message()->send([
+            'to' => $data['telp'],
+            'from' => 'sender',
+            'text' => "Dari BenihKu : \n Kode OTP : {$otp} \n Jangan beritahu siapapun"
+        ]);
 
         return User::create([
             'name' => $data['name'],
